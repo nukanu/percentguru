@@ -32,14 +32,42 @@ const FEATURED = [
   { slug: "percentage-change-calculator", hub: "percentage" },
 ] as const
 
-function CalcLink({ href, title }: { href: string; title: string }) {
+const DESCRIPTIONS: Record<string, string> = {
+  // Percentage
+  "percentage-calculator": "Find X% of any number — tips, tax, commissions",
+  "what-is-x-percent-of-y": "Enter a % and a number — get the amount instantly",
+  "x-is-what-percent-of-y": "Express one number as a percentage of another",
+  "percentage-increase-calculator": "How much did a value go up?",
+  "percentage-decrease-calculator": "How much did a value drop?",
+  "percentage-change-calculator": "Track increases and decreases as a percentage",
+  "percentage-difference-calculator": "Compare two values with no 'before' or 'after'",
+  "percentage-error-calculator": "How accurate was a measurement vs expected?",
+  "reverse-percentage-calculator": "Find the original before a % was applied",
+  // Finance
+  "discount-calculator": "See how much you save and what you'll pay",
+  "markup-calculator": "Price from cost with a target markup",
+  "profit-margin-calculator": "Revenue and cost — into a margin percentage",
+  "sales-tax-calculator": "Add any tax rate to a price — works for VAT too",
+  "roi-calculator": "Return % and net gain on any investment",
+  "interest-calculator": "Simple interest earned or owed over time",
+  "loan-payment-calculator": "Monthly repayment and total interest on any loan",
+  "weighted-average-calculator": "Average values that don't carry equal weight",
+  "break-even-calculator": "How many units to sell before you cover costs?",
+}
+
+function CalcLink({ href, title, description }: { href: string; title: string; description?: string }) {
   return (
     <Link
       href={href}
       className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors group"
     >
-      <span className="text-gray-700 group-hover:text-blue-700 font-medium">{title}</span>
-      <span className="text-gray-400 group-hover:text-blue-400 text-lg">&rarr;</span>
+      <span className="min-w-0">
+        <span className="block text-gray-700 group-hover:text-blue-700 font-medium">{title}</span>
+        {description && (
+          <span className="block text-xs text-gray-500 group-hover:text-blue-400 mt-0.5 truncate">{description}</span>
+        )}
+      </span>
+      <span className="text-gray-400 group-hover:text-blue-400 text-lg ml-3 shrink-0">&rarr;</span>
     </Link>
   )
 }
@@ -49,8 +77,8 @@ export default function Home() {
   const financeCalcs = getCalculatorsByHub("finance")
   const featured = FEATURED.map(({ slug, hub }) => {
     const calc = getCalculator(slug)
-    return calc ? { title: calc.title, href: `/${hub}/${slug}/` } : null
-  }).filter(Boolean) as { title: string; href: string }[]
+    return calc ? { slug, title: calc.title, href: `/${hub}/${slug}/` } : null
+  }).filter(Boolean) as { slug: string; title: string; href: string }[]
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-12">
@@ -58,22 +86,28 @@ export default function Home() {
       {/* Hero */}
       <section className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Calculate Discounts, Margins, Loans &amp; Percentages
+          Percentage &amp; Finance Calculators
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-3">
-          Work out discounts, profit margins, loan payments, percentage changes, ROI, and more — results appear as you type.
+          Work out <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discounts</Link>,{" "}
+          <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">profit margins</Link>,{" "}
+          <Link href="/finance/loan-payment-calculator/" className="text-blue-600 hover:underline">loan payments</Link>,{" "}
+          percentage changes, ROI, and more — results appear as you type.
         </p>
-        <p className="text-sm text-gray-400">
-          Every calculator runs instantly in your browser — no account or install needed.
+        <p className="text-sm text-gray-600 max-w-xl mx-auto mb-4">
+          Whether you&apos;re checking a sale price, working out gross margin on a product,
+          figuring out a loan&apos;s monthly cost, or measuring year-over-year revenue growth —
+          there&apos;s a calculator here for it.
         </p>
+        <p className="text-sm text-gray-500">Choose a calculator below to get started.</p>
       </section>
 
       {/* Most Used */}
       <section className="mb-12">
-        <h2 className="text-xl font-bold text-gray-800 mb-4">Most Used Calculators</h2>
+        <h2 className="text-xl font-bold text-gray-800 mb-4">Top Calculators</h2>
         <div className="grid sm:grid-cols-2 gap-2">
           {featured.map((c) => (
-            <CalcLink key={c.href} href={c.href} title={c.title} />
+            <CalcLink key={c.href} href={c.href} title={c.title} description={DESCRIPTIONS[c.slug]} />
           ))}
         </div>
       </section>
@@ -93,7 +127,11 @@ export default function Home() {
           <ul className="space-y-2">
             {percentageCalcs.map((c) => (
               <li key={c.slug}>
-                <CalcLink href={`/percentage/${c.slug}/`} title={c.title} />
+                <CalcLink
+                  href={`/percentage/${c.slug}/`}
+                  title={c.title}
+                  description={DESCRIPTIONS[c.slug]}
+                />
               </li>
             ))}
           </ul>
@@ -112,12 +150,52 @@ export default function Home() {
           <ul className="space-y-2">
             {financeCalcs.map((c) => (
               <li key={c.slug}>
-                <CalcLink href={`/finance/${c.slug}/`} title={c.title} />
+                <CalcLink
+                  href={`/finance/${c.slug}/`}
+                  title={c.title}
+                  description={DESCRIPTIONS[c.slug]}
+                />
               </li>
             ))}
           </ul>
         </section>
       </div>
+
+      {/* What you can calculate */}
+      <section className="mt-14">
+        <h2 className="text-xl font-bold text-gray-800 mb-4">What you can calculate</h2>
+        <ul className="space-y-2 text-gray-600 text-sm list-disc list-inside">
+          <li><strong>Discounts and sale prices</strong> — see exactly how much you save and what you pay (e.g. 25% off $80 = $20 off, $60 final)</li>
+          <li><strong>Sales tax and VAT</strong> — add any tax rate to a price, or reverse from a tax-inclusive total</li>
+          <li><strong>Percentage increase and decrease</strong> — measure how much a value rose or fell</li>
+          <li><strong>Profit margin and markup</strong> — gross margin from revenue and cost, or selling price from markup</li>
+          <li><strong>Return on investment (ROI)</strong> — find the gain or loss on any investment or project</li>
+          <li><strong>Loan repayments</strong> — monthly payment and total interest on any fixed-rate loan</li>
+          <li><strong>Comparisons and ratios</strong> — express ratios as percentages or compare two values</li>
+        </ul>
+      </section>
+
+      {/* Popular calculators */}
+      <section className="mt-12">
+        <h2 className="text-xl font-bold text-gray-800 mb-4">Popular calculators</h2>
+        <p className="text-sm text-gray-600 leading-relaxed mb-3">
+          If you&apos;re shopping a sale, the{" "}
+          <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">Discount Calculator</Link>{" "}
+          shows your exact savings and final price. For business pricing, the{" "}
+          <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">Profit Margin Calculator</Link>{" "}
+          and{" "}
+          <Link href="/finance/markup-calculator/" className="text-blue-600 hover:underline">Markup Calculator</Link>{" "}
+          cover both sides — what you keep as profit and what to charge from cost.
+        </p>
+        <p className="text-sm text-gray-600 leading-relaxed">
+          For investments and projects, the{" "}
+          <Link href="/finance/roi-calculator/" className="text-blue-600 hover:underline">ROI Calculator</Link>{" "}
+          gives you the return percentage and net gain instantly. For everyday percentage questions, the{" "}
+          <Link href="/percentage/what-is-x-percent-of-y/" className="text-blue-600 hover:underline">What is X% of Y?</Link>{" "}
+          calculator handles tips, tax amounts, commissions, and more.
+          Pick the one that fits your situation and get your answer in seconds.
+        </p>
+      </section>
 
     </div>
   )
