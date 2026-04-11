@@ -62,7 +62,8 @@ export default function DiscountCalculatorPage() {
       <CalculatorShell
         slug="discount-calculator"
         title="Discount Calculator"
-        intro={<>Enter the original price and the discount percentage to see how much you save and what you&apos;ll pay. Useful at checkout, when comparing promotions, or when negotiating trade discounts. If you&apos;re a seller setting prices, the <Link href="/finance/markup-calculator/" className="text-blue-600 hover:underline">markup calculator</Link> shows the opposite direction — from cost to selling price.</>}
+        intro={<>Enter the original price and the discount percentage to see how much you save and what you&apos;ll pay. Useful at checkout, when comparing promotions, or when negotiating trade discounts. A discount and a percentage decrease are mathematically the same thing — the difference is context: a discount is applied to a price, while a percentage decrease describes any falling value. If you&apos;re a seller setting prices, the <Link href="/finance/markup-calculator/" className="text-blue-600 hover:underline">markup calculator</Link> shows the opposite direction — from cost to selling price.</>}
+        whenToUse="Use this at the point of purchase to verify savings, when comparing two promotions (e.g. 20% off vs $30 off), or when calculating a trade or bulk discount before placing an order."
         calculator={<DiscountCalculatorWidget />}
         howTo={[
           "Enter the original (full) price in the first field.",

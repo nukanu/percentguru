@@ -62,7 +62,8 @@ export default function LoanPaymentCalculatorPage() {
       <CalculatorShell
         slug="loan-payment-calculator"
         title="Loan Payment Calculator"
-        intro={<>Enter the loan amount, annual interest rate, and term in months to see the exact monthly payment and total interest paid over the life of the loan. Works for personal loans, car loans, or any fixed-rate instalment loan. For a simpler estimate without monthly compounding, the <Link href="/finance/interest-calculator/" className="text-blue-600 hover:underline">simple interest calculator</Link> gives a quick approximation.</>}
+        intro={<>Enter the loan amount, annual interest rate, and term in months to see the exact monthly payment and total interest paid over the life of the loan. Works for personal loans, car loans, or any fixed-rate instalment loan. Most people focus only on the monthly payment — but total interest is equally important: a longer term lowers the monthly cost while significantly increasing what you pay overall. For a quick estimate without monthly compounding, the <Link href="/finance/interest-calculator/" className="text-blue-600 hover:underline">simple interest calculator</Link> gives a rough approximation.</>}
+        whenToUse="Use this before applying for a loan to understand the real monthly commitment and total cost, when comparing two loan offers with different rates or terms, or when evaluating whether to pay off a loan early by seeing how much remaining interest you would avoid."
         calculator={<LoanPaymentCalculatorWidget />}
         howTo={[
           "Enter the loan amount — the total you are borrowing.",

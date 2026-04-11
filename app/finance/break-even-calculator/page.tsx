@@ -62,7 +62,8 @@ export default function BreakEvenCalculatorPage() {
       <CalculatorShell
         slug="break-even-calculator"
         title="Break-Even Calculator"
-        intro={<>Enter your fixed costs, selling price per unit, and variable cost per unit — the calculator shows exactly how many units you need to sell to break even and the revenue that represents. Essential before launching a product, setting a price, or presenting a business case. If you want to measure the return after break-even is achieved, the <Link href="/finance/roi-calculator/" className="text-blue-600 hover:underline">ROI calculator</Link> handles that.</>}
+        intro={<>Enter your fixed costs, selling price per unit, and variable cost per unit — the calculator shows exactly how many units you need to sell to break even and the revenue that represents. Essential before launching a product, setting a price, or presenting a business case. The key figure this depends on is the contribution margin (selling price minus variable cost) — a small contribution margin means a high break-even volume, which is a significant business risk. If you want to measure the return after break-even is achieved, the <Link href="/finance/roi-calculator/" className="text-blue-600 hover:underline">ROI calculator</Link> handles that.</>}
+        whenToUse="Use this before launching a product or starting a business to test whether your pricing and cost structure can realistically reach profitability. Also useful when evaluating a price change — input the new price to immediately see how it shifts the break-even threshold."
         calculator={<BreakEvenCalculatorWidget />}
         howTo={[
           "Enter total fixed costs — expenses that do not change with production volume.",

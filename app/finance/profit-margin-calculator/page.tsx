@@ -63,7 +63,8 @@ export default function ProfitMarginPage() {
       <CalculatorShell
         slug="profit-margin-calculator"
         title="Profit Margin Calculator"
-        intro={<>Enter what you charged (revenue) and what it cost you to deliver — the calculator shows your gross profit and profit margin percentage instantly. Used for pricing products, evaluating deals, reporting financials, and checking whether a <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discounted price</Link> still leaves a workable margin.</>}
+        intro={<>Enter what you charged (revenue) and what it cost you to deliver — the calculator shows your gross profit and margin percentage instantly. Used for pricing products, evaluating deals, reporting financials, and checking whether a <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discounted price</Link> still leaves a workable margin. This calculates gross margin only — it doesn&apos;t factor in operating expenses, so net margin will always be lower in practice.</>}
+        whenToUse="Use this when evaluating a product or service's profitability — before setting a price, after closing a deal, or when reviewing a product line to see which items carry the best margins. Also useful when you need to report gross margin to investors or in financial statements."
         calculator={<ProfitMarginWidget />}
         howTo={[
           "Enter the revenue — the price you sold the product or service for.",

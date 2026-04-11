@@ -11,6 +11,7 @@ type CalculatorShellProps = {
   slug: string
   title: string
   intro: React.ReactNode
+  whenToUse: string
   calculator: React.ReactNode
   howTo: string[]
   formula: string
@@ -24,6 +25,7 @@ export default function CalculatorShell({
   slug,
   title,
   intro,
+  whenToUse,
   calculator,
   howTo,
   formula,
@@ -40,10 +42,16 @@ export default function CalculatorShell({
   return (
     <article className="mx-auto max-w-2xl px-4 pb-12">
       <h1 className="text-3xl font-bold text-gray-900 mb-2">{title}</h1>
-      <p className="text-gray-500 mb-6 leading-relaxed">{intro}</p>
+      <p className="text-gray-500 mb-4 leading-relaxed">{intro}</p>
+
+      <section className="mb-6">
+        <h2 className="text-sm font-semibold text-gray-700 mb-1">When to use this calculator</h2>
+        <p className="text-sm text-gray-500">{whenToUse}</p>
+      </section>
 
       <section aria-label="Calculator">
         {calculator}
+        <p className="text-xs text-gray-400 mt-3">Results are instant — nothing is stored and no account is needed.</p>
       </section>
 
       {relatedCalculators.length > 0 && (

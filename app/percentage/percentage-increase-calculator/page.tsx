@@ -63,7 +63,8 @@ export default function PercentageIncreasePage() {
       <CalculatorShell
         slug="percentage-increase-calculator"
         title="Percentage Increase Calculator"
-        intro="Enter the original value and the new value to find by what percentage it increased. Used for checking pay rises, measuring revenue growth, tracking price increases, or comparing any two numbers where one is larger than the other."
+        intro="Enter the original value and the new value to find by what percentage it increased. Used for checking pay rises, measuring revenue growth, tracking price increases, or comparing any two numbers where one is larger than the other. A common mistake is confusing a percentage point change with a percentage change — if interest rates go from 2% to 3%, that's a 1 percentage-point rise but a 50% percentage increase."
+        whenToUse="Use this when a value has gone up and you need to express the growth as a percentage — for example, a salary rising from $45,000 to $51,750, revenue climbing from $80,000 to $96,000 month-on-month, or a product price increasing from $12 to $15."
         calculator={<PercentageIncreaseWidget />}
         howTo={[
           "Enter the original (starting) value in the first field.",

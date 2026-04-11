@@ -63,7 +63,8 @@ export default function ReversePercentagePage() {
       <CalculatorShell
         slug="reverse-percentage-calculator"
         title="Reverse Percentage Calculator"
-        intro="Know the percentage that was applied and the result, but not the original number? This calculator works backwards to find it. Common uses: finding the pre-discount price of a sale item, the pre-tax price from a receipt total, or the original value before a percentage increase was applied."
+        intro="Know the percentage that was applied and the result, but not the original number? This calculator works backwards to find it. Common uses: finding the pre-discount price of a sale item, the pre-tax price from a receipt total, or the original value before a percentage increase was applied. The most common mistake: entering the discount percentage instead of the remaining percentage — if something is 20% off, you enter 80 (what remains), not 20."
+        whenToUse="Use this when you have a final value and the percentage that produced it, and need to recover the starting figure — for example, a sale item at $68 after 15% off, a post-tax receipt of £94 at 17.5% VAT, or a final score that represents 80% of total marks."
         calculator={<ReversePercentageWidget />}
         howTo={[
           "Enter the percentage in the first field — the percentage that was applied to the original.",

@@ -63,7 +63,8 @@ export default function PercentageDifferencePage() {
       <CalculatorShell
         slug="percentage-difference-calculator"
         title="Percentage Difference Calculator"
-        intro={<>Enter two values to find the percentage difference between them. Unlike <Link href="/percentage/percentage-change-calculator/" className="text-blue-600 hover:underline">percentage change</Link>, this is symmetric — neither value is treated as the starting point. Used when comparing two equivalent measurements, two supplier quotes, or two data points where neither is the baseline.</>}
+        intro={<>Enter two values to find the percentage difference between them. Unlike <Link href="/percentage/percentage-change-calculator/" className="text-blue-600 hover:underline">percentage change</Link>, this is symmetric — neither value is treated as the starting point. Used when comparing two equivalent measurements, two supplier quotes, or two data points where neither is the baseline. The formula uses the average of both values as the denominator, which is what makes it order-independent.</>}
+        whenToUse="Use this when comparing two values that are on equal footing — two supplier prices for the same item, two lab measurements of the same substance, or two estimates for a project where neither is the 'correct' reference."
         calculator={<PercentageDifferenceWidget />}
         howTo={[
           "Enter the first value in the Value A field.",

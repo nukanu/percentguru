@@ -63,7 +63,8 @@ export default function MarkupCalculatorPage() {
       <CalculatorShell
         slug="markup-calculator"
         title="Markup Calculator"
-        intro={<>Enter the cost and the markup percentage — the calculator returns the selling price and exact profit amount. The right tool when you&apos;re setting prices from a known cost. If you&apos;re working backwards from a target profit margin instead, the <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">profit margin calculator</Link> is more direct.</>}
+        intro={<>Enter the cost and the markup percentage — the calculator returns the selling price and exact profit amount. The right tool when you&apos;re pricing from a known cost. One thing many people get wrong: a 50% markup does not equal a 50% profit margin — markup is on cost, margin is on revenue, so a 50% markup gives a 33.3% margin. If you&apos;re working backwards from a target margin instead, the <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">profit margin calculator</Link> is more direct.</>}
+        whenToUse="Use this when setting prices for products you buy and resell — retail, wholesale, food service, or freelance work where you need a consistent margin over your cost. Also useful for quickly testing how a change in cost or markup affects the final selling price."
         calculator={<MarkupCalculatorWidget />}
         howTo={[
           "Enter the cost price — what you paid for the item or service.",

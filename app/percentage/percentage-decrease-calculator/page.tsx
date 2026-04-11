@@ -63,7 +63,8 @@ export default function PercentageDecreasePage() {
       <CalculatorShell
         slug="percentage-decrease-calculator"
         title="Percentage Decrease Calculator"
-        intro="Enter the original value and the new, lower value to find the percentage it fell by. Useful for measuring price cuts, revenue drops, weight loss, reduced costs, or any time a number has gone down and you need to express the change as a percentage."
+        intro="Enter the original value and the new, lower value to find the percentage it fell by. Useful for measuring price cuts, revenue drops, weight loss, reduced costs, or any time a number has gone down and you need to express the change as a percentage. Worth noting: a 50% decrease followed by a 50% increase does not return to the original value — it lands at 75%."
+        whenToUse="Use this when a value has gone down and you need to quantify the drop — for example, a product price falling from $180 to $135, headcount reducing from 40 to 32, or website traffic dropping from 12,000 to 9,000 visits."
         calculator={<PercentageDecreaseWidget />}
         howTo={[
           "Enter the original (starting) value in the first field.",

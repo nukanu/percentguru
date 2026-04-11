@@ -62,7 +62,8 @@ export default function ROICalculatorPage() {
       <CalculatorShell
         slug="roi-calculator"
         title="ROI Calculator"
-        intro={<>Enter your initial investment and the final value it returned — the calculator shows your ROI percentage and exact net gain or loss. Used for evaluating stocks, real estate, business projects, and marketing spend. To assess whether the business itself is worth funding in the first place, the <Link href="/finance/break-even-calculator/" className="text-blue-600 hover:underline">break-even calculator</Link> shows how many units need to be sold before any return is possible.</>}
+        intro={<>Enter your initial investment and the final value it returned — the calculator shows your ROI percentage and exact net gain or loss. Used for evaluating stocks, real estate, business projects, and marketing spend. ROI doesn&apos;t account for time — a 40% return over 10 years is very different from 40% in one year, so factor in the holding period when comparing options. To assess whether a business is worth funding at all, the <Link href="/finance/break-even-calculator/" className="text-blue-600 hover:underline">break-even calculator</Link> shows how many units need to sell before any return is possible.</>}
+        whenToUse="Use this to evaluate any investment with a measurable outcome — a stock position, property purchase, ad campaign, or business project. Particularly useful when comparing two options side by side to see which generated a better return relative to what was put in."
         calculator={<ROICalculatorWidget />}
         howTo={[
           "Enter the initial investment — the amount you put in.",

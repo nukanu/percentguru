@@ -62,7 +62,8 @@ export default function XIsWhatPercentOfYPage() {
       <CalculatorShell
         slug="x-is-what-percent-of-y"
         title="X is What Percent of Y?"
-        intro={<>Enter two numbers to find what percentage the first is of the second. Used for expressing test scores as a grade percentage, showing what share of a budget was spent, calculating <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">profit as a percentage of revenue</Link>, or comparing a part to a whole in any context.</>}
+        intro={<>Enter two numbers to find what percentage the first is of the second. Used for expressing test scores as a grade percentage, showing what share of a budget was spent, calculating <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">profit as a percentage of revenue</Link>, or comparing a part to a whole in any context. Note: this measures a static ratio — if one number came before the other in time, use the percentage change calculator instead.</>}
+        whenToUse="Use this when you have a part and a whole and need to express the relationship as a percentage — for example, 36 correct out of 48 questions, $12,000 spent from a $50,000 budget, or $8,000 profit from $32,000 in revenue."
         calculator={<XIsWhatPercentOfYWidget />}
         howTo={[
           "Enter the value (X) in the first field — the part you want to express as a percentage.",

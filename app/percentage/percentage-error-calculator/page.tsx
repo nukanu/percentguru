@@ -62,7 +62,8 @@ export default function PercentageErrorPage() {
       <CalculatorShell
         slug="percentage-error-calculator"
         title="Percentage Error Calculator"
-        intro="Enter your measured value and the accepted theoretical value to find out how accurate your measurement was. A result close to 0% means high accuracy. Used in chemistry, physics, engineering, and quality control wherever you need to validate a measurement against a known reference."
+        intro="Enter your measured value and the accepted theoretical value to find out how accurate your measurement was. A result close to 0% means high accuracy. Used in chemistry, physics, engineering, and quality control wherever you need to validate a measurement against a known reference. The result is always positive because the formula uses absolute difference — direction doesn't matter, only the size of the deviation."
+        whenToUse="Use this in any situation where you have an expected value and need to evaluate how close your actual measurement came — a lab titration, a sensor reading against a calibrated standard, a model forecast versus actual outcome, or a student experiment checking against a textbook value."
         calculator={<PercentageErrorWidget />}
         howTo={[
           "Enter the experimental value — the result you measured or observed.",

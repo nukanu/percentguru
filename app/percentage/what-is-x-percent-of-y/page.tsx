@@ -76,7 +76,8 @@ export default function WhatIsXPercentOfYPage() {
       <CalculatorShell
         slug="what-is-x-percent-of-y"
         title="What is X% of Y?"
-        intro={<>Enter a percentage and a number to find the result instantly. The most common percentage calculation — used for tips on restaurant bills, <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discount amounts on sale items</Link>, <Link href="/finance/sales-tax-calculator/" className="text-blue-600 hover:underline">tax on a purchase</Link>, commission on a sale, or a percentage share of any total.</>}
+        intro={<>Enter a percentage and a number to find the result instantly. The most common percentage calculation — used for tips on restaurant bills, <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discount amounts on sale items</Link>, <Link href="/finance/sales-tax-calculator/" className="text-blue-600 hover:underline">tax on a purchase</Link>, commission on a sale, or a percentage share of any total. The key distinction: this tells you the amount a percentage represents, not the percentage itself — those are different questions.</>}
+        whenToUse="Use this when you know the percentage and the total, and want the specific value — for example, a 15% tip on a $48 bill, the tax on a $320 purchase, or a 3% commission on $85,000 in sales."
         calculator={<WhatIsXPercentOfYWidget />}
         howTo={[
           "Enter the percentage value in the first field (e.g. 20 for 20%).",

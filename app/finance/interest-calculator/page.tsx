@@ -62,7 +62,8 @@ export default function InterestCalculatorPage() {
       <CalculatorShell
         slug="interest-calculator"
         title="Simple Interest Calculator"
-        intro={<>Enter the principal, annual interest rate, and number of years to see exactly how much interest accrues and the total amount at the end of the period. Uses the simple interest formula — interest on principal only, not compounded. For loans with monthly repayments, the <Link href="/finance/loan-payment-calculator/" className="text-blue-600 hover:underline">loan payment calculator</Link> applies the compound formula used by most lenders.</>}
+        intro={<>Enter the principal, annual interest rate, and number of years to see how much interest accrues and the total at the end. Uses the simple interest formula — interest on the original principal only, with no compounding. This tends to underestimate the cost of most real-world loans, which compound monthly, but it&apos;s accurate for short-term loans, some bonds, and quick estimates. For loans with monthly repayments, the <Link href="/finance/loan-payment-calculator/" className="text-blue-600 hover:underline">loan payment calculator</Link> applies the compound formula used by most lenders.</>}
+        whenToUse="Use this for a quick interest estimate, for short-term personal or informal loans, for fixed-rate savings bonds that pay simple interest, or when doing coursework that specifically requires the simple interest formula."
         calculator={<InterestCalculatorWidget />}
         howTo={[
           "Enter the principal — the starting amount of money.",

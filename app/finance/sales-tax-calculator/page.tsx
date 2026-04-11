@@ -62,7 +62,8 @@ export default function SalesTaxPage() {
       <CalculatorShell
         slug="sales-tax-calculator"
         title="Sales Tax Calculator"
-        intro={<>Enter the pre-tax price and your local tax rate to see the exact tax amount and final total. Works for US sales tax, UK VAT, EU VAT, or any percentage-based tax worldwide. If you need to work backwards from a price that already includes tax, the <Link href="/percentage/reverse-percentage-calculator/" className="text-blue-600 hover:underline">reverse percentage calculator</Link> can recover the pre-tax amount.</>}
+        intro={<>Enter the pre-tax price and your local tax rate to see the exact tax amount and final total. Works for US sales tax, UK VAT, EU VAT, or any percentage-based tax worldwide. Sales tax and VAT produce the same number for the end consumer even though they work differently — sales tax is collected at point of sale, VAT is collected at each stage of the supply chain. If you need to work backwards from a price that already includes tax, the <Link href="/percentage/reverse-percentage-calculator/" className="text-blue-600 hover:underline">reverse percentage calculator</Link> can recover the pre-tax amount.</>}
+        whenToUse="Use this before making a purchase to see the true cost, when preparing invoices that must show tax separately, or when budgeting for expenses in a different tax jurisdiction. Works for any country — just enter the applicable rate."
         calculator={<SalesTaxWidget />}
         howTo={[
           "Enter the pre-tax price in the first field.",
