@@ -17,11 +17,11 @@ const faqs = [
   },
   {
     question: "How do you calculate a discount?",
-    answer: "Multiply the original price by the discount percentage divided by 100. For example, 25% off $200 = $200 × 0.25 = $50 off, so the final price is $150.",
+    answer: "Multiply the original price by the discount percentage divided by 100. For example, 25% off $200: $200 × 0.25 = $50 off, final price = $150.",
   },
   {
     question: "What is the difference between discount and sale price?",
-    answer: "The discount is the amount subtracted from the original price. The sale price is what you actually pay — original price minus the discount.",
+    answer: "The discount is the amount you save — the reduction from the original price. The sale price is what you actually pay. Final price = original − discount.",
   },
   {
     question: "What is 50% off $120?",
@@ -29,8 +29,8 @@ const faqs = [
   },
   {
     question: "How do I find the original price from a discounted price?",
-    answer: <>Use the <Link href="/percentage/reverse-percentage-calculator/" className="text-blue-600 hover:underline">reverse percentage calculator</Link>. Enter the remaining percentage (100 minus the discount) and the sale price — it gives you the original. For example, $80 after a 20% discount means 80% remains: enter 80% and $80 to get $100.</>,
-    schemaAnswer: "Use the reverse percentage calculator. Enter the remaining percentage (100 minus the discount) and the sale price — it gives you the original. For example, $80 after a 20% discount means 80% remains: enter 80% and $80 to get $100.",
+    answer: <>Use the <Link href="/percentage/reverse-percentage-calculator/" className="text-blue-600 hover:underline">reverse percentage calculator</Link>. Enter the remaining percentage (100 minus the discount) and the sale price to get the original. For example, $80 after 20% off means 80% remains — enter 80% and $80 to get $100.</>,
+    schemaAnswer: "Use the reverse percentage calculator. Enter the remaining percentage (100 minus the discount) and the sale price. For example, $80 after a 20% discount means 80% remains — enter 80% and $80 to get $100.",
   },
 ]
 
@@ -62,7 +62,7 @@ export default function DiscountCalculatorPage() {
       <CalculatorShell
         slug="discount-calculator"
         title="Discount Calculator"
-        intro="Enter the original price and the discount percentage to see exactly how much you save and what you'll pay. Useful at checkout, during sales, or when comparing deals."
+        intro={<>Enter the original price and the discount percentage to see how much you save and what you&apos;ll pay. Useful at checkout, when comparing promotions, or when negotiating trade discounts. If you&apos;re a seller setting prices, the <Link href="/finance/markup-calculator/" className="text-blue-600 hover:underline">markup calculator</Link> shows the opposite direction — from cost to selling price.</>}
         calculator={<DiscountCalculatorWidget />}
         howTo={[
           "Enter the original (full) price in the first field.",
@@ -70,18 +70,18 @@ export default function DiscountCalculatorPage() {
           "The savings amount and final price are shown instantly.",
         ]}
         formula="Discount Amount = (Discount % / 100) × Original Price"
-        formulaExplained="Multiply the original price by the discount rate to get the amount saved. Subtract that from the original price to get the final price."
+        formulaExplained="Multiply the original price by the discount rate to get the amount saved. Subtract from the original price to get the final price you pay."
         examples={[
           { input: "25% off $200", output: "$50 saved — $150 final" },
           { input: "15% off $60", output: "$9 saved — $51 final" },
-          { input: "40% off $250", output: "$100 saved — $150 final" },
+          { input: "40% off $85", output: "$34 saved — $51 final" },
         ]}
         useCases={[
           "Calculating sale prices while shopping",
-          "Comparing discounts across products",
+          "Comparing discounts across competing products",
           "Applying coupon or promo code savings",
-          "Working out trade or bulk discounts",
-          "Budgeting for a sale or clearance event",
+          "Working out trade or bulk order discounts",
+          "Quickly verifying a cashier&apos;s discount at checkout",
         ]}
         faqs={faqs}
       />

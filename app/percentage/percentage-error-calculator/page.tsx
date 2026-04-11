@@ -9,28 +9,28 @@ import PercentageErrorWidget from "./CalculatorWidget"
 const faqs = [
   {
     question: "What is percentage error?",
-    answer: "Percentage error measures how far an experimental or measured value is from the accepted theoretical value, expressed as a percentage. It quantifies the accuracy of a measurement.",
+    answer: "Percentage error measures how far an experimental or measured value is from the accepted theoretical value. It quantifies accuracy — the closer to 0%, the more accurate the measurement.",
   },
   {
     question: "What is the percentage error if experimental is 9.8 and theoretical is 10?",
     answer: "The percentage error is 2%. Calculation: |9.8 − 10| / 10 × 100 = 0.2 / 10 × 100 = 2.",
   },
   {
+    question: "What is the percentage error if experimental is 105 and theoretical is 100?",
+    answer: "The percentage error is 5%. Calculation: |105 − 100| / 100 × 100 = 5. This works the same whether the measurement is above or below the theoretical value.",
+  },
+  {
     question: "What is a good percentage error?",
-    answer: "It depends on the context. In most lab experiments, under 5% is considered acceptable. In precision engineering, even 1% may be too high.",
+    answer: "Context-dependent. In most school lab experiments, under 5% is acceptable. In precision manufacturing or medical equipment, even 0.5% may be too high. In chemical titrations, under 1% is typical. Always check the acceptable tolerance for your specific application.",
   },
   {
     question: "Why is percentage error always positive?",
-    answer: "The formula uses the absolute value of the difference, so the sign of the error doesn't matter — only its magnitude. This makes it easier to compare accuracy across experiments.",
-  },
-  {
-    question: "What is the percentage error if experimental is 105 and theoretical is 100?",
-    answer: "The percentage error is 5%. Calculation: |105 − 100| / 100 × 100 = 5.",
+    answer: "The formula uses the absolute value of the difference, so the sign of the error is discarded. This makes sense because accuracy is about magnitude, not direction — being 2% too high is as inaccurate as being 2% too low.",
   },
   {
     question: "What is the difference between percentage error and percentage difference?",
-    answer: <>Percentage error has a known correct answer — it measures how far off your measurement was from the theoretical value. <Link href="/percentage/percentage-difference-calculator/" className="text-blue-600 hover:underline">Percentage difference</Link> treats both values as equally valid and uses their average as the denominator. Use percentage error in scientific contexts; use percentage difference when comparing two equivalent measurements.</>,
-    schemaAnswer: "Percentage error has a known correct answer — it measures how far off your measurement was from the theoretical value. Percentage difference treats both values as equally valid and uses their average as the denominator. Use percentage error in scientific contexts; use percentage difference when comparing two equivalent measurements.",
+    answer: <>Percentage error requires a known correct value — it measures deviation from that reference. <Link href="/percentage/percentage-difference-calculator/" className="text-blue-600 hover:underline">Percentage difference</Link> treats both values as equally valid and uses their average as the denominator. Use percentage error in scientific and engineering contexts where a true or accepted value exists.</>,
+    schemaAnswer: "Percentage error requires a known correct value — it measures deviation from that reference. Percentage difference treats both values as equally valid and uses their average. Use percentage error in scientific contexts where a true value exists.",
   },
 ]
 
@@ -62,7 +62,7 @@ export default function PercentageErrorPage() {
       <CalculatorShell
         slug="percentage-error-calculator"
         title="Percentage Error Calculator"
-        intro="Enter your measured value and the accepted theoretical value to find the percentage error. Tells you how accurate your measurement was — the closer to 0%, the better."
+        intro="Enter your measured value and the accepted theoretical value to find out how accurate your measurement was. A result close to 0% means high accuracy. Used in chemistry, physics, engineering, and quality control wherever you need to validate a measurement against a known reference."
         calculator={<PercentageErrorWidget />}
         howTo={[
           "Enter the experimental value — the result you measured or observed.",
@@ -70,17 +70,17 @@ export default function PercentageErrorPage() {
           "The percentage error is calculated instantly.",
         ]}
         formula="Percentage Error = (|Experimental − Theoretical| / Theoretical) × 100"
-        formulaExplained="Take the absolute difference between your measured and expected values, divide by the theoretical value, then multiply by 100."
+        formulaExplained="Take the absolute difference between your measured and expected values, divide by the theoretical value, then multiply by 100. The absolute value ensures the result is always positive regardless of direction."
         examples={[
-          { input: "Experimental: 9.5, Theoretical: 10", output: "5%" },
-          { input: "Experimental: 102, Theoretical: 100", output: "2%" },
-          { input: "Experimental: 4.8, Theoretical: 5", output: "4%" },
+          { input: "Experimental: 9.5, Theoretical: 10", output: "5% error" },
+          { input: "Experimental: 102, Theoretical: 100", output: "2% error" },
+          { input: "Experimental: 4.65, Theoretical: 5", output: "7% error" },
         ]}
         useCases={[
-          "Checking accuracy of lab measurements in chemistry or physics",
-          "Validating sensor readings against calibrated values",
-          "Assessing quality control in manufacturing",
-          "Comparing model predictions to actual outcomes",
+          "Checking the accuracy of lab measurements in chemistry or physics",
+          "Validating sensor or instrument readings against calibrated values",
+          "Assessing quality control tolerances in manufacturing",
+          "Comparing model predictions to known outcomes",
           "Evaluating experimental results in academic coursework",
         ]}
         faqs={faqs}

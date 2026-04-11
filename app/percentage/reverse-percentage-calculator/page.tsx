@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { generatePageMetadata } from "@/lib/seo/metadata"
 import { softwareApplicationSchema, faqSchema } from "@/lib/seo/schema"
 import CalculatorShell from "@/components/calculator/CalculatorShell"
@@ -16,19 +17,21 @@ const faqs = [
   },
   {
     question: "What is a reverse percentage?",
-    answer: "A reverse percentage works backwards from a known result and a known percentage to find the original value. For example: if 40 is 20% of something, what is that something? Answer: 200.",
+    answer: "A reverse percentage works backwards from a known result and a known percentage to find the original value. For example: if 40 is 20% of something, the original is 200.",
   },
   {
     question: "How do I find the original price before a discount?",
-    answer: "This depends on what you know. If an item is $80 after a 20% discount, the remaining price is 80% of the original. Enter 80 as the percentage and 80 as the result — the calculator gives $100. Don't enter the discount percentage (20); enter the remaining percentage (80).",
+    answer: <>If an item costs £80 after a 20% discount, 80% of the original remains. Enter 80 as the percentage and 80 as the result — the calculator returns £100. Do not enter the discount (20%); enter the <em>remaining</em> percentage (80%). For the full discount and final price in one step, use the <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discount calculator</Link> instead.</>,
+    schemaAnswer: "If an item costs £80 after a 20% discount, 80% of the original remains. Enter 80 as the percentage and 80 as the result — the calculator returns £100. Do not enter the discount percentage (20); enter the remaining percentage (80).",
   },
   {
     question: "50 is 10% of what number?",
     answer: "50 is 10% of 500. Calculation: (50 / 10) × 100 = 500.",
   },
   {
-    question: "When would I use a reverse percentage calculator?",
-    answer: "Whenever you know a result and the percentage that was applied, but not the original value. Common examples: finding pre-tax prices, pre-discount prices, or original values before a percentage change.",
+    question: "How do I find a pre-tax price from a total that includes tax?",
+    answer: <>If a total of £108 includes 8% tax, then 108% of the original price = £108. Enter 108 as the percentage and 108 as the result — the original pre-tax price is £100. You can also use the <Link href="/finance/sales-tax-calculator/" className="text-blue-600 hover:underline">sales tax calculator</Link> to verify the tax amount and total.</>  ,
+    schemaAnswer: "If a total of £108 includes 8% tax, then 108% of the original price = £108. Enter 108 as the percentage and 108 as the result — the original pre-tax price is £100.",
   },
 ]
 
@@ -60,26 +63,26 @@ export default function ReversePercentagePage() {
       <CalculatorShell
         slug="reverse-percentage-calculator"
         title="Reverse Percentage Calculator"
-        intro="Know the percentage and the result, but not the original number? Enter them here to work backwards and find the original value."
+        intro="Know the percentage that was applied and the result, but not the original number? This calculator works backwards to find it. Common uses: finding the pre-discount price of a sale item, the pre-tax price from a receipt total, or the original value before a percentage increase was applied."
         calculator={<ReversePercentageWidget />}
         howTo={[
-          "Enter the percentage in the first field (e.g. 20 for 20%).",
-          "Enter the known result — the value that is that percentage of the original.",
+          "Enter the percentage in the first field — the percentage that was applied to the original.",
+          "Enter the known result — the value that represents that percentage of the original.",
           "The original value is calculated instantly.",
         ]}
         formula="Original = (Result / Percentage) × 100"
-        formulaExplained="Divide the known result by the percentage, then multiply by 100 to find the original value."
+        formulaExplained="Divide the known result by the percentage, then multiply by 100. For example: 30 is 15% of what? (30 / 15) × 100 = 200."
         examples={[
           { input: "30 is 15% of what?", output: "200" },
           { input: "45 is 90% of what?", output: "50" },
-          { input: "7 is 35% of what?", output: "20" },
+          { input: "63 is 70% of what?", output: "90" },
         ]}
         useCases={[
           "Finding the original price before a percentage discount",
-          "Calculating pre-tax prices from post-tax amounts",
-          "Reversing a percentage increase to find the starting value",
-          "Determining the original salary before a pay cut",
-          "Working backwards from a test score to find total marks",
+          "Calculating pre-tax prices from post-tax receipt totals",
+          "Working out the original salary before a pay cut",
+          "Reversing a percentage change to find the starting value",
+          "Determining total marks from a percentage score",
         ]}
         faqs={faqs}
       />

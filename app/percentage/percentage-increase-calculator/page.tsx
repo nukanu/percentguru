@@ -9,28 +9,29 @@ import PercentageIncreaseWidget from "./CalculatorWidget"
 const faqs = [
   {
     question: "What is the percentage increase from 80 to 100?",
-    answer: "The percentage increase from 80 to 100 is 25%. Calculation: ((100 - 80) / 80) × 100 = 25.",
+    answer: "The percentage increase from 80 to 100 is 25%. Calculation: ((100 − 80) / 80) × 100 = 25.",
   },
   {
     question: "What is the percentage increase from 50 to 75?",
-    answer: "The percentage increase from 50 to 75 is 50%. Calculation: ((75 - 50) / 50) × 100 = 50.",
+    answer: "The percentage increase from 50 to 75 is 50%. Calculation: ((75 − 50) / 50) × 100 = 50.",
   },
   {
-    question: "How do you calculate percentage increase?",
-    answer: "Subtract the original value from the new value, divide by the original value, then multiply by 100. Formula: ((New - Original) / Original) × 100.",
+    question: "What is the percentage increase from 160 to 200?",
+    answer: "The percentage increase from 160 to 200 is 25%. Calculation: ((200 − 160) / 160) × 100 = 25. This is a common scenario — a salary increase from £160 to £200 per day.",
   },
   {
     question: "Can the result be more than 100%?",
-    answer: "Yes. If a value doubles, the percentage increase is 100%. If it triples, it's 200%. There is no upper limit.",
+    answer: "Yes. If a value doubles, the percentage increase is 100%. If it triples, the increase is 200%. Prices, traffic, and subscriber counts can all grow beyond 100% of the original.",
   },
   {
     question: "What if my new value is lower than the original?",
-    answer: <>The result will be negative, meaning the value fell rather than rose. If you know the value has gone down, the <Link href="/percentage/percentage-decrease-calculator/" className="text-blue-600 hover:underline">percentage decrease calculator</Link> is more appropriate.</>,
-    schemaAnswer: "The result will be negative, meaning the value fell rather than rose. If you know the value has gone down, the percentage decrease calculator is more appropriate.",
+    answer: <>The result will be negative, meaning the value fell rather than rose. If you&apos;re specifically measuring a drop, the <Link href="/percentage/percentage-decrease-calculator/" className="text-blue-600 hover:underline">percentage decrease calculator</Link> is more explicit about direction.</>,
+    schemaAnswer: "The result will be negative, meaning the value fell rather than rose. If you're specifically measuring a drop, the percentage decrease calculator is more explicit about direction.",
   },
   {
-    question: "What is the percentage increase from 200 to 250?",
-    answer: "The percentage increase from 200 to 250 is 25%. Calculation: ((250 - 200) / 200) × 100 = 25.",
+    question: "How does percentage increase relate to ROI?",
+    answer: <>Return on investment measures a very similar concept — how much a financial outlay grew. If you invested £500 and it grew to £700, the <Link href="/finance/roi-calculator/" className="text-blue-600 hover:underline">ROI calculator</Link> gives you the same maths (40%) but labels it as a return rather than an increase.</>,
+    schemaAnswer: "Return on investment measures a very similar concept — how much a financial outlay grew. If you invested £500 and it grew to £700, the ROI calculator gives you the same maths (40%) but labels it as a return rather than an increase.",
   },
 ]
 
@@ -62,25 +63,25 @@ export default function PercentageIncreasePage() {
       <CalculatorShell
         slug="percentage-increase-calculator"
         title="Percentage Increase Calculator"
-        intro="Enter the original value and the new value to find out by what percentage it has increased. Works for prices, salaries, scores, or any numeric change."
+        intro="Enter the original value and the new value to find by what percentage it increased. Used for checking pay rises, measuring revenue growth, tracking price increases, or comparing any two numbers where one is larger than the other."
         calculator={<PercentageIncreaseWidget />}
         howTo={[
           "Enter the original (starting) value in the first field.",
           "Enter the new (final) value in the second field.",
-          "The percentage increase is calculated instantly.",
+          "The percentage increase is shown instantly.",
         ]}
-        formula="Percentage Increase = ((New - Original) / Original) × 100"
-        formulaExplained="Find the difference between the new and original values, divide by the original, then multiply by 100 to express it as a percentage."
+        formula="Percentage Increase = ((New − Original) / Original) × 100"
+        formulaExplained="Subtract the original from the new value to get the change. Divide by the original value, then multiply by 100. A positive result confirms it's an increase."
         examples={[
-          { input: "From 40 to 60", output: "50%" },
-          { input: "From 120 to 150", output: "25%" },
-          { input: "From 9 to 12", output: "33.3333%" },
+          { input: "From 40 to 60", output: "50% increase" },
+          { input: "From 120 to 138", output: "15% increase" },
+          { input: "From 9 to 12", output: "33.3333% increase" },
         ]}
         useCases={[
-          "Calculating a pay rise as a percentage",
-          "Measuring revenue growth year-over-year",
-          "Tracking price increases on products",
-          "Comparing exam score improvements",
+          "Calculating the exact size of a pay rise",
+          "Measuring year-over-year revenue growth",
+          "Tracking price increases on supplier quotes",
+          "Comparing exam score improvements over time",
           "Measuring follower or subscriber growth",
         ]}
         faqs={faqs}

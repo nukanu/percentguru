@@ -9,28 +9,29 @@ import PercentageDecreaseWidget from "./CalculatorWidget"
 const faqs = [
   {
     question: "What is the percentage decrease from 100 to 80?",
-    answer: "The percentage decrease from 100 to 80 is 20%. Calculation: ((100 - 80) / 100) × 100 = 20.",
+    answer: "The percentage decrease from 100 to 80 is 20%. Calculation: ((100 − 80) / 100) × 100 = 20.",
   },
   {
-    question: "What is the percentage decrease from 200 to 150?",
-    answer: "The percentage decrease from 200 to 150 is 25%. Calculation: ((200 - 150) / 200) × 100 = 25.",
-  },
-  {
-    question: "How do you calculate percentage decrease?",
-    answer: "Subtract the new value from the original, divide by the original value, then multiply by 100. Formula: ((Original - New) / Original) × 100.",
-  },
-  {
-    question: "What if my new value is higher than the original?",
-    answer: <>The result will be negative, which means the value actually went up. If that&apos;s what you&apos;re measuring, use the <Link href="/percentage/percentage-increase-calculator/" className="text-blue-600 hover:underline">percentage increase calculator</Link> instead.</>,
-    schemaAnswer: "The result will be negative, which means the value actually went up. If that's what you're measuring, use the percentage increase calculator instead.",
+    question: "What is the percentage decrease from 200 to 130?",
+    answer: "The percentage decrease from 200 to 130 is 35%. Calculation: ((200 − 130) / 200) × 100 = 35.",
   },
   {
     question: "What is the percentage decrease from 500 to 400?",
-    answer: "The percentage decrease from 500 to 400 is 20%. Calculation: ((500 - 400) / 500) × 100 = 20.",
+    answer: "The percentage decrease from 500 to 400 is 20%. This comes up in pricing — if a product drops from £500 to £400, that's a 20% price cut.",
   },
   {
     question: "Is a 50% decrease the same as halving a value?",
-    answer: "Yes. A 50% decrease means the new value is exactly half the original. For example, 200 decreased by 50% = 100.",
+    answer: "Yes. A 50% decrease produces exactly half the original. Important to remember: a 50% decrease followed by a 50% increase does not return to the original — it results in 75% of the starting value.",
+  },
+  {
+    question: "What if my new value is higher than the original?",
+    answer: <>The result will be negative — meaning the value actually went up, not down. Use the <Link href="/percentage/percentage-increase-calculator/" className="text-blue-600 hover:underline">percentage increase calculator</Link> if you&apos;re measuring growth.</>,
+    schemaAnswer: "The result will be negative — meaning the value actually went up, not down. Use the percentage increase calculator if you're measuring growth.",
+  },
+  {
+    question: "How does this differ from a sale discount?",
+    answer: <>A percentage decrease tells you by how much a value fell. A discount expresses that same drop as a saving on a price. The maths is identical — if you want to calculate the final price after a percentage off, the <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discount calculator</Link> shows both the saving and the sale price in one step.</>,
+    schemaAnswer: "A percentage decrease tells you by how much a value fell. A discount expresses that same drop as a saving on a price. The maths is identical — if you want to calculate the final price after a percentage off, the discount calculator shows both the saving and the sale price in one step.",
   },
 ]
 
@@ -62,26 +63,26 @@ export default function PercentageDecreasePage() {
       <CalculatorShell
         slug="percentage-decrease-calculator"
         title="Percentage Decrease Calculator"
-        intro="Enter a before value and an after value to see how much it dropped as a percentage. Useful for measuring price cuts, falling revenue, weight loss, or any time a number has gone down."
+        intro="Enter the original value and the new, lower value to find the percentage it fell by. Useful for measuring price cuts, revenue drops, weight loss, reduced costs, or any time a number has gone down and you need to express the change as a percentage."
         calculator={<PercentageDecreaseWidget />}
         howTo={[
           "Enter the original (starting) value in the first field.",
           "Enter the new (lower) value in the second field.",
-          "The percentage decrease is calculated instantly.",
+          "The percentage decrease is shown instantly.",
         ]}
-        formula="Percentage Decrease = ((Original - New) / Original) × 100"
-        formulaExplained="Find the difference between the original and new values, divide by the original, then multiply by 100."
+        formula="Percentage Decrease = ((Original − New) / Original) × 100"
+        formulaExplained="Subtract the new value from the original to get the drop. Divide by the original value, then multiply by 100. The result is always expressed as a positive percentage."
         examples={[
-          { input: "From 80 to 60", output: "25%" },
-          { input: "From 1000 to 850", output: "15%" },
-          { input: "From 45 to 36", output: "20%" },
+          { input: "From 80 to 60", output: "25% decrease" },
+          { input: "From 1000 to 750", output: "25% decrease" },
+          { input: "From 45 to 27", output: "40% decrease" },
         ]}
         useCases={[
-          "Calculating a sale price reduction",
-          "Tracking weight loss progress as a percentage",
-          "Measuring a drop in revenue or traffic",
-          "Finding the percentage cut in a budget",
-          "Comparing energy usage reductions",
+          "Measuring a price reduction on a product",
+          "Tracking weight loss as a percentage of starting weight",
+          "Reporting a drop in revenue or website traffic",
+          "Calculating the size of a budget cut",
+          "Measuring an energy or emissions reduction",
         ]}
         faqs={faqs}
       />

@@ -13,11 +13,11 @@ const faqs = [
   },
   {
     question: "What is a good profit margin?",
-    answer: "It varies by industry. Retail typically sees 2–5%. SaaS businesses often target 60–80%. A general rule: 10% is average, 20% is good, 30%+ is excellent for most businesses.",
+    answer: "It varies by industry. Grocery retail typically runs 2–5%. SaaS companies often target 60–80%. As a rough guide: 10% is average, 20% is healthy, 30%+ is strong for most businesses. Compare against your industry benchmark rather than a universal standard.",
   },
   {
     question: "What is the difference between gross and net profit margin?",
-    answer: "Gross profit margin only subtracts the cost of goods sold (COGS) from revenue. Net profit margin also subtracts operating expenses, taxes, and interest. This calculator computes gross margin.",
+    answer: "Gross profit margin subtracts only the cost of goods sold (COGS) from revenue. Net profit margin also subtracts operating expenses, taxes, and interest. This calculator computes gross margin — the starting point for profitability analysis.",
   },
   {
     question: "What is the profit margin if I sell something for $80 that cost $60?",
@@ -25,12 +25,13 @@ const faqs = [
   },
   {
     question: "How is profit margin different from markup?",
-    answer: <>Margin is profit divided by revenue. Markup is profit divided by cost. They&apos;re related but never equal (unless margin is 0%). A 50% markup equals a 33.33% margin. If you&apos;re setting prices from cost, the <Link href="/finance/markup-calculator/" className="text-blue-600 hover:underline">markup calculator</Link> is the right starting point.</>,
-    schemaAnswer: "Margin is profit divided by revenue. Markup is profit divided by cost. They're related but never equal (unless margin is 0%). A 50% markup equals a 33.33% margin.",
+    answer: <>Margin is profit divided by <em>revenue</em>. Markup is profit divided by <em>cost</em>. A 50% markup equals a 33.33% margin — never the same value (unless margin is 0%). If you&apos;re setting prices from cost, the <Link href="/finance/markup-calculator/" className="text-blue-600 hover:underline">markup calculator</Link> is the right starting point.</>,
+    schemaAnswer: "Margin is profit divided by revenue. Markup is profit divided by cost. A 50% markup equals a 33.33% margin. If you're setting prices from cost, the markup calculator is the right starting point.",
   },
   {
-    question: "What profit margin do I need to cover operating costs?",
-    answer: "It depends on your overhead. If your operating costs (rent, salaries, software) equal 20% of revenue, you need at least a 20% gross margin to break even after those expenses. Most businesses aim for gross margin well above their operating cost percentage to ensure net profit.",
+    question: "How does profit margin relate to break-even?",
+    answer: <>Your gross margin must exceed your operating cost percentage for the business to be profitable. The <Link href="/finance/break-even-calculator/" className="text-blue-600 hover:underline">break-even calculator</Link> shows how many units you need to sell to cover fixed costs — which depends on the contribution margin (selling price minus variable cost) at the core.</>,
+    schemaAnswer: "Your gross margin must exceed your operating cost percentage to be profitable. The break-even calculator shows how many units you need to sell to cover fixed costs, based on the contribution margin.",
   },
 ]
 
@@ -62,26 +63,26 @@ export default function ProfitMarginPage() {
       <CalculatorShell
         slug="profit-margin-calculator"
         title="Profit Margin Calculator"
-        intro="Enter what you charged (revenue) and what it cost you to deliver — the calculator shows your gross profit and profit margin percentage. Used for pricing products, evaluating deals, and reporting financials."
+        intro={<>Enter what you charged (revenue) and what it cost you to deliver — the calculator shows your gross profit and profit margin percentage instantly. Used for pricing products, evaluating deals, reporting financials, and checking whether a <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discounted price</Link> still leaves a workable margin.</>}
         calculator={<ProfitMarginWidget />}
         howTo={[
           "Enter the revenue — the price you sold the product or service for.",
           "Enter the cost — what it cost you to produce or acquire it.",
-          "The gross profit and profit margin percentage appear instantly.",
+          "Gross profit and profit margin percentage appear instantly.",
         ]}
         formula="Profit Margin = ((Revenue − Cost) / Revenue) × 100"
-        formulaExplained="Subtract cost from revenue to get gross profit, divide by revenue, then multiply by 100 to express it as a percentage."
+        formulaExplained="Subtract cost from revenue to get gross profit. Divide by revenue, then multiply by 100 to express as a percentage."
         examples={[
           { input: "Revenue $200, Cost $140", output: "30% margin — $60 profit" },
           { input: "Revenue $500, Cost $400", output: "20% margin — $100 profit" },
           { input: "Revenue $80, Cost $20", output: "75% margin — $60 profit" },
         ]}
         useCases={[
-          "Evaluating product or service profitability",
-          "Setting prices to hit a target margin",
+          "Evaluating the profitability of a product or service",
+          "Setting prices to hit a target gross margin",
           "Comparing margins across a product range",
           "Reporting gross profit in financial statements",
-          "Analysing business health and pricing strategy",
+          "Checking whether a discounted price still leaves adequate margin",
         ]}
         faqs={faqs}
       />

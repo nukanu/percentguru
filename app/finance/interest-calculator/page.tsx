@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { generatePageMetadata } from "@/lib/seo/metadata"
 import { softwareApplicationSchema, faqSchema } from "@/lib/seo/schema"
 import CalculatorShell from "@/components/calculator/CalculatorShell"
@@ -8,27 +9,28 @@ import InterestCalculatorWidget from "./CalculatorWidget"
 const faqs = [
   {
     question: "What is simple interest?",
-    answer: "Simple interest is calculated only on the principal (original) amount — not on accumulated interest. It grows linearly over time, making it straightforward to calculate but less common than compound interest for savings accounts.",
+    answer: "Simple interest is calculated only on the principal — not on previously accumulated interest. It grows linearly: $1,000 at 5% for 3 years earns the same $50/year each year, totalling $150.",
   },
   {
     question: "How much interest on $5,000 at 4% for 3 years?",
     answer: "Simple interest = $5,000 × 4% × 3 = $600. Total amount = $5,600.",
   },
   {
-    question: "What is the simple interest formula?",
-    answer: "Interest = Principal × Rate × Time / 100. For example, $1,000 at 5% for 2 years: Interest = $1,000 × 5 × 2 / 100 = $100.",
-  },
-  {
-    question: "What is the difference between simple and compound interest?",
-    answer: "Simple interest is calculated only on the principal each period. Compound interest is calculated on the principal plus any previously earned interest — so interest earns interest. Over time, compound interest produces significantly higher returns.",
-  },
-  {
     question: "How much interest on $10,000 at 6% for 5 years?",
     answer: "Simple interest = $10,000 × 6% × 5 = $3,000. Total = $13,000.",
   },
   {
+    question: "What is the simple interest formula?",
+    answer: "Interest = Principal × Rate × Time / 100. For example, $2,000 at 5% for 4 years: $2,000 × 5 × 4 / 100 = $400 interest.",
+  },
+  {
+    question: "What is the difference between simple and compound interest?",
+    answer: "Simple interest is calculated on the principal only. Compound interest is calculated on the principal plus any previously earned interest — so interest earns interest. Over time, compound interest produces significantly higher returns or costs.",
+  },
+  {
     question: "When is simple interest used?",
-    answer: "Simple interest is used for short-term loans, car loans, some personal loans, and basic savings calculations. Most bank savings accounts and mortgages use compound interest, which grows faster.",
+    answer: <>Simple interest applies to many short-term personal loans, car loans, and basic bonds. Most savings accounts and mortgages use compound interest. If you&apos;re evaluating a loan, the <Link href="/finance/loan-payment-calculator/" className="text-blue-600 hover:underline">loan payment calculator</Link> uses the compound formula to give you the actual monthly payment.</>  ,
+    schemaAnswer: "Simple interest applies to many short-term personal loans, car loans, and basic bonds. Most savings accounts and mortgages use compound interest. The loan payment calculator uses the compound formula for actual monthly repayments.",
   },
 ]
 
@@ -60,7 +62,7 @@ export default function InterestCalculatorPage() {
       <CalculatorShell
         slug="interest-calculator"
         title="Simple Interest Calculator"
-        intro="Enter the principal amount, annual interest rate, and time in years — the calculator shows how much interest is earned and the total amount at the end of the period. Uses the simple interest formula (interest on principal only, not compounded)."
+        intro={<>Enter the principal, annual interest rate, and number of years to see exactly how much interest accrues and the total amount at the end of the period. Uses the simple interest formula — interest on principal only, not compounded. For loans with monthly repayments, the <Link href="/finance/loan-payment-calculator/" className="text-blue-600 hover:underline">loan payment calculator</Link> applies the compound formula used by most lenders.</>}
         calculator={<InterestCalculatorWidget />}
         howTo={[
           "Enter the principal — the starting amount of money.",
@@ -76,11 +78,11 @@ export default function InterestCalculatorPage() {
           { input: "Principal $15,000, Rate 3%, Time 10 years", output: "$4,500 interest — $19,500 total" },
         ]}
         useCases={[
-          "Estimating interest on a personal loan",
-          "Calculating returns on short-term savings",
-          "Understanding loan cost before borrowing",
-          "Comparing different rate and term combinations",
-          "Finance homework and exam preparation",
+          "Estimating interest on a short-term personal loan",
+          "Calculating returns on a fixed-rate savings bond",
+          "Understanding the basic cost of borrowing before applying",
+          "Comparing different rate and term combinations quickly",
+          "Finance coursework and exam preparation",
         ]}
         faqs={faqs}
       />

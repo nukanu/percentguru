@@ -9,7 +9,7 @@ import ROICalculatorWidget from "./CalculatorWidget"
 const faqs = [
   {
     question: "What is ROI?",
-    answer: "ROI (Return on Investment) measures the gain or loss on an investment relative to the amount invested. It tells you what percentage return you earned — or lost — on your money.",
+    answer: "ROI (Return on Investment) measures the gain or loss on an investment relative to the amount invested. A positive ROI means you made money; a negative ROI means you lost it.",
   },
   {
     question: "What is the ROI on a $1,000 investment that returned $1,400?",
@@ -17,20 +17,20 @@ const faqs = [
   },
   {
     question: "What is the ROI formula?",
-    answer: "ROI = ((Final Value − Initial Investment) / Initial Investment) × 100. A positive result means a gain; a negative result means a loss.",
+    answer: "ROI = ((Final Value − Initial Investment) / Initial Investment) × 100. A positive result is a gain; a negative result is a loss.",
   },
   {
     question: "What is a good ROI?",
-    answer: "It depends on the asset class and time period. Stock market investors typically target 7–10% annually. Real estate often sees 8–12%. Short-term trades or business investments are measured against opportunity cost. There is no universal 'good' — context matters.",
+    answer: "Context-dependent. Stock market investors typically target 7–10% annually. Real estate often sees 8–12%. Short-term business projects are measured against opportunity cost and time horizon. There is no universal threshold — compare against the next-best alternative use of the same capital.",
   },
   {
     question: "Can ROI be negative?",
-    answer: "Yes. If your final value is less than the initial investment, ROI is negative — meaning you lost money. For example, investing $500 and receiving back $400 gives an ROI of −20%.",
+    answer: "Yes. If the final value is less than the initial investment, ROI is negative. Investing $500 and receiving $400 back gives an ROI of −20%.",
   },
   {
     question: "What is the difference between ROI and profit margin?",
-    answer: <>ROI measures return relative to what you invested. <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">Profit margin</Link> measures profit relative to revenue. Use ROI to evaluate the efficiency of an investment; use profit margin to assess how much of each sale is kept as profit.</>,
-    schemaAnswer: "ROI measures return relative to what you invested. Profit margin measures profit relative to revenue. Use ROI to evaluate the efficiency of an investment; use profit margin to assess how much of each sale is kept as profit.",
+    answer: <>ROI measures return relative to what you <em>invested</em>. <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">Profit margin</Link> measures profit relative to <em>revenue</em>. ROI is better for evaluating investment decisions; profit margin is better for assessing how efficiently revenue converts to profit. A business can have a high profit margin and low ROI if the capital requirements are large.</>,
+    schemaAnswer: "ROI measures return relative to what you invested. Profit margin measures profit relative to revenue. ROI is better for evaluating investment decisions; profit margin is better for assessing operational efficiency.",
   },
 ]
 
@@ -62,7 +62,7 @@ export default function ROICalculatorPage() {
       <CalculatorShell
         slug="roi-calculator"
         title="ROI Calculator"
-        intro="Enter your initial investment and the final value it returned — the calculator shows your ROI percentage and exact net gain or loss. Useful for evaluating stocks, real estate, business projects, or any investment."
+        intro={<>Enter your initial investment and the final value it returned — the calculator shows your ROI percentage and exact net gain or loss. Used for evaluating stocks, real estate, business projects, and marketing spend. To assess whether the business itself is worth funding in the first place, the <Link href="/finance/break-even-calculator/" className="text-blue-600 hover:underline">break-even calculator</Link> shows how many units need to be sold before any return is possible.</>}
         calculator={<ROICalculatorWidget />}
         howTo={[
           "Enter the initial investment — the amount you put in.",
@@ -70,18 +70,18 @@ export default function ROICalculatorPage() {
           "ROI percentage and net gain or loss are shown instantly.",
         ]}
         formula="ROI = ((Final Value − Initial Investment) / Initial Investment) × 100"
-        formulaExplained="Subtract the initial investment from the final value to get the net gain. Divide by the initial investment, then multiply by 100 to express as a percentage."
+        formulaExplained="Subtract the initial investment from the final value to get the net gain. Divide by the initial investment, then multiply by 100. A positive result is a gain; negative is a loss."
         examples={[
           { input: "Invested $2,000, returned $2,600", output: "30% ROI — +$600 gain" },
           { input: "Invested $500, returned $450", output: "−10% ROI — −$50 loss" },
-          { input: "Invested $10,000, returned $14,500", output: "45% ROI — +$4,500 gain" },
+          { input: "Invested $10,000, returned $15,500", output: "55% ROI — +$5,500 gain" },
         ]}
         useCases={[
           "Evaluating stock or fund investment performance",
-          "Comparing returns across different investments",
-          "Assessing business project profitability",
+          "Comparing the return on different investment options",
+          "Assessing business project or marketing campaign profitability",
           "Measuring real estate investment returns",
-          "Tracking marketing campaign ROI",
+          "Deciding whether to reinvest in an asset or redeploy capital",
         ]}
         faqs={faqs}
       />

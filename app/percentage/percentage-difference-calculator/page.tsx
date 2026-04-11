@@ -13,24 +13,25 @@ const faqs = [
   },
   {
     question: "What is the percentage difference between 10 and 20?",
-    answer: "The percentage difference between 10 and 20 is 66.6667%. Calculation: |10 − 20| / ((10 + 20) / 2) × 100 = 10 / 15 × 100 ≈ 66.67.",
+    answer: "The percentage difference between 10 and 20 is 66.67%. Calculation: |10 − 20| / ((10 + 20) / 2) × 100 = 10 / 15 × 100 ≈ 66.67.",
   },
   {
     question: "What is the difference between percentage difference and percentage change?",
-    answer: <>Percentage difference is symmetric — neither value is the &quot;original&quot;. If order matters (e.g. a value went from X to Y), use the <Link href="/percentage/percentage-change-calculator/" className="text-blue-600 hover:underline">percentage change calculator</Link> instead, which tracks direction.</>,
-    schemaAnswer: "Percentage difference is symmetric — neither value is the 'original'. If order matters (e.g. a value went from X to Y), use the percentage change calculator instead, which tracks direction.",
+    answer: <>Percentage difference is symmetric — neither value is the &quot;original&quot;. If order matters (a value went from X to Y), use the <Link href="/percentage/percentage-change-calculator/" className="text-blue-600 hover:underline">percentage change calculator</Link> instead, which tracks direction.</>  ,
+    schemaAnswer: "Percentage difference is symmetric — neither value is the 'original'. If order matters (a value went from X to Y), use the percentage change calculator instead, which tracks direction.",
   },
   {
     question: "Why does percentage difference use the average of the two values?",
-    answer: "Using the average as the denominator treats both values equally. This avoids giving different results depending on which value you call the 'original'.",
+    answer: "Using the average as the denominator treats both values equally and avoids giving a different answer depending on which you call 'first'. Without this, 40 vs 60 and 60 vs 40 would produce different percentages — which would be misleading for a symmetric comparison.",
   },
   {
     question: "What is the percentage difference between 100 and 100?",
-    answer: "The percentage difference is 0% — both values are identical.",
+    answer: "0% — both values are identical.",
   },
   {
     question: "Can percentage difference exceed 100%?",
-    answer: "Yes. If one value is much larger than the other relative to their average, the result exceeds 100%. For example, 10 and 90 gives a 160% difference: |10−90| / ((10+90)/2) × 100 = 80/50 × 100 = 160.",
+    answer: <>Yes. When one value is much larger than the other relative to their average, the result exceeds 100%. For example, 10 and 90: |10−90| / ((10+90)/2) × 100 = 80/50 × 100 = 160%. If both values are treated as measurements of the same thing, consider whether <Link href="/percentage/percentage-error-calculator/" className="text-blue-600 hover:underline">percentage error</Link> is a better fit — it applies when one value is the known correct reference.</>,
+    schemaAnswer: "Yes. When one value is much larger than the other relative to their average, the result exceeds 100%. For example: |10−90| / ((10+90)/2) × 100 = 80/50 × 100 = 160%.",
   },
 ]
 
@@ -62,7 +63,7 @@ export default function PercentageDifferencePage() {
       <CalculatorShell
         slug="percentage-difference-calculator"
         title="Percentage Difference Calculator"
-        intro={<>Enter two values to find the percentage difference between them. Unlike <Link href="/percentage/percentage-change-calculator/" className="text-blue-600 hover:underline">percentage change</Link>, this is symmetric — neither value is treated as the starting point.</>}
+        intro={<>Enter two values to find the percentage difference between them. Unlike <Link href="/percentage/percentage-change-calculator/" className="text-blue-600 hover:underline">percentage change</Link>, this is symmetric — neither value is treated as the starting point. Used when comparing two equivalent measurements, two supplier quotes, or two data points where neither is the baseline.</>}
         calculator={<PercentageDifferenceWidget />}
         howTo={[
           "Enter the first value in the Value A field.",
@@ -70,18 +71,18 @@ export default function PercentageDifferencePage() {
           "The percentage difference between them is shown instantly.",
         ]}
         formula="Percentage Difference = (|A − B| / ((A + B) / 2)) × 100"
-        formulaExplained="Take the absolute difference between A and B, divide by their average, then multiply by 100."
+        formulaExplained="Take the absolute difference between A and B, divide by their average, then multiply by 100. The average as the denominator ensures the result is the same regardless of input order."
         examples={[
           { input: "Between 30 and 50", output: "50%" },
-          { input: "Between 70 and 90", output: "25%" },
+          { input: "Between 70 and 91", output: "26.09%" },
           { input: "Between 5 and 15", output: "100%" },
         ]}
         useCases={[
           "Comparing prices from two different suppliers",
           "Measuring the spread between two data points",
           "Comparing survey results from two groups",
-          "Analysing differences between two measurements",
-          "Checking variance between two estimates",
+          "Checking variance between two estimates or measurements",
+          "Analysing differences in performance benchmarks",
         ]}
         faqs={faqs}
       />
