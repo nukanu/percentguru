@@ -1,0 +1,42 @@
+import Link from "next/link"
+
+export default function Footer() {
+  return (
+    <footer className="border-t border-gray-200 bg-gray-50 mt-16">
+      <div className="mx-auto max-w-4xl px-4 py-8">
+        <div className="flex flex-col sm:flex-row justify-between gap-6 text-sm text-gray-500">
+          <div>
+            <p className="font-semibold text-gray-700 mb-2">Percentage Calculators</p>
+            <ul className="space-y-1">
+              <li><Link href="/percentage/what-is-x-percent-of-y/" className="hover:text-blue-600">What is X% of Y?</Link></li>
+              <li><Link href="/percentage/x-is-what-percent-of-y/" className="hover:text-blue-600">X is What % of Y?</Link></li>
+              <li><Link href="/percentage/percentage-increase-calculator/" className="hover:text-blue-600">Percentage Increase</Link></li>
+              <li><Link href="/percentage/percentage-decrease-calculator/" className="hover:text-blue-600">Percentage Decrease</Link></li>
+              <li><Link href="/percentage/percentage-change-calculator/" className="hover:text-blue-600">Percentage Change</Link></li>
+            </ul>
+          </div>
+          <div>
+            <p className="font-semibold text-gray-700 mb-2">Finance Calculators</p>
+            <ul className="space-y-1">
+              <li><Link href="/finance/discount-calculator/" className="hover:text-blue-600">Discount Calculator</Link></li>
+              <li><Link href="/finance/markup-calculator/" className="hover:text-blue-600">Markup Calculator</Link></li>
+              <li><Link href="/finance/profit-margin-calculator/" className="hover:text-blue-600">Profit Margin</Link></li>
+              <li><Link href="/finance/sales-tax-calculator/" className="hover:text-blue-600">Sales Tax</Link></li>
+            </ul>
+          </div>
+          <div>
+            <p className="font-semibold text-gray-700 mb-2">PercentGuru</p>
+            <ul className="space-y-1">
+              <li><Link href="/" className="hover:text-blue-600">Home</Link></li>
+              <li><Link href="/percentage/" className="hover:text-blue-600">Percentage Hub</Link></li>
+              <li><Link href="/finance/" className="hover:text-blue-600">Finance Hub</Link></li>
+            </ul>
+          </div>
+        </div>
+        <p className="mt-8 text-xs text-gray-400 text-center">
+          © {new Date().getFullYear()} PercentGuru. Free online calculators.
+        </p>
+      </div>
+    </footer>
+  )
+}
