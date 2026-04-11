@@ -98,6 +98,41 @@ export const calculators: CalculatorConfig[] = [
     description: "Calculate sales tax and total price including tax.",
     keywords: ["sales tax calculator", "tax calculator", "calculate sales tax"],
   },
+  {
+    slug: "roi-calculator",
+    hub: "finance",
+    title: "ROI Calculator",
+    description: "Calculate return on investment percentage and net gain or loss.",
+    keywords: ["ROI calculator", "return on investment calculator", "calculate ROI"],
+  },
+  {
+    slug: "interest-calculator",
+    hub: "finance",
+    title: "Simple Interest Calculator",
+    description: "Calculate simple interest and total amount from principal, rate, and time.",
+    keywords: ["simple interest calculator", "interest calculator", "calculate interest"],
+  },
+  {
+    slug: "loan-payment-calculator",
+    hub: "finance",
+    title: "Loan Payment Calculator",
+    description: "Calculate monthly loan payment and total interest for any fixed-rate loan.",
+    keywords: ["loan payment calculator", "monthly payment calculator", "loan calculator"],
+  },
+  {
+    slug: "weighted-average-calculator",
+    hub: "finance",
+    title: "Weighted Average Calculator",
+    description: "Calculate the weighted average from values and their corresponding weights.",
+    keywords: ["weighted average calculator", "weighted mean calculator", "calculate weighted average"],
+  },
+  {
+    slug: "break-even-calculator",
+    hub: "finance",
+    title: "Break-Even Calculator",
+    description: "Calculate break-even point in units and revenue from fixed costs and pricing.",
+    keywords: ["break-even calculator", "breakeven point calculator", "break even analysis"],
+  },
 ]
 
 export function getCalculatorsByHub(hub: "percentage" | "finance"): CalculatorConfig[] {

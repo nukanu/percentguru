@@ -26,3 +26,31 @@ export function salesTaxAmount(price: number, taxRate: number): number {
 export function priceAfterTax(price: number, taxRate: number): number {
   return price + salesTaxAmount(price, taxRate)
 }
+
+export function roi(initialInvestment: number, finalValue: number): number {
+  if (initialInvestment === 0) return 0
+  return ((finalValue - initialInvestment) / initialInvestment) * 100
+}
+
+export function simpleInterest(principal: number, rate: number, years: number): number {
+  return (principal * rate * years) / 100
+}
+
+export function monthlyPayment(principal: number, annualRate: number, months: number): number {
+  const r = annualRate / 100 / 12
+  if (r === 0) return principal / months
+  return (principal * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1)
+}
+
+export function weightedAverage(values: number[], weights: number[]): number {
+  const totalWeight = weights.reduce((sum, w) => sum + w, 0)
+  if (totalWeight === 0) return 0
+  const weightedSum = values.reduce((sum, v, i) => sum + v * weights[i], 0)
+  return weightedSum / totalWeight
+}
+
+export function breakEvenUnits(fixedCosts: number, sellingPrice: number, variableCost: number): number {
+  const contribution = sellingPrice - variableCost
+  if (contribution <= 0) return Infinity
+  return fixedCosts / contribution
+}

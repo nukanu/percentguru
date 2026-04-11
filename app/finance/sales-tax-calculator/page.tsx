@@ -34,7 +34,7 @@ const faqs = [
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Sales Tax Calculator",
-  description: "Calculate the sales tax amount and total price including tax. Enter any price and tax rate for an instant result.",
+  description: "Enter a price and tax rate to instantly see the tax amount and total cost. Works for US sales tax, VAT, or any rate worldwide.",
   path: "/finance/sales-tax-calculator/",
   keywords: ["sales tax calculator", "tax calculator", "calculate sales tax", "price with tax"],
 })
@@ -60,7 +60,7 @@ export default function SalesTaxPage() {
       <CalculatorShell
         slug="sales-tax-calculator"
         title="Sales Tax Calculator"
-        intro="Enter a price and a tax rate to instantly see the tax amount and the total cost including tax. Works for any currency and any tax rate."
+        intro="Enter the pre-tax price and your local tax rate to see the tax amount and the total you'll pay. Works for US sales tax, UK VAT, or any other rate worldwide."
         calculator={<SalesTaxWidget />}
         howTo={[
           "Enter the pre-tax price in the first field.",
@@ -71,8 +71,8 @@ export default function SalesTaxPage() {
         formulaExplained="Divide the tax rate by 100 to convert it to a decimal, then multiply by the pre-tax price. Add that to the original price to get the total."
         examples={[
           { input: "$200 at 5% tax", output: "$10 tax — $210 total" },
-          { input: "$49.99 at 8.875% tax", output: "$4.44 tax — $54.43 total" },
-          { input: "$1,000 at 20% VAT", output: "$200 tax — $1,200 total" },
+          { input: "$85 at 8% tax", output: "$6.80 tax — $91.80 total" },
+          { input: "$500 at 20% VAT", output: "$100 tax — $600 total" },
         ]}
         useCases={[
           "Calculating the true cost of a purchase before checkout",

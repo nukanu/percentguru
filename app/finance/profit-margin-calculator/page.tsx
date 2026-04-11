@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { generatePageMetadata } from "@/lib/seo/metadata"
 import { softwareApplicationSchema, faqSchema } from "@/lib/seo/schema"
 import CalculatorShell from "@/components/calculator/CalculatorShell"
@@ -24,17 +25,18 @@ const faqs = [
   },
   {
     question: "How is profit margin different from markup?",
-    answer: "Margin is calculated on revenue: profit / selling price. Markup is calculated on cost: profit / cost. A 50% markup equals a 33.33% margin — not the same number.",
+    answer: <>Margin is profit divided by revenue. Markup is profit divided by cost. They&apos;re related but never equal (unless margin is 0%). A 50% markup equals a 33.33% margin. If you&apos;re setting prices from cost, the <Link href="/finance/markup-calculator/" className="text-blue-600 hover:underline">markup calculator</Link> is the right starting point.</>,
+    schemaAnswer: "Margin is profit divided by revenue. Markup is profit divided by cost. They're related but never equal (unless margin is 0%). A 50% markup equals a 33.33% margin.",
   },
   {
-    question: "What profit margin do I need to break even?",
-    answer: "A 0% profit margin means revenue equals cost — you break even. Any positive margin means you are making a profit.",
+    question: "What profit margin do I need to cover operating costs?",
+    answer: "It depends on your overhead. If your operating costs (rent, salaries, software) equal 20% of revenue, you need at least a 20% gross margin to break even after those expenses. Most businesses aim for gross margin well above their operating cost percentage to ensure net profit.",
   },
 ]
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Profit Margin Calculator",
-  description: "Calculate gross profit margin and profit amount from revenue and cost. Free and instant.",
+  description: "Enter revenue and cost to instantly calculate gross profit margin and profit amount. Useful for pricing, financial reporting, and margin analysis.",
   path: "/finance/profit-margin-calculator/",
   keywords: ["profit margin calculator", "gross margin calculator", "profit percentage", "calculate profit margin"],
 })
@@ -60,7 +62,7 @@ export default function ProfitMarginPage() {
       <CalculatorShell
         slug="profit-margin-calculator"
         title="Profit Margin Calculator"
-        intro="Enter your revenue and cost to find the gross profit margin and total profit. Useful for pricing decisions, business reporting, and evaluating product profitability."
+        intro="Enter what you charged (revenue) and what it cost you to deliver — the calculator shows your gross profit and profit margin percentage. Used for pricing products, evaluating deals, and reporting financials."
         calculator={<ProfitMarginWidget />}
         howTo={[
           "Enter the revenue — the price you sold the product or service for.",
@@ -71,7 +73,7 @@ export default function ProfitMarginPage() {
         formulaExplained="Subtract cost from revenue to get gross profit, divide by revenue, then multiply by 100 to express it as a percentage."
         examples={[
           { input: "Revenue $200, Cost $140", output: "30% margin — $60 profit" },
-          { input: "Revenue $500, Cost $350", output: "30% margin — $150 profit" },
+          { input: "Revenue $500, Cost $400", output: "20% margin — $100 profit" },
           { input: "Revenue $80, Cost $20", output: "75% margin — $60 profit" },
         ]}
         useCases={[

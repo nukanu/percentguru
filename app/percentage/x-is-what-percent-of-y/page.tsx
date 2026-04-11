@@ -23,8 +23,8 @@ const faqs = [
     answer: "That's valid — it means X is greater than Y. For example, 150 is 150% of 100.",
   },
   {
-    question: "Is this the same as finding a percentage ratio?",
-    answer: "Yes. This calculator finds the percentage ratio of X to Y, telling you what fraction X is of Y expressed as a percent.",
+    question: "What if I want to know what percent 120 is of 80?",
+    answer: "Enter 120 as X and 80 as Y. The result is 150% — meaning 120 is 150% of 80, which makes sense since 120 is larger than 80.",
   },
   {
     question: "1 is what percent of 4?",
@@ -34,7 +34,7 @@ const faqs = [
 
 export const metadata: Metadata = generatePageMetadata({
   title: "X is What Percent of Y? Calculator",
-  description: "Find what percentage one number is of another instantly. Enter X and Y to calculate the percentage.",
+  description: "Find what percentage one number is of another. Enter any two numbers — works for test scores, budget shares, survey results, and more.",
   path: "/percentage/x-is-what-percent-of-y/",
   keywords: ["x is what percent of y", "what percent of", "percentage ratio calculator"],
 })
@@ -60,7 +60,7 @@ export default function XIsWhatPercentOfYPage() {
       <CalculatorShell
         slug="x-is-what-percent-of-y"
         title="X is What Percent of Y?"
-        intro="Enter two numbers to find what percentage the first is of the second. Useful for grades, ratios, survey results, and any time you need to express a part as a percentage of a whole."
+        intro="Got two numbers and need to know what percentage one is of the other? Enter the part and the total — this calculator tells you exactly what percent the first number is of the second."
         calculator={<XIsWhatPercentOfYWidget />}
         howTo={[
           "Enter the value (X) in the first field — the part you want to express as a percentage.",

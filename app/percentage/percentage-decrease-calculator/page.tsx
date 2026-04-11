@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { generatePageMetadata } from "@/lib/seo/metadata"
 import { softwareApplicationSchema, faqSchema } from "@/lib/seo/schema"
 import CalculatorShell from "@/components/calculator/CalculatorShell"
@@ -20,7 +21,8 @@ const faqs = [
   },
   {
     question: "What if my new value is higher than the original?",
-    answer: "The result will be negative, which means the value actually increased. Use the percentage increase calculator in that case.",
+    answer: <>The result will be negative, which means the value actually went up. If that&apos;s what you&apos;re measuring, use the <Link href="/percentage/percentage-increase-calculator/" className="text-blue-600 hover:underline">percentage increase calculator</Link> instead.</>,
+    schemaAnswer: "The result will be negative, which means the value actually went up. If that's what you're measuring, use the percentage increase calculator instead.",
   },
   {
     question: "What is the percentage decrease from 500 to 400?",
@@ -34,7 +36,7 @@ const faqs = [
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Percentage Decrease Calculator",
-  description: "Calculate the percentage decrease between two values instantly. Enter the original and new value to get the result.",
+  description: "Calculate the percentage decrease between two values. Enter before and after — works for price drops, budget cuts, and falling metrics.",
   path: "/percentage/percentage-decrease-calculator/",
   keywords: ["percentage decrease calculator", "percent decrease", "how to calculate percentage decrease"],
 })
@@ -60,7 +62,7 @@ export default function PercentageDecreasePage() {
       <CalculatorShell
         slug="percentage-decrease-calculator"
         title="Percentage Decrease Calculator"
-        intro="Enter the original value and the new (lower) value to find out by what percentage it has decreased. Useful for price drops, weight loss, budget cuts, or any reduction."
+        intro="Enter a before value and an after value to see how much it dropped as a percentage. Useful for measuring price cuts, falling revenue, weight loss, or any time a number has gone down."
         calculator={<PercentageDecreaseWidget />}
         howTo={[
           "Enter the original (starting) value in the first field.",

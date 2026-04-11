@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { generatePageMetadata } from "@/lib/seo/metadata"
 import { softwareApplicationSchema, faqSchema } from "@/lib/seo/schema"
 import CalculatorShell from "@/components/calculator/CalculatorShell"
@@ -28,13 +29,14 @@ const faqs = [
   },
   {
     question: "How do I find the original price from a discounted price?",
-    answer: "If you know the sale price and the discount percentage, use the reverse percentage calculator. For example, if $80 is the price after a 20% discount, the original was $80 / 0.80 = $100.",
+    answer: <>Use the <Link href="/percentage/reverse-percentage-calculator/" className="text-blue-600 hover:underline">reverse percentage calculator</Link>. Enter the remaining percentage (100 minus the discount) and the sale price — it gives you the original. For example, $80 after a 20% discount means 80% remains: enter 80% and $80 to get $100.</>,
+    schemaAnswer: "Use the reverse percentage calculator. Enter the remaining percentage (100 minus the discount) and the sale price — it gives you the original. For example, $80 after a 20% discount means 80% remains: enter 80% and $80 to get $100.",
   },
 ]
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Discount Calculator — Calculate Percent Off",
-  description: "Calculate how much you save and the final price after a percentage discount. Free and instant.",
+  description: "Enter a price and a discount percentage to instantly see your savings and the final price. Works for any sale, coupon, or bulk discount.",
   path: "/finance/discount-calculator/",
   keywords: ["discount calculator", "percent off calculator", "sale price calculator", "how much do I save"],
 })
@@ -60,7 +62,7 @@ export default function DiscountCalculatorPage() {
       <CalculatorShell
         slug="discount-calculator"
         title="Discount Calculator"
-        intro="Enter the original price and the discount percentage to instantly see how much you save and what the final price is."
+        intro="Enter the original price and the discount percentage to see exactly how much you save and what you'll pay. Useful at checkout, during sales, or when comparing deals."
         calculator={<DiscountCalculatorWidget />}
         howTo={[
           "Enter the original (full) price in the first field.",

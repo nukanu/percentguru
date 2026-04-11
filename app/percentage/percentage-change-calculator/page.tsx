@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { generatePageMetadata } from "@/lib/seo/metadata"
 import { softwareApplicationSchema, faqSchema } from "@/lib/seo/schema"
 import CalculatorShell from "@/components/calculator/CalculatorShell"
@@ -16,7 +17,8 @@ const faqs = [
   },
   {
     question: "What is the difference between percentage change and percentage difference?",
-    answer: "Percentage change measures the relative shift from one value to another in a specific direction (increase or decrease). Percentage difference compares two values symmetrically with no direction implied.",
+    answer: <>Percentage change measures a directional shift — from a starting value to an ending value. <Link href="/percentage/percentage-difference-calculator/" className="text-blue-600 hover:underline">Percentage difference</Link> compares two values symmetrically, with no concept of &quot;before&quot; or &quot;after&quot;. Use percentage change when order matters; use percentage difference when it doesn&apos;t.</>,
+    schemaAnswer: "Percentage change measures a directional shift — from a starting value to an ending value. Percentage difference compares two values symmetrically, with no concept of 'before' or 'after'. Use percentage change when order matters; use percentage difference when it doesn't.",
   },
   {
     question: "Can percentage change be negative?",
@@ -28,13 +30,13 @@ const faqs = [
   },
   {
     question: "What is the percentage change from 0 to any number?",
-    answer: "Percentage change from zero is undefined because you'd be dividing by zero. This calculator returns 0% in that case as a safe default.",
+    answer: "Technically undefined — you can't divide by zero. In practice, if your starting value is zero, percentage change isn't a meaningful measure. Use absolute difference instead.",
   },
 ]
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Percentage Change Calculator",
-  description: "Calculate the percentage change between two values. Shows whether the change is an increase or decrease.",
+  description: "Calculate the percentage change between any two values. Shows direction (increase or decrease) and magnitude instantly.",
   path: "/percentage/percentage-change-calculator/",
   keywords: ["percentage change calculator", "percent change", "calculate percentage change"],
 })
@@ -60,7 +62,7 @@ export default function PercentageChangePage() {
       <CalculatorShell
         slug="percentage-change-calculator"
         title="Percentage Change Calculator"
-        intro="Enter any two values to find the percentage change between them. A positive result means an increase; a negative result means a decrease."
+        intro="Enter a before value and an after value to find out how much it changed as a percentage. Works for any direction — the calculator will tell you whether it went up or down, and by how much."
         calculator={<PercentageChangeWidget />}
         howTo={[
           "Enter the original (before) value in the first field.",

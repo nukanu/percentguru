@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { generatePageMetadata } from "@/lib/seo/metadata"
 import { softwareApplicationSchema, faqSchema } from "@/lib/seo/schema"
 import CalculatorShell from "@/components/calculator/CalculatorShell"
@@ -12,7 +13,8 @@ const faqs = [
   },
   {
     question: "What is the difference between markup and margin?",
-    answer: "Markup is calculated on cost — it's how much you add on top. Margin is calculated on revenue — it's how much of the selling price is profit. A 50% markup does not equal a 50% margin.",
+    answer: <>Markup is based on cost — it&apos;s what you add on top. Margin is based on revenue — it&apos;s the share of the selling price that&apos;s profit. A 50% markup gives a 33.3% margin, not 50%. If you need to work backwards from a target margin, use the <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">profit margin calculator</Link>.</>,
+    schemaAnswer: "Markup is based on cost — it's what you add on top. Margin is based on revenue — it's the share of the selling price that's profit. A 50% markup gives a 33.3% margin, not 50%.",
   },
   {
     question: "What markup percentage gives a 50% profit margin?",
@@ -34,7 +36,7 @@ const faqs = [
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Markup Calculator — Calculate Selling Price from Cost",
-  description: "Calculate the selling price and markup amount from a cost price and markup percentage. Free and instant.",
+  description: "Enter a cost price and markup percentage to get the selling price and profit amount instantly. Essential for retail pricing and margin planning.",
   path: "/finance/markup-calculator/",
   keywords: ["markup calculator", "markup percentage calculator", "cost to selling price", "price markup"],
 })
@@ -60,7 +62,7 @@ export default function MarkupCalculatorPage() {
       <CalculatorShell
         slug="markup-calculator"
         title="Markup Calculator"
-        intro="Enter the cost price and your desired markup percentage to find the selling price and the exact amount added. Used for pricing products, setting wholesale rates, and calculating margins."
+        intro="Enter what something costs you and the markup percentage you want to apply — the calculator gives you the selling price and the exact profit added. Used by retailers, freelancers, and anyone setting prices."
         calculator={<MarkupCalculatorWidget />}
         howTo={[
           "Enter the cost price — what you paid for the item or service.",

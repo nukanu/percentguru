@@ -64,6 +64,31 @@ const relatedMap: Record<string, string[]> = {
     "profit-margin-calculator",
     "markup-calculator",
   ],
+  "roi-calculator": [
+    "profit-margin-calculator",
+    "break-even-calculator",
+    "interest-calculator",
+  ],
+  "interest-calculator": [
+    "loan-payment-calculator",
+    "roi-calculator",
+    "discount-calculator",
+  ],
+  "loan-payment-calculator": [
+    "interest-calculator",
+    "roi-calculator",
+    "break-even-calculator",
+  ],
+  "weighted-average-calculator": [
+    "profit-margin-calculator",
+    "discount-calculator",
+    "markup-calculator",
+  ],
+  "break-even-calculator": [
+    "profit-margin-calculator",
+    "roi-calculator",
+    "markup-calculator",
+  ],
 }
 
 export function getRelatedSlugs(slug: string): string[] {

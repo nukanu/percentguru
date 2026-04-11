@@ -16,16 +16,19 @@ export function softwareApplicationSchema(name: string, description: string) {
   }
 }
 
-export function faqSchema(faqs: { question: string; answer: string }[]) {
+// schemaAnswer is the plain-text fallback for FAQs whose display answer contains JSX
+export function faqSchema(
+  faqs: { question: string; answer: unknown; schemaAnswer?: string }[]
+) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map(({ question, answer }) => ({
+    mainEntity: faqs.map(({ question, answer, schemaAnswer }) => ({
       "@type": "Question",
       name: question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: answer,
+        text: schemaAnswer ?? (typeof answer === "string" ? answer : ""),
       },
     })),
   }

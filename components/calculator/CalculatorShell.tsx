@@ -4,13 +4,13 @@ import { getRelatedSlugs } from "@/lib/content/related"
 
 type FAQ = {
   question: string
-  answer: string
+  answer: React.ReactNode
 }
 
 type CalculatorShellProps = {
   slug: string
   title: string
-  intro: string
+  intro: React.ReactNode
   calculator: React.ReactNode
   howTo: string[]
   formula: string
@@ -38,7 +38,7 @@ export default function CalculatorShell({
     .filter(Boolean)
 
   return (
-    <article className="mx-auto max-w-2xl px-4 py-8">
+    <article className="mx-auto max-w-2xl px-4 pb-12">
       <h1 className="text-3xl font-bold text-gray-900 mb-2">{title}</h1>
       <p className="text-gray-500 mb-6 leading-relaxed">{intro}</p>
 
@@ -62,6 +62,11 @@ export default function CalculatorShell({
           </div>
         </section>
       )}
+
+      {/* Ad slot — below calculator */}
+      <div className="mt-8 border border-dashed border-gray-200 rounded-lg py-4 text-center text-xs text-gray-300">
+        Sponsored
+      </div>
 
       <section className="mt-8">
         <h2 className="text-lg font-bold text-gray-900 mb-3">How to Calculate</h2>
@@ -100,6 +105,11 @@ export default function CalculatorShell({
           ))}
         </ul>
       </section>
+
+      {/* Ad slot — mid-page */}
+      <div className="mt-8 border border-dashed border-gray-200 rounded-lg py-4 text-center text-xs text-gray-300">
+        Sponsored
+      </div>
 
       <section className="mt-8">
         <h2 className="text-lg font-bold text-gray-900 mb-3">FAQ</h2>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { generatePageMetadata } from "@/lib/seo/metadata"
 import { softwareApplicationSchema, faqSchema } from "@/lib/seo/schema"
 import CalculatorShell from "@/components/calculator/CalculatorShell"
@@ -16,7 +17,8 @@ const faqs = [
   },
   {
     question: "What is the difference between percentage difference and percentage change?",
-    answer: "Percentage difference is symmetric — it compares two values without a defined 'before' and 'after'. Percentage change has a direction: it measures how much one value shifted relative to a starting point.",
+    answer: <>Percentage difference is symmetric — neither value is the &quot;original&quot;. If order matters (e.g. a value went from X to Y), use the <Link href="/percentage/percentage-change-calculator/" className="text-blue-600 hover:underline">percentage change calculator</Link> instead, which tracks direction.</>,
+    schemaAnswer: "Percentage difference is symmetric — neither value is the 'original'. If order matters (e.g. a value went from X to Y), use the percentage change calculator instead, which tracks direction.",
   },
   {
     question: "Why does percentage difference use the average of the two values?",
@@ -28,13 +30,13 @@ const faqs = [
   },
   {
     question: "Can percentage difference exceed 100%?",
-    answer: "Yes. If the two values are very different relative to their average, the result can exceed 100%. For example, 0 and 200 gives a 200% difference.",
+    answer: "Yes. If one value is much larger than the other relative to their average, the result exceeds 100%. For example, 10 and 90 gives a 160% difference: |10−90| / ((10+90)/2) × 100 = 80/50 × 100 = 160.",
   },
 ]
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Percentage Difference Calculator",
-  description: "Find the percentage difference between two numbers. Symmetric comparison — no 'before' or 'after' required.",
+  description: "Find the percentage difference between any two numbers. No 'before' or 'after' needed — useful for comparing prices, measurements, or data points.",
   path: "/percentage/percentage-difference-calculator/",
   keywords: ["percentage difference calculator", "percent difference", "difference between two numbers percentage"],
 })
@@ -60,7 +62,7 @@ export default function PercentageDifferencePage() {
       <CalculatorShell
         slug="percentage-difference-calculator"
         title="Percentage Difference Calculator"
-        intro="Enter two values to find the percentage difference between them. Unlike percentage change, this is symmetric — neither value is treated as the starting point."
+        intro={<>Enter two values to find the percentage difference between them. Unlike <Link href="/percentage/percentage-change-calculator/" className="text-blue-600 hover:underline">percentage change</Link>, this is symmetric — neither value is treated as the starting point.</>}
         calculator={<PercentageDifferenceWidget />}
         howTo={[
           "Enter the first value in the Value A field.",

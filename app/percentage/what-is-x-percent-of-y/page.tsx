@@ -19,9 +19,8 @@ const faqs = [
     answer: "5% of 50 is 2.5. Calculation: (5 / 100) × 50 = 2.5.",
   },
   {
-    question: "What is the difference between percent and percentage?",
-    answer:
-      "\"Percent\" means per hundred and is used with a specific number (e.g. 20 percent). \"Percentage\" refers to a rate or proportion in general (e.g. a large percentage). In practice, they're used interchangeably.",
+    question: "What is 18% of 200?",
+    answer: "18% of 200 is 36. This comes up often for gratuity — an 18% tip on a $200 restaurant bill is $36.",
   },
   {
     question: "Does this work with decimals like 7.5%?",
@@ -38,7 +37,7 @@ const faqs = [
 export const metadata: Metadata = generatePageMetadata({
   title: "What is X% of Y? — Percentage of a Number Calculator",
   description:
-    "Find what any percentage of a number is instantly. Enter a percentage and a number to calculate the result.",
+    "Find what any percentage of a number is instantly. Enter a percentage and a number — works for tips, discounts, tax, and more.",
   path: "/percentage/what-is-x-percent-of-y/",
   keywords: [
     "what is x percent of y",
@@ -91,7 +90,7 @@ export default function WhatIsXPercentOfYPage() {
         formulaExplained="Divide the percentage X by 100 to convert it to a decimal, then multiply by the number Y."
         examples={[
           { input: "What is 20% of 150?", output: "30" },
-          { input: "What is 7.5% of 400?", output: "30" },
+          { input: "What is 7.5% of 80?", output: "6" },
           { input: "What is 1% of 1000?", output: "10" },
         ]}
         useCases={[

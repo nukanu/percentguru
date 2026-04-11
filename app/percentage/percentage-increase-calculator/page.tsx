@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { generatePageMetadata } from "@/lib/seo/metadata"
 import { softwareApplicationSchema, faqSchema } from "@/lib/seo/schema"
 import CalculatorShell from "@/components/calculator/CalculatorShell"
@@ -24,7 +25,8 @@ const faqs = [
   },
   {
     question: "What if my new value is lower than the original?",
-    answer: "The result will be negative, indicating a percentage decrease rather than an increase. Use the percentage decrease calculator if you know the value has fallen.",
+    answer: <>The result will be negative, meaning the value fell rather than rose. If you know the value has gone down, the <Link href="/percentage/percentage-decrease-calculator/" className="text-blue-600 hover:underline">percentage decrease calculator</Link> is more appropriate.</>,
+    schemaAnswer: "The result will be negative, meaning the value fell rather than rose. If you know the value has gone down, the percentage decrease calculator is more appropriate.",
   },
   {
     question: "What is the percentage increase from 200 to 250?",
@@ -34,7 +36,7 @@ const faqs = [
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Percentage Increase Calculator",
-  description: "Calculate the percentage increase between two values instantly. Enter the original and new value to get the result.",
+  description: "Calculate the percentage increase between two values. Enter before and after — works for salaries, prices, scores, and revenue growth.",
   path: "/percentage/percentage-increase-calculator/",
   keywords: ["percentage increase calculator", "percent increase", "how to calculate percentage increase"],
 })
