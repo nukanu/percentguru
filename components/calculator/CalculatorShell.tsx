@@ -63,11 +63,6 @@ export default function CalculatorShell({
         </section>
       )}
 
-      {/* Ad slot — below calculator */}
-      <div className="mt-8 border border-dashed border-gray-200 rounded-lg py-4 text-center text-xs text-gray-300">
-        Sponsored
-      </div>
-
       <section className="mt-8">
         <h2 className="text-lg font-bold text-gray-900 mb-3">How to Calculate</h2>
         <ol className="space-y-1.5 list-decimal list-inside text-gray-700">
@@ -105,11 +100,6 @@ export default function CalculatorShell({
           ))}
         </ul>
       </section>
-
-      {/* Ad slot — mid-page */}
-      <div className="mt-8 border border-dashed border-gray-200 rounded-lg py-4 text-center text-xs text-gray-300">
-        Sponsored
-      </div>
 
       <section className="mt-8">
         <h2 className="text-lg font-bold text-gray-900 mb-3">FAQ</h2>
