@@ -34,6 +34,9 @@ export default function Footer() {
           <div>
             <p className="font-semibold text-gray-700 mb-2">More Finance</p>
             <ul className="space-y-1">
+              <li><Link href="/finance/mortgage-calculator/" className="hover:text-blue-600">Mortgage Calculator</Link></li>
+              <li><Link href="/finance/savings-calculator/" className="hover:text-blue-600">Savings Calculator</Link></li>
+              <li><Link href="/finance/salary-to-hourly-calculator/" className="hover:text-blue-600">Salary to Hourly</Link></li>
               <li><Link href="/finance/compound-interest-calculator/" className="hover:text-blue-600">Compound Interest</Link></li>
               <li><Link href="/finance/sales-tax-calculator/" className="hover:text-blue-600">Sales Tax</Link></li>
               <li><Link href="/finance/interest-calculator/" className="hover:text-blue-600">Simple Interest</Link></li>

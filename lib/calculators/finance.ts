@@ -73,6 +73,20 @@ export function compoundInterestEarned(
   return compoundInterestTotal(principal, annualRate, compoundsPerYear, years) - principal
 }
 
+export function savingsFutureValue(
+  principal: number,
+  monthlyContribution: number,
+  annualRate: number,
+  years: number
+): number {
+  const r = annualRate / 100 / 12
+  const n = years * 12
+  if (r === 0) return principal + monthlyContribution * n
+  const fvPrincipal = principal * Math.pow(1 + r, n)
+  const fvContributions = monthlyContribution * (Math.pow(1 + r, n) - 1) / r
+  return fvPrincipal + fvContributions
+}
+
 export function addVat(net: number, vatRate: number): { gross: number; vatAmount: number } {
   const vatAmount = (vatRate / 100) * net
   return { gross: net + vatAmount, vatAmount }

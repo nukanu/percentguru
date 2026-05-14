@@ -85,9 +85,9 @@ const relatedMap: Record<string, string[]> = {
     "roi-calculator",
   ],
   "loan-payment-calculator": [
+    "mortgage-calculator",
     "interest-calculator",
     "roi-calculator",
-    "break-even-calculator",
   ],
   "weighted-average-calculator": [
     "profit-margin-calculator",
@@ -152,6 +152,21 @@ const relatedMap: Record<string, string[]> = {
   "percent-to-decimal-calculator": [
     "decimal-to-percent-calculator",
     "fraction-to-percent-calculator",
+    "percentage-calculator",
+  ],
+  "mortgage-calculator": [
+    "loan-payment-calculator",
+    "savings-calculator",
+    "interest-calculator",
+  ],
+  "savings-calculator": [
+    "compound-interest-calculator",
+    "mortgage-calculator",
+    "roi-calculator",
+  ],
+  "salary-to-hourly-calculator": [
+    "salary-increase-calculator",
+    "annual-change-calculator",
     "percentage-calculator",
   ],
 }

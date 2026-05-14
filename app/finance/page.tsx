@@ -1,15 +1,14 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { getCalculatorsByHub } from "@/lib/content/calculators"
 import { generateHubMetadata } from "@/lib/seo/metadata"
 import { faqSchema } from "@/lib/seo/schema"
 import Breadcrumb from "@/components/layout/Breadcrumb"
 
 export const metadata: Metadata = generateHubMetadata({
   hub: "finance",
-  title: "Finance Calculators — Pricing, Margins, Loans, and Returns",
+  title: "Finance Calculators — Pricing, Loans, Savings & Returns",
   description:
-    "Free finance calculators for discounts, profit margin, markup, sales tax, loan payments, ROI, simple interest, weighted averages, and break-even analysis.",
+    "Free finance calculators for mortgages, savings, salary, discounts, profit margin, VAT, loan payments, ROI, and more. Instant results, no sign-up.",
 })
 
 const faqs = [
@@ -19,7 +18,7 @@ const faqs = [
   },
   {
     question: "How do I find total interest paid on a loan?",
-    answer: "Enter the principal, annual rate, and term into the loan payment calculator. It shows both the monthly repayment and total interest — for example, $10,000 at 6% over 60 months costs $1,600 in interest. The simple interest calculator gives a faster estimate without monthly compounding.",
+    answer: "Enter the principal, annual rate, and term into the loan payment calculator. It shows both the monthly repayment and total interest — for example, $10,000 at 6% over 60 months costs $1,600 in interest. The mortgage calculator does the same for home loans.",
   },
   {
     question: "Can I use the ROI calculator for ad spend or projects?",
@@ -38,17 +37,63 @@ const faqs = [
 const decisionGuide = [
   { question: "Setting a product price from cost", tool: "Markup Calculator", href: "/finance/markup-calculator/" },
   { question: "Measuring profit as % of revenue", tool: "Profit Margin Calculator", href: "/finance/profit-margin-calculator/" },
-  { question: "Calculating a sale or coupon price", tool: "Percent Off Calculator", href: "/percentage/percent-off-calculator/" },
+  { question: "Calculating monthly mortgage payment", tool: "Mortgage Calculator", href: "/finance/mortgage-calculator/" },
+  { question: "Projecting savings growth over time", tool: "Savings Calculator", href: "/finance/savings-calculator/" },
+  { question: "Converting annual salary to hourly rate", tool: "Salary to Hourly", href: "/finance/salary-to-hourly-calculator/" },
   { question: "Adding sales tax to a price", tool: "Sales Tax Calculator", href: "/finance/sales-tax-calculator/" },
   { question: "Estimating monthly loan repayment", tool: "Loan Payment Calculator", href: "/finance/loan-payment-calculator/" },
   { question: "Measuring return on investment", tool: "ROI Calculator", href: "/finance/roi-calculator/" },
   { question: "Finding units needed to cover costs", tool: "Break-Even Calculator", href: "/finance/break-even-calculator/" },
-  { question: "Tracking cost savings from a supplier", tool: "Cost Reduction Calculator", href: "/finance/cost-reduction-calculator/" },
 ]
 
-export default function FinancePage() {
-  const calculators = getCalculatorsByHub("finance")
+type CalcEntry = { slug: string; title: string; description: string }
 
+const PERSONAL_FINANCE: CalcEntry[] = [
+  { slug: "mortgage-calculator", title: "Mortgage Calculator", description: "Monthly payment and total interest from home price, down payment, rate, and term." },
+  { slug: "savings-calculator", title: "Savings Calculator", description: "Future savings balance from initial deposit, monthly contributions, and interest rate." },
+  { slug: "salary-to-hourly-calculator", title: "Salary to Hourly Calculator", description: "Annual salary → hourly, daily, weekly, and monthly pay breakdown." },
+  { slug: "loan-payment-calculator", title: "Loan Payment Calculator", description: "Monthly repayment and total interest for any fixed-rate loan." },
+  { slug: "compound-interest-calculator", title: "Compound Interest Calculator", description: "Total amount and interest earned with monthly, quarterly, or annual compounding." },
+  { slug: "interest-calculator", title: "Simple Interest Calculator", description: "Simple interest earned or owed from principal, rate, and time." },
+]
+
+const BUSINESS_PRICING: CalcEntry[] = [
+  { slug: "discount-calculator", title: "Discount Calculator", description: "Savings amount and final price from an original price and discount percentage." },
+  { slug: "markup-calculator", title: "Markup Calculator", description: "Selling price from cost and a target markup percentage." },
+  { slug: "profit-margin-calculator", title: "Profit Margin Calculator", description: "Gross margin as a percentage from revenue and cost." },
+  { slug: "sales-tax-calculator", title: "Sales Tax Calculator", description: "Add any tax rate to a price — works for US sales tax." },
+  { slug: "vat-calculator", title: "VAT Calculator", description: "Add or remove VAT at any rate, including UK 20%, 5%, and custom rates." },
+  { slug: "cost-reduction-calculator", title: "Cost Reduction Calculator", description: "Savings amount and percentage cost reduction between two costs." },
+  { slug: "weighted-average-calculator", title: "Weighted Average Calculator", description: "Average for values that don't carry equal weight." },
+]
+
+const INVESTMENT: CalcEntry[] = [
+  { slug: "roi-calculator", title: "ROI Calculator", description: "Return percentage and net gain on any investment or project." },
+  { slug: "break-even-calculator", title: "Break-Even Calculator", description: "Units needed to cover fixed costs before turning a profit." },
+]
+
+function CalcList({ items, hub = "finance" }: { items: CalcEntry[]; hub?: string }) {
+  return (
+    <ul className="space-y-2">
+      {items.map((c) => (
+        <li key={c.slug}>
+          <Link
+            href={`/${hub}/${c.slug}/`}
+            className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors group"
+          >
+            <div>
+              <p className="font-semibold text-gray-800 group-hover:text-blue-700">{c.title}</p>
+              <p className="text-sm text-gray-500 mt-0.5">{c.description}</p>
+            </div>
+            <span className="text-gray-400 group-hover:text-blue-400 text-xl ml-4">&rarr;</span>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+export default function FinancePage() {
   return (
     <>
       <script
@@ -66,14 +111,14 @@ export default function FinancePage() {
         <h1 className="text-3xl font-bold text-gray-900 mb-3">Finance Calculators</h1>
         <p className="text-gray-600 mb-5 text-lg">
           Free tools for real financial decisions — check a{" "}
-          <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">sale price</Link>,
+          <Link href="/finance/mortgage-calculator/" className="text-blue-600 hover:underline">mortgage payment</Link>,
+          project{" "}
+          <Link href="/finance/savings-calculator/" className="text-blue-600 hover:underline">savings growth</Link>,
           set a{" "}
           <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">product margin</Link>,
-          plan a{" "}
-          <Link href="/finance/loan-payment-calculator/" className="text-blue-600 hover:underline">monthly loan cost</Link>,
           or find the{" "}
           <Link href="/finance/break-even-calculator/" className="text-blue-600 hover:underline">break-even point</Link>{" "}
-          before you commit. All calculators are free and run instantly in your browser. For percentage-based calculations without a financial context, see the{" "}
+          before you commit. All calculators run instantly in your browser. For percentage-only calculations, see the{" "}
           <Link href="/percentage/" className="text-blue-600 hover:underline">percentage calculators</Link>.
         </p>
 
@@ -93,39 +138,21 @@ export default function FinancePage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-lg font-semibold text-gray-800 mb-3">What these tools help you with</h2>
-          <ul className="space-y-1.5 text-sm text-gray-600 list-disc list-inside">
-            <li><strong>Pricing and margins</strong> — work out gross profit as % of revenue, e.g. $30 cost, $50 price → 40% margin</li>
-            <li><strong>Discounts and sale prices</strong> — find exact savings and final price, e.g. 25% off $80 → $20 off, $60 final</li>
-            <li><strong>Monthly loan cost</strong> — calculate repayments and total interest before signing</li>
-            <li><strong>Investment returns</strong> — measure ROI as a percentage and net gain, e.g. $5,000 invested, $6,200 returned → 24% ROI</li>
-            <li><strong>Break-even analysis</strong> — find units needed to cover fixed costs before a product launch</li>
-            <li><strong>Cost savings</strong> — quantify supplier or operational savings as a percentage with the <Link href="/finance/cost-reduction-calculator/" className="text-blue-600 hover:underline">cost reduction calculator</Link></li>
-          </ul>
+          <h2 className="text-lg font-semibold text-gray-800 mb-3">Personal Finance</h2>
+          <p className="text-sm text-gray-500 mb-4">Mortgages, savings, salary, and loans — planning your own money.</p>
+          <CalcList items={PERSONAL_FINANCE} />
         </section>
 
         <section className="mb-8">
-          <h2 className="text-lg font-semibold text-gray-800 mb-3">All finance calculators</h2>
-          <p className="text-sm text-gray-500 mb-4">
-            Each tool answers a specific financial question. Choose based on what you&apos;re trying to find — a price, a payment, a return, or a cost threshold.
-          </p>
-          <ul className="space-y-3">
-            {calculators.map((c) => (
-              <li key={c.slug}>
-                <Link
-                  href={`/finance/${c.slug}/`}
-                  className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors group"
-                >
-                  <div>
-                    <p className="font-semibold text-gray-800 group-hover:text-blue-700">{c.title}</p>
-                    <p className="text-sm text-gray-500 mt-0.5">{c.description}</p>
-                  </div>
-                  <span className="text-gray-400 group-hover:text-blue-400 text-xl ml-4">&rarr;</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <p className="text-xs text-gray-500 mt-4">All calculators run instantly in your browser — no sign-up, no data stored.</p>
+          <h2 className="text-lg font-semibold text-gray-800 mb-3">Business &amp; Pricing</h2>
+          <p className="text-sm text-gray-500 mb-4">Pricing, margins, tax, discounts — for products and services.</p>
+          <CalcList items={BUSINESS_PRICING} />
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-lg font-semibold text-gray-800 mb-3">Investment &amp; Analysis</h2>
+          <p className="text-sm text-gray-500 mb-4">ROI and break-even — measuring returns and viability.</p>
+          <CalcList items={INVESTMENT} />
         </section>
 
         <section className="mt-10 border-t border-gray-100 pt-8">

@@ -224,6 +224,27 @@ export const calculators: CalculatorConfig[] = [
     description: "Convert any percentage to a decimal instantly. Enter 75 to get 0.75.",
     keywords: ["percent to decimal calculator", "convert percentage to decimal", "percent to decimal"],
   },
+  {
+    slug: "mortgage-calculator",
+    hub: "finance",
+    title: "Mortgage Calculator",
+    description: "Calculate your monthly mortgage payment and total interest from home price, down payment, rate, and term.",
+    keywords: ["mortgage calculator", "monthly mortgage payment calculator", "home loan calculator", "mortgage payment"],
+  },
+  {
+    slug: "savings-calculator",
+    hub: "finance",
+    title: "Savings Calculator",
+    description: "Calculate future savings balance from an initial deposit, monthly contributions, interest rate, and time.",
+    keywords: ["savings calculator", "compound savings calculator", "future value savings", "how much will I save"],
+  },
+  {
+    slug: "salary-to-hourly-calculator",
+    hub: "finance",
+    title: "Salary to Hourly Calculator",
+    description: "Convert annual salary to hourly, daily, weekly, and monthly pay rates instantly.",
+    keywords: ["salary to hourly calculator", "annual salary to hourly rate", "convert salary to hourly", "hourly wage calculator"],
+  },
 ]
 
 export function getCalculatorsByHub(hub: "percentage" | "finance"): CalculatorConfig[] {
