@@ -16,6 +16,8 @@ export default function Footer() {
               <li><Link href="/percentage/reverse-percentage-calculator/" className="hover:text-blue-600">Reverse Percentage</Link></li>
               <li><Link href="/percentage/gpa-calculator/" className="hover:text-blue-600">GPA Calculator</Link></li>
               <li><Link href="/percentage/fraction-to-percent-calculator/" className="hover:text-blue-600">Fraction to Percent</Link></li>
+              <li><Link href="/percentage/decimal-to-percent-calculator/" className="hover:text-blue-600">Decimal to Percent</Link></li>
+              <li><Link href="/percentage/percent-to-decimal-calculator/" className="hover:text-blue-600">Percent to Decimal</Link></li>
             </ul>
           </div>
           <div>

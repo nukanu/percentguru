@@ -210,6 +210,20 @@ export const calculators: CalculatorConfig[] = [
     description: "Add or remove VAT from any amount. Works for any VAT rate including UK 20%, EU rates, and custom rates.",
     keywords: ["VAT calculator", "add VAT calculator", "remove VAT calculator", "VAT inclusive exclusive"],
   },
+  {
+    slug: "decimal-to-percent-calculator",
+    hub: "percentage",
+    title: "Decimal to Percent Calculator",
+    description: "Convert any decimal to a percentage instantly. Enter 0.75 to get 75%.",
+    keywords: ["decimal to percent calculator", "convert decimal to percentage", "decimal to percent"],
+  },
+  {
+    slug: "percent-to-decimal-calculator",
+    hub: "percentage",
+    title: "Percent to Decimal Calculator",
+    description: "Convert any percentage to a decimal instantly. Enter 75 to get 0.75.",
+    keywords: ["percent to decimal calculator", "convert percentage to decimal", "percent to decimal"],
+  },
 ]
 
 export function getCalculatorsByHub(hub: "percentage" | "finance"): CalculatorConfig[] {

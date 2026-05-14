@@ -144,6 +144,16 @@ const relatedMap: Record<string, string[]> = {
     "discount-calculator",
     "profit-margin-calculator",
   ],
+  "decimal-to-percent-calculator": [
+    "percent-to-decimal-calculator",
+    "fraction-to-percent-calculator",
+    "percentage-calculator",
+  ],
+  "percent-to-decimal-calculator": [
+    "decimal-to-percent-calculator",
+    "fraction-to-percent-calculator",
+    "percentage-calculator",
+  ],
 }
 
 export function getRelatedSlugs(slug: string): string[] {
