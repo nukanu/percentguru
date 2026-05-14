@@ -14,6 +14,7 @@ export default function CookieBanner() {
 
   function accept() {
     localStorage.setItem("cookie-consent", "accepted")
+    window.dispatchEvent(new Event("cookie-consent-accepted"))
     setVisible(false)
   }
 
@@ -28,7 +29,7 @@ export default function CookieBanner() {
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg">
       <div className="mx-auto max-w-4xl px-4 py-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 justify-between">
         <p className="text-sm text-gray-600">
-          We use cookies for analytics and to show relevant ads. See our{" "}
+          We use cookies to understand how the site is used. See our{" "}
           <Link href="/privacy-policy/" className="text-blue-600 hover:underline">
             Privacy Policy
           </Link>{" "}
