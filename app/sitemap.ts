@@ -3,6 +3,9 @@ import { calculators } from "@/lib/content/calculators"
 
 const BASE_URL = "https://percentguru.com"
 
+const ANSWER_PERCENTS = [5, 10, 15, 20, 25, 30, 33, 40, 50, 60, 66, 75, 80, 90]
+const ANSWER_NUMBERS = [20, 25, 30, 40, 50, 60, 75, 80, 100, 120, 150, 200, 250, 300, 400, 500, 750, 1000]
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const calculatorPages = calculators.map((c) => ({
     url: `${BASE_URL}/${c.hub}/${c.slug}/`,
@@ -10,6 +13,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }))
+
+  const answerPages = ANSWER_PERCENTS.flatMap((p) =>
+    ANSWER_NUMBERS.map((n) => ({
+      url: `${BASE_URL}/percentage/what-is-${p}-percent-of-${n}/`,
+      lastModified: new Date(),
+      changeFrequency: "yearly" as const,
+      priority: 0.5,
+    }))
+  )
 
   return [
     {
@@ -31,6 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     ...calculatorPages,
+    ...answerPages,
     {
       url: `${BASE_URL}/about/`,
       lastModified: new Date(),
