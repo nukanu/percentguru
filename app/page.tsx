@@ -19,9 +19,9 @@ const organizationSchema = {
 }
 
 export const metadata: Metadata = {
-  title: "PercentGuru — Percentage & Finance Calculators",
+  title: "PercentGuru — Free Percentage & Finance Calculators",
   description:
-    "Calculate percentages, discounts, profit margins, loan payments, ROI, and more. Instant results, no account needed.",
+    "Free percentage and finance calculators — percentage increase, discount, profit margin, VAT, GPA, loan payments, ROI, and more. Instant results, no account needed.",
   alternates: { canonical: "https://percentguru.com/" },
   openGraph: {
     title: "PercentGuru — Percentage & Finance Calculators",
@@ -33,9 +33,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "PercentGuru — Percentage & Finance Calculators",
+    title: "PercentGuru — Free Percentage & Finance Calculators",
     description:
-      "Calculate percentages, discounts, profit margins, loan payments, ROI, and more. Instant results, no account needed.",
+      "Free percentage and finance calculators — percentage increase, discount, profit margin, VAT, GPA, loan payments, ROI, and more. Instant results, no account needed.",
   },
 }
 
@@ -44,6 +44,8 @@ const FEATURED = [
   { slug: "what-is-x-percent-of-y", hub: "percentage" },
   { slug: "profit-margin-calculator", hub: "finance" },
   { slug: "percentage-increase-calculator", hub: "percentage" },
+  { slug: "vat-calculator", hub: "finance" },
+  { slug: "gpa-calculator", hub: "percentage" },
   { slug: "loan-payment-calculator", hub: "finance" },
   { slug: "percentage-change-calculator", hub: "percentage" },
 ] as const
@@ -73,6 +75,12 @@ const DESCRIPTIONS: Record<string, string> = {
   "salary-increase-calculator": "See how much a raise adds in dollars and new total",
   "annual-change-calculator": "CAGR and total change over any number of years",
   "cost-reduction-calculator": "Savings amount and % reduction between two costs",
+  "gpa-calculator": "Letter grades + credit hours → GPA on the 4.0 scale",
+  "fraction-to-percent-calculator": "Enter any fraction (3/8, 2/3) — get the percentage",
+  "vat-calculator": "Add or remove VAT — works for UK 20%, 5%, or any rate",
+  "percent-off-calculator": "Enter any price and % off — see sale price and savings",
+  "grade-calculator": "Score out of total → percentage and letter grade instantly",
+  "percentage-points-calculator": "PP change vs relative % change — explained clearly",
 }
 
 function CalcLink({ href, title, description }: { href: string; title: string; description?: string }) {
@@ -109,20 +117,21 @@ export default function Home() {
       {/* Hero */}
       <section className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Percentage &amp; Finance Calculators
+          Free Percentage &amp; Finance Calculators
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-3">
-          Work out <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discounts</Link>,{" "}
+          31 free calculators for{" "}
+          <Link href="/percentage/percentage-increase-calculator/" className="text-blue-600 hover:underline">percentage increase</Link>,{" "}
+          <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discounts</Link>,{" "}
+          <Link href="/finance/vat-calculator/" className="text-blue-600 hover:underline">VAT</Link>,{" "}
+          <Link href="/percentage/gpa-calculator/" className="text-blue-600 hover:underline">GPA</Link>,{" "}
           <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">profit margins</Link>,{" "}
-          <Link href="/finance/loan-payment-calculator/" className="text-blue-600 hover:underline">loan payments</Link>,{" "}
-          percentage changes, ROI, and more — results appear as you type.
+          <Link href="/finance/loan-payment-calculator/" className="text-blue-600 hover:underline">loan payments</Link>, and more.
+          Results appear instantly as you type — no account, no ads blocking the answer.
         </p>
-        <p className="text-sm text-gray-600 max-w-xl mx-auto mb-4">
-          Whether you&apos;re checking a sale price, working out gross margin on a product,
-          figuring out a loan&apos;s monthly cost, or measuring year-over-year revenue growth —
-          there&apos;s a calculator here for it.
+        <p className="text-sm text-gray-500 max-w-xl mx-auto">
+          Each calculator shows the formula, worked examples, and explains the result — not just the number.
         </p>
-        <p className="text-sm text-gray-500">Choose a calculator below to get started.</p>
       </section>
 
       {/* Most Used */}
@@ -184,17 +193,40 @@ export default function Home() {
         </section>
       </div>
 
-      {/* What you can calculate */}
+      {/* Quick answers */}
       <section className="mt-14">
+        <h2 className="text-xl font-bold text-gray-800 mb-3">Quick answers</h2>
+        <p className="text-sm text-gray-500 mb-4">Common percentage questions — tap for the full calculation.</p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          {[
+            { href: "/percentage/what-is-20-percent-of-50/", label: "20% of 50?" },
+            { href: "/percentage/what-is-10-percent-of-100/", label: "10% of 100?" },
+            { href: "/percentage/what-is-15-percent-of-200/", label: "15% of 200?" },
+            { href: "/percentage/what-is-25-percent-of-80/", label: "25% of 80?" },
+            { href: "/percentage/what-is-10-percent-off-50/", label: "10% off 50?" },
+            { href: "/percentage/what-is-20-percent-off-100/", label: "20% off 100?" },
+            { href: "/percentage/what-is-10-percent-increase-from-100/", label: "10% increase from 100?" },
+            { href: "/percentage/50-is-what-percent-of-200/", label: "50 is what % of 200?" },
+          ].map(({ href, label }) => (
+            <Link key={href} href={href} className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors text-center">
+              {label}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* What you can calculate */}
+      <section className="mt-12">
         <h2 className="text-xl font-bold text-gray-800 mb-4">What you can calculate</h2>
         <ul className="space-y-2 text-gray-600 text-sm list-disc list-inside">
-          <li><strong>Discounts and sale prices</strong> — see exactly how much you save and what you pay (e.g. 25% off $80 = $20 off, $60 final)</li>
-          <li><strong>Sales tax and VAT</strong> — add any tax rate to a price, or reverse from a tax-inclusive total</li>
-          <li><strong>Percentage increase and decrease</strong> — measure how much a value rose or fell</li>
-          <li><strong>Profit margin and markup</strong> — gross margin from revenue and cost, or selling price from markup</li>
-          <li><strong>Return on investment (ROI)</strong> — find the gain or loss on any investment or project</li>
+          <li><strong>Discounts and sale prices</strong> — see exactly how much you save and what you pay (e.g. 25% off £80 = £20 off, £60 final)</li>
+          <li><strong>VAT and sales tax</strong> — add or remove VAT at any rate, or calculate US sales tax on a purchase</li>
+          <li><strong>Percentage increase and decrease</strong> — measure how much a value rose or fell as a percentage</li>
+          <li><strong>Profit margin and markup</strong> — gross margin from revenue and cost, or selling price from cost and markup</li>
+          <li><strong>GPA and grades</strong> — calculate GPA on the 4.0 scale or convert any score to a percentage and letter grade</li>
+          <li><strong>Return on investment (ROI)</strong> — find the gain or loss percentage on any investment or project</li>
           <li><strong>Loan repayments</strong> — monthly payment and total interest on any fixed-rate loan</li>
-          <li><strong>Comparisons and ratios</strong> — express ratios as percentages or compare two values</li>
+          <li><strong>Fractions and ratios</strong> — convert fractions to percentages, or express one number as a percentage of another</li>
         </ul>
       </section>
 
@@ -203,20 +235,23 @@ export default function Home() {
         <h2 className="text-xl font-bold text-gray-800 mb-4">Popular calculators</h2>
         <p className="text-sm text-gray-600 leading-relaxed mb-3">
           If you&apos;re shopping a sale, the{" "}
-          <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">Discount Calculator</Link>{" "}
-          shows your exact savings and final price. For business pricing, the{" "}
-          <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">Profit Margin Calculator</Link>{" "}
+          <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discount calculator</Link>{" "}
+          shows your exact savings and final price. For UK business pricing, the{" "}
+          <Link href="/finance/vat-calculator/" className="text-blue-600 hover:underline">VAT calculator</Link>{" "}
+          handles adding or removing VAT in one step. For business margins, the{" "}
+          <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">profit margin calculator</Link>{" "}
           and{" "}
-          <Link href="/finance/markup-calculator/" className="text-blue-600 hover:underline">Markup Calculator</Link>{" "}
-          cover both sides — what you keep as profit and what to charge from cost.
+          <Link href="/finance/markup-calculator/" className="text-blue-600 hover:underline">markup calculator</Link>{" "}
+          cover both sides of pricing.
         </p>
         <p className="text-sm text-gray-600 leading-relaxed">
-          For investments and projects, the{" "}
-          <Link href="/finance/roi-calculator/" className="text-blue-600 hover:underline">ROI Calculator</Link>{" "}
-          gives you the return percentage and net gain instantly. For everyday percentage questions, the{" "}
-          <Link href="/percentage/what-is-x-percent-of-y/" className="text-blue-600 hover:underline">What is X% of Y?</Link>{" "}
-          calculator handles tips, tax amounts, commissions, and more.
-          Pick the one that fits your situation and get your answer in seconds.
+          For students, the{" "}
+          <Link href="/percentage/gpa-calculator/" className="text-blue-600 hover:underline">GPA calculator</Link>{" "}
+          and{" "}
+          <Link href="/percentage/grade-calculator/" className="text-blue-600 hover:underline">grade calculator</Link>{" "}
+          convert marks to percentages and grade point averages. For everyday percentage questions, the{" "}
+          <Link href="/percentage/what-is-x-percent-of-y/" className="text-blue-600 hover:underline">what is X% of Y calculator</Link>{" "}
+          handles tips, tax amounts, commissions, and any other percentage-of-a-number question.
         </p>
       </section>
 
