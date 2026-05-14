@@ -62,7 +62,7 @@ export default function WeightedAverageCalculatorPage() {
       <CalculatorShell
         slug="weighted-average-calculator"
         title="Weighted Average Calculator"
-        intro="Enter each value alongside its weight — the calculator computes the weighted average instantly. Used for GPA calculations, blended portfolio returns, weighted scores from assignments with different point values, and any situation where values contribute unequally to a final result. If all weights are equal, a weighted average is identical to a regular average — the weights only matter when items carry different significance."
+        intro={<>Enter each value alongside its weight — the calculator computes the weighted average instantly. Used for GPA calculations, blended portfolio returns, weighted scores from assignments with different point values, and any situation where values contribute unequally to a final result. If all weights are equal, a weighted average is identical to a regular average — the weights only matter when items carry different significance. Once you have a blended return, you can measure it further with the <Link href="/finance/roi-calculator/" className="text-blue-600 hover:underline">ROI calculator</Link> or assess overall business performance with the <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">profit margin calculator</Link>.</>}
         whenToUse="Use this when you're averaging values that don't all count equally — GPA from courses with different credit hours, a portfolio return blended by asset allocation, or an overall score from assessments worth different percentages of the total grade."
         calculator={<WeightedAverageCalculatorWidget />}
         howTo={[

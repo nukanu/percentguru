@@ -62,7 +62,7 @@ export default function PercentageChangePage() {
       <CalculatorShell
         slug="percentage-change-calculator"
         title="Percentage Change Calculator"
-        intro="Enter a before value and an after value to find the percentage change — positive for an increase, negative for a decrease. Used in reporting, dashboards, and financial analysis whenever you need to show how much something moved and in which direction. This is distinct from percentage difference, which has no direction — use this calculator specifically when one value came before the other."
+        intro={<>Enter a before value and an after value to find the percentage change — positive for an increase, negative for a decrease. Used in reporting, dashboards, and financial analysis whenever you need to show how much something moved and in which direction. If you only need to measure a rise, the <Link href="/percentage/percentage-increase-calculator/" className="text-blue-600 hover:underline">percentage increase calculator</Link> is more explicit; for a drop, use the <Link href="/percentage/percentage-decrease-calculator/" className="text-blue-600 hover:underline">percentage decrease calculator</Link>. This calculator is distinct from percentage difference, which has no concept of direction — use this one specifically when one value came before the other.</>}
         whenToUse="Use this for any before/after comparison — quarterly revenue figures, monthly active users, stock price movements, test scores across two attempts, or year-over-year expenses. Works for both increases and decreases in a single calculation."
         calculator={<PercentageChangeWidget />}
         howTo={[
