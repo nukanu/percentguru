@@ -71,6 +71,13 @@ export const calculators: CalculatorConfig[] = [
     keywords: ["percentage error calculator", "percent error", "calculate percentage error"],
   },
   {
+    slug: "percent-off-calculator",
+    hub: "percentage",
+    title: "Percent Off Calculator",
+    description: "Find the sale price and savings for any percent off deal instantly.",
+    keywords: ["percent off calculator", "percentage off calculator", "how much is x% off"],
+  },
+  {
     slug: "discount-calculator",
     hub: "finance",
     title: "Discount Calculator",
