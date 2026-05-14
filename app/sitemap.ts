@@ -3,16 +3,16 @@ import { calculators } from "@/lib/content/calculators"
 
 const BASE_URL = "https://percentguru.com"
 
-const ANSWER_PERCENTS = [5, 10, 15, 20, 25, 30, 33, 40, 50, 60, 66, 75, 80, 90]
-const ANSWER_NUMBERS = [20, 25, 30, 40, 50, 60, 75, 80, 100, 120, 150, 200, 250, 300, 400, 500, 750, 1000]
-const ANSWER_PARTS = [5, 10, 12, 15, 18, 20, 25, 30, 40, 50, 60, 75, 80, 100]
-const ANSWER_WHOLES = [20, 25, 40, 50, 75, 100, 120, 150, 200, 250, 300, 400, 500, 1000]
+const ANSWER_PERCENTS = [1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25, 30, 33, 35, 40, 50, 60, 66, 75, 80, 90]
+const ANSWER_NUMBERS = [10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 75, 80, 90, 100, 120, 125, 150, 175, 200, 225, 250, 300, 350, 400, 500, 750, 1000]
+const ANSWER_PARTS = [1, 2, 3, 5, 6, 8, 9, 10, 12, 14, 15, 18, 20, 25, 30, 35, 40, 50, 60, 75, 80, 100]
+const ANSWER_WHOLES = [10, 15, 20, 25, 30, 40, 50, 60, 75, 80, 100, 120, 150, 175, 200, 250, 300, 400, 500, 1000]
 const INCREASE_PERCENTS = [3, 5, 10, 15, 20, 25, 30, 40, 50]
 const INCREASE_BASES = [10, 20, 25, 50, 100, 150, 200, 250, 300, 400, 500, 1000]
 const DECREASE_PERCENTS = [5, 10, 15, 20, 25, 30, 40, 50]
 const DECREASE_BASES = [10, 20, 25, 50, 100, 150, 200, 250, 300, 400, 500, 1000]
-const OFF_PERCENTS = [5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 75]
-const OFF_PRICES = [10, 20, 25, 30, 40, 50, 60, 75, 80, 100, 120, 150, 200, 250, 300, 400, 500, 750, 1000]
+const OFF_PERCENTS = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 65, 70, 75]
+const OFF_PRICES = [10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 65, 70, 75, 80, 90, 100, 120, 150, 175, 200, 250, 300, 400, 500, 750, 1000, 2000]
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const calculatorPages = calculators.map((c) => ({
