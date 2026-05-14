@@ -71,6 +71,13 @@ export const calculators: CalculatorConfig[] = [
     keywords: ["percentage error calculator", "percent error", "calculate percentage error"],
   },
   {
+    slug: "tip-calculator",
+    hub: "percentage",
+    title: "Tip Calculator",
+    description: "Calculate tip amounts and split the bill between any number of people.",
+    keywords: ["tip calculator", "restaurant tip calculator", "how much to tip", "split bill calculator"],
+  },
+  {
     slug: "percent-off-calculator",
     hub: "percentage",
     title: "Percent Off Calculator",

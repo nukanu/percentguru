@@ -5,26 +5,42 @@ import { generatePageMetadata } from "@/lib/seo/metadata"
 import Breadcrumb from "@/components/layout/Breadcrumb"
 import { fmt } from "@/lib/calculators/utils"
 
+// Pattern 1: what-is-20-percent-of-100
 const PERCENTS = [5, 10, 15, 20, 25, 30, 33, 40, 50, 60, 66, 75, 80, 90]
 const NUMBERS = [20, 25, 30, 40, 50, 60, 75, 80, 100, 120, 150, 200, 250, 300, 400, 500, 750, 1000]
 
-function parseSlug(answer: string): { p: number; n: number } | null {
-  const match = answer.match(/^what-is-(\d+)-percent-of-(\d+)$/)
-  if (!match) return null
-  const p = parseInt(match[1])
-  const n = parseInt(match[2])
-  if (!PERCENTS.includes(p) || !NUMBERS.includes(n)) return null
-  return { p, n }
-}
+// Pattern 2: 15-is-what-percent-of-60
+const PARTS = [5, 10, 12, 15, 18, 20, 25, 30, 40, 50, 60, 75, 80, 100]
+const WHOLES = [20, 25, 40, 50, 75, 100, 120, 150, 200, 250, 300, 400, 500, 1000]
 
-function calc(p: number, n: number): number {
-  return (p / 100) * n
+type ParsedAnswer =
+  | { type: "whatIsXPctOfY"; p: number; n: number }
+  | { type: "xIsWhatPctOfY"; part: number; whole: number }
+
+function parseSlug(answer: string): ParsedAnswer | null {
+  const m1 = answer.match(/^what-is-(\d+)-percent-of-(\d+)$/)
+  if (m1) {
+    const p = parseInt(m1[1])
+    const n = parseInt(m1[2])
+    if (PERCENTS.includes(p) && NUMBERS.includes(n)) return { type: "whatIsXPctOfY", p, n }
+  }
+  const m2 = answer.match(/^(\d+)-is-what-percent-of-(\d+)$/)
+  if (m2) {
+    const part = parseInt(m2[1])
+    const whole = parseInt(m2[2])
+    if (PARTS.includes(part) && WHOLES.includes(whole)) return { type: "xIsWhatPctOfY", part, whole }
+  }
+  return null
 }
 
 export function generateStaticParams() {
-  return PERCENTS.flatMap((p) =>
+  const type1 = PERCENTS.flatMap((p) =>
     NUMBERS.map((n) => ({ answer: `what-is-${p}-percent-of-${n}` }))
   )
+  const type2 = PARTS.flatMap((part) =>
+    WHOLES.map((whole) => ({ answer: `${part}-is-what-percent-of-${whole}` }))
+  )
+  return [...type1, ...type2]
 }
 
 export async function generateMetadata({
@@ -35,18 +51,30 @@ export async function generateMetadata({
   const { answer } = await params
   const parsed = parseSlug(answer)
   if (!parsed) return {}
-  const { p, n } = parsed
-  const result = fmt(calc(p, n))
-  return generatePageMetadata({
-    title: `What is ${p}% of ${n}? — Answer: ${result}`,
-    description: `${p}% of ${n} is ${result}. See the step-by-step calculation and use the free percentage calculator for any value.`,
-    path: `/percentage/${answer}/`,
-    keywords: [
-      `what is ${p} percent of ${n}`,
-      `${p}% of ${n}`,
-      `${p} percent of ${n}`,
-    ],
-  })
+
+  if (parsed.type === "whatIsXPctOfY") {
+    const { p, n } = parsed
+    const result = fmt((p / 100) * n)
+    return generatePageMetadata({
+      title: `What is ${p}% of ${n}? — Answer: ${result}`,
+      description: `${p}% of ${n} is ${result}. See the step-by-step calculation and use the free percentage calculator for any value.`,
+      path: `/percentage/${answer}/`,
+      keywords: [`what is ${p} percent of ${n}`, `${p}% of ${n}`, `${p} percent of ${n}`],
+    })
+  } else {
+    const { part, whole } = parsed
+    const result = fmt((part / whole) * 100)
+    return generatePageMetadata({
+      title: `${part} is What Percent of ${whole}? — Answer: ${result}%`,
+      description: `${part} is ${result}% of ${whole}. See the step-by-step calculation and formula.`,
+      path: `/percentage/${answer}/`,
+      keywords: [
+        `${part} is what percent of ${whole}`,
+        `what percent is ${part} of ${whole}`,
+        `${part} out of ${whole} as a percentage`,
+      ],
+    })
+  }
 }
 
 export default async function AnswerPage({
@@ -58,18 +86,111 @@ export default async function AnswerPage({
   const parsed = parseSlug(answer)
   if (!parsed) notFound()
 
-  const { p, n } = parsed
-  const result = calc(p, n)
-  const resultFormatted = fmt(result)
+  if (parsed.type === "whatIsXPctOfY") {
+    return <WhatIsXPctOfY p={parsed.p} n={parsed.n} />
+  }
+  return <XIsWhatPctOfY part={parsed.part} whole={parsed.whole} />
+}
+
+function WhatIsXPctOfY({ p, n }: { p: number; n: number }) {
+  const result = (p / 100) * n
+  const resultFmt = fmt(result)
   const decimal = p / 100
 
   const relatedSamePercent = NUMBERS.filter((x) => x !== n)
     .slice(0, 3)
-    .map((x) => ({ p, n: x, result: fmt(calc(p, x)) }))
+    .map((x) => ({ p, n: x, result: fmt((p / 100) * x) }))
 
   const relatedSameNumber = PERCENTS.filter((x) => x !== p)
     .slice(0, 3)
-    .map((x) => ({ p: x, n, result: fmt(calc(x, n)) }))
+    .map((x) => ({ p: x, n, result: fmt((x / 100) * n) }))
+
+  return (
+    <article className="mx-auto max-w-2xl px-4 pb-12">
+      <div className="pt-8">
+        <Breadcrumb
+          crumbs={[
+            { name: "Home", href: "/" },
+            { name: "Percentage Calculators", href: "/percentage/" },
+            { name: `What is ${p}% of ${n}?`, href: `/percentage/what-is-${p}-percent-of-${n}/` },
+          ]}
+        />
+      </div>
+
+      <h1 className="text-3xl font-bold text-gray-900 mb-6">What is {p}% of {n}?</h1>
+
+      <div className="bg-blue-50 border border-blue-100 rounded-xl px-6 py-6 mb-8 text-center">
+        <p className="text-gray-600 text-sm mb-1">{p}% of {n} =</p>
+        <p className="text-5xl font-bold text-blue-700">{resultFmt}</p>
+      </div>
+
+      <section className="mb-8">
+        <h2 className="text-lg font-bold text-gray-900 mb-3">How to calculate {p}% of {n}</h2>
+        <ol className="space-y-2 text-gray-700 list-decimal list-inside">
+          <li>Convert {p}% to a decimal: {p} ÷ 100 = {decimal}</li>
+          <li>Multiply by {n}: {decimal} × {n} = <strong>{resultFmt}</strong></li>
+        </ol>
+        <div className="mt-3 bg-gray-100 rounded-lg px-4 py-3 font-mono text-sm text-gray-800">
+          {n} × {decimal} = {resultFmt}
+        </div>
+      </section>
+
+      <section className="mb-8 border border-gray-200 rounded-xl px-5 py-4 bg-gray-50">
+        <p className="text-gray-700 text-sm">
+          Need a different value?{" "}
+          <Link href="/percentage/what-is-x-percent-of-y/" className="text-blue-600 hover:underline font-medium">
+            Use the percentage calculator
+          </Link>{" "}
+          to find any percent of any number instantly.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Other {p}% calculations</h2>
+        <div className="grid grid-cols-3 gap-2">
+          {relatedSamePercent.map(({ p: rp, n: rn, result: rr }) => (
+            <Link
+              key={`${rp}-${rn}`}
+              href={`/percentage/what-is-${rp}-percent-of-${rn}/`}
+              className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
+            >
+              <span className="text-xs text-gray-500">{rp}% of {rn}</span>
+              <span className="font-bold text-gray-900 mt-0.5">{rr}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Other percentages of {n}</h2>
+        <div className="grid grid-cols-3 gap-2">
+          {relatedSameNumber.map(({ p: rp, n: rn, result: rr }) => (
+            <Link
+              key={`${rp}-${rn}`}
+              href={`/percentage/what-is-${rp}-percent-of-${rn}/`}
+              className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
+            >
+              <span className="text-xs text-gray-500">{rp}% of {rn}</span>
+              <span className="font-bold text-gray-900 mt-0.5">{rr}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </article>
+  )
+}
+
+function XIsWhatPctOfY({ part, whole }: { part: number; whole: number }) {
+  const result = (part / whole) * 100
+  const resultFmt = fmt(result)
+
+  const relatedSameWhole = PARTS.filter((x) => x !== part)
+    .slice(0, 3)
+    .map((x) => ({ part: x, whole, result: fmt((x / whole) * 100) }))
+
+  const relatedSamePart = WHOLES.filter((x) => x !== whole)
+    .slice(0, 3)
+    .map((x) => ({ part, whole: x, result: fmt((part / x) * 100) }))
 
   return (
     <article className="mx-auto max-w-2xl px-4 pb-12">
@@ -79,70 +200,58 @@ export default async function AnswerPage({
             { name: "Home", href: "/" },
             { name: "Percentage Calculators", href: "/percentage/" },
             {
-              name: `What is ${p}% of ${n}?`,
-              href: `/percentage/what-is-${p}-percent-of-${n}/`,
+              name: `${part} is what percent of ${whole}?`,
+              href: `/percentage/${part}-is-what-percent-of-${whole}/`,
             },
           ]}
         />
       </div>
 
       <h1 className="text-3xl font-bold text-gray-900 mb-6">
-        What is {p}% of {n}?
+        {part} is What Percent of {whole}?
       </h1>
 
       <div className="bg-blue-50 border border-blue-100 rounded-xl px-6 py-6 mb-8 text-center">
-        <p className="text-gray-600 text-sm mb-1">
-          {p}% of {n} =
-        </p>
-        <p className="text-5xl font-bold text-blue-700">{resultFormatted}</p>
+        <p className="text-gray-600 text-sm mb-1">{part} out of {whole} =</p>
+        <p className="text-5xl font-bold text-blue-700">{resultFmt}%</p>
       </div>
 
       <section className="mb-8">
         <h2 className="text-lg font-bold text-gray-900 mb-3">
-          How to calculate {p}% of {n}
+          How to calculate {part} as a percentage of {whole}
         </h2>
         <ol className="space-y-2 text-gray-700 list-decimal list-inside">
-          <li>
-            Convert {p}% to a decimal: {p} ÷ 100 = {decimal}
-          </li>
-          <li>
-            Multiply by {n}: {decimal} × {n} ={" "}
-            <strong>{resultFormatted}</strong>
-          </li>
+          <li>Divide {part} by {whole}: {part} ÷ {whole} = {fmt(part / whole)}</li>
+          <li>Multiply by 100: {fmt(part / whole)} × 100 = <strong>{resultFmt}%</strong></li>
         </ol>
         <div className="mt-3 bg-gray-100 rounded-lg px-4 py-3 font-mono text-sm text-gray-800">
-          {n} × {decimal} = {resultFormatted}
+          ({part} ÷ {whole}) × 100 = {resultFmt}%
         </div>
       </section>
 
       <section className="mb-8 border border-gray-200 rounded-xl px-5 py-4 bg-gray-50">
         <p className="text-gray-700 text-sm">
           Need a different value?{" "}
-          <Link
-            href="/percentage/what-is-x-percent-of-y/"
-            className="text-blue-600 hover:underline font-medium"
-          >
-            Use the percentage calculator
+          <Link href="/percentage/x-is-what-percent-of-y/" className="text-blue-600 hover:underline font-medium">
+            Use the X is what percent of Y calculator
           </Link>{" "}
-          to find any percent of any number instantly.
+          for any two numbers instantly.
         </p>
       </section>
 
       <section className="mb-8">
         <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">
-          Other {p}% calculations
+          Other values out of {whole}
         </h2>
         <div className="grid grid-cols-3 gap-2">
-          {relatedSamePercent.map(({ p: rp, n: rn, result: rr }) => (
+          {relatedSameWhole.map(({ part: rp, whole: rw, result: rr }) => (
             <Link
-              key={`${rp}-${rn}`}
-              href={`/percentage/what-is-${rp}-percent-of-${rn}/`}
+              key={`${rp}-${rw}`}
+              href={`/percentage/${rp}-is-what-percent-of-${rw}/`}
               className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
             >
-              <span className="text-xs text-gray-500">
-                {rp}% of {rn}
-              </span>
-              <span className="font-bold text-gray-900 mt-0.5">{rr}</span>
+              <span className="text-xs text-gray-500">{rp} of {rw}</span>
+              <span className="font-bold text-gray-900 mt-0.5">{rr}%</span>
             </Link>
           ))}
         </div>
@@ -150,19 +259,17 @@ export default async function AnswerPage({
 
       <section>
         <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">
-          Other percentages of {n}
+          {part} out of other totals
         </h2>
         <div className="grid grid-cols-3 gap-2">
-          {relatedSameNumber.map(({ p: rp, n: rn, result: rr }) => (
+          {relatedSamePart.map(({ part: rp, whole: rw, result: rr }) => (
             <Link
-              key={`${rp}-${rn}`}
-              href={`/percentage/what-is-${rp}-percent-of-${rn}/`}
+              key={`${rp}-${rw}`}
+              href={`/percentage/${rp}-is-what-percent-of-${rw}/`}
               className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
             >
-              <span className="text-xs text-gray-500">
-                {rp}% of {rn}
-              </span>
-              <span className="font-bold text-gray-900 mt-0.5">{rr}</span>
+              <span className="text-xs text-gray-500">{rp} of {rw}</span>
+              <span className="font-bold text-gray-900 mt-0.5">{rr}%</span>
             </Link>
           ))}
         </div>

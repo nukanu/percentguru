@@ -2,6 +2,22 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { getCalculatorsByHub, getCalculator } from "@/lib/content/calculators"
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "PercentGuru",
+  url: "https://percentguru.com",
+  description: "Free percentage and finance calculators — instant results, no sign-up required.",
+}
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "PercentGuru",
+  url: "https://percentguru.com",
+  description: "Free online percentage and finance calculators.",
+}
+
 export const metadata: Metadata = {
   title: "PercentGuru — Percentage & Finance Calculators",
   description:
@@ -53,6 +69,10 @@ const DESCRIPTIONS: Record<string, string> = {
   "loan-payment-calculator": "Monthly repayment and total interest on any loan",
   "weighted-average-calculator": "Average values that don't carry equal weight",
   "break-even-calculator": "How many units to sell before you cover costs?",
+  "tip-calculator": "Bill amount + tip % — instant total and per-person split",
+  "salary-increase-calculator": "See how much a raise adds in dollars and new total",
+  "annual-change-calculator": "CAGR and total change over any number of years",
+  "cost-reduction-calculator": "Savings amount and % reduction between two costs",
 }
 
 function CalcLink({ href, title, description }: { href: string; title: string; description?: string }) {
@@ -81,6 +101,9 @@ export default function Home() {
   }).filter(Boolean) as { slug: string; title: string; href: string }[]
 
   return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
     <div className="mx-auto max-w-4xl px-4 py-12">
 
       {/* Hero */}
@@ -198,5 +221,6 @@ export default function Home() {
       </section>
 
     </div>
+    </>
   )
 }

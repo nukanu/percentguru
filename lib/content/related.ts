@@ -1,8 +1,8 @@
 const relatedMap: Record<string, string[]> = {
   "what-is-x-percent-of-y": [
+    "tip-calculator",
     "x-is-what-percent-of-y",
     "percentage-calculator",
-    "reverse-percentage-calculator",
   ],
   "x-is-what-percent-of-y": [
     "what-is-x-percent-of-y",
@@ -44,9 +44,14 @@ const relatedMap: Record<string, string[]> = {
     "percentage-change-calculator",
     "x-is-what-percent-of-y",
   ],
+  "tip-calculator": [
+    "what-is-x-percent-of-y",
+    "percent-off-calculator",
+    "sales-tax-calculator",
+  ],
   "percent-off-calculator": [
+    "tip-calculator",
     "discount-calculator",
-    "reverse-percentage-calculator",
     "sales-tax-calculator",
   ],
   "discount-calculator": [
