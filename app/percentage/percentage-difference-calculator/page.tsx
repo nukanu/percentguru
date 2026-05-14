@@ -36,8 +36,8 @@ const faqs = [
 ]
 
 export const metadata: Metadata = generatePageMetadata({
-  title: "Percentage Difference Calculator",
-  description: "Find the percentage difference between any two numbers. No 'before' or 'after' needed — useful for comparing prices, measurements, or data points.",
+  title: "Percentage Difference Calculator — Formula & Examples",
+  description: "Find the percentage difference between any two numbers. No 'before' or 'after' needed. Uses the average of both values as the base — not the same as percentage change.",
   path: "/percentage/percentage-difference-calculator/",
   keywords: ["percentage difference calculator", "percent difference", "difference between two numbers percentage"],
 })

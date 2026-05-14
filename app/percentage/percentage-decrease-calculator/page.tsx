@@ -36,8 +36,8 @@ const faqs = [
 ]
 
 export const metadata: Metadata = generatePageMetadata({
-  title: "Percentage Decrease Calculator",
-  description: "Calculate the percentage decrease between two values. Enter before and after — works for price drops, budget cuts, and falling metrics.",
+  title: "Percentage Decrease Calculator — % Drop Formula",
+  description: "Calculate how much a value fell as a percentage. Enter before and after values — works for price drops, budget cuts, revenue declines, and any falling metric.",
   path: "/percentage/percentage-decrease-calculator/",
   keywords: ["percentage decrease calculator", "percent decrease", "how to calculate percentage decrease"],
 })

@@ -13,9 +13,14 @@ const NUMBERS = [20, 25, 30, 40, 50, 60, 75, 80, 100, 120, 150, 200, 250, 300, 4
 const PARTS = [5, 10, 12, 15, 18, 20, 25, 30, 40, 50, 60, 75, 80, 100]
 const WHOLES = [20, 25, 40, 50, 75, 100, 120, 150, 200, 250, 300, 400, 500, 1000]
 
+// Pattern 3: what-is-10-percent-increase-from-50
+const INCREASE_PERCENTS = [3, 5, 10, 15, 20, 25, 30, 40, 50]
+const INCREASE_BASES = [10, 20, 25, 50, 100, 150, 200, 250, 300, 400, 500, 1000]
+
 type ParsedAnswer =
   | { type: "whatIsXPctOfY"; p: number; n: number }
   | { type: "xIsWhatPctOfY"; part: number; whole: number }
+  | { type: "pctIncreaseFrom"; p: number; base: number }
 
 function parseSlug(answer: string): ParsedAnswer | null {
   const m1 = answer.match(/^what-is-(\d+)-percent-of-(\d+)$/)
@@ -30,6 +35,12 @@ function parseSlug(answer: string): ParsedAnswer | null {
     const whole = parseInt(m2[2])
     if (PARTS.includes(part) && WHOLES.includes(whole)) return { type: "xIsWhatPctOfY", part, whole }
   }
+  const m3 = answer.match(/^what-is-(\d+)-percent-increase-from-(\d+)$/)
+  if (m3) {
+    const p = parseInt(m3[1])
+    const base = parseInt(m3[2])
+    if (INCREASE_PERCENTS.includes(p) && INCREASE_BASES.includes(base)) return { type: "pctIncreaseFrom", p, base }
+  }
   return null
 }
 
@@ -40,7 +51,10 @@ export function generateStaticParams() {
   const type2 = PARTS.flatMap((part) =>
     WHOLES.map((whole) => ({ answer: `${part}-is-what-percent-of-${whole}` }))
   )
-  return [...type1, ...type2]
+  const type3 = INCREASE_PERCENTS.flatMap((p) =>
+    INCREASE_BASES.map((base) => ({ answer: `what-is-${p}-percent-increase-from-${base}` }))
+  )
+  return [...type1, ...type2, ...type3]
 }
 
 export async function generateMetadata({
@@ -61,7 +75,7 @@ export async function generateMetadata({
       path: `/percentage/${answer}/`,
       keywords: [`what is ${p} percent of ${n}`, `${p}% of ${n}`, `${p} percent of ${n}`],
     })
-  } else {
+  } else if (parsed.type === "xIsWhatPctOfY") {
     const { part, whole } = parsed
     const result = fmt((part / whole) * 100)
     return generatePageMetadata({
@@ -72,6 +86,20 @@ export async function generateMetadata({
         `${part} is what percent of ${whole}`,
         `what percent is ${part} of ${whole}`,
         `${part} out of ${whole} as a percentage`,
+      ],
+    })
+  } else {
+    const { p, base } = parsed
+    const increase = (p / 100) * base
+    const result = fmt(base + increase)
+    return generatePageMetadata({
+      title: `What is ${p}% Increase from ${base}? — Answer: ${result}`,
+      description: `A ${p}% increase from ${base} equals ${result}. The increase amount is ${fmt(increase)}. See the step-by-step calculation.`,
+      path: `/percentage/${answer}/`,
+      keywords: [
+        `what is ${p} percent increase from ${base}`,
+        `${p}% increase from ${base}`,
+        `${p} percent increase of ${base}`,
       ],
     })
   }
@@ -89,7 +117,10 @@ export default async function AnswerPage({
   if (parsed.type === "whatIsXPctOfY") {
     return <WhatIsXPctOfY p={parsed.p} n={parsed.n} />
   }
-  return <XIsWhatPctOfY part={parsed.part} whole={parsed.whole} />
+  if (parsed.type === "xIsWhatPctOfY") {
+    return <XIsWhatPctOfY part={parsed.part} whole={parsed.whole} />
+  }
+  return <PctIncreaseFrom p={parsed.p} base={parsed.base} />
 }
 
 function WhatIsXPctOfY({ p, n }: { p: number; n: number }) {
@@ -270,6 +301,96 @@ function XIsWhatPctOfY({ part, whole }: { part: number; whole: number }) {
             >
               <span className="text-xs text-gray-500">{rp} of {rw}</span>
               <span className="font-bold text-gray-900 mt-0.5">{rr}%</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </article>
+  )
+}
+
+function PctIncreaseFrom({ p, base }: { p: number; base: number }) {
+  const increaseAmt = (p / 100) * base
+  const newValue = base + increaseAmt
+  const newFmt = fmt(newValue)
+  const incFmt = fmt(increaseAmt)
+
+  const relatedPercents = INCREASE_PERCENTS.filter((x) => x !== p)
+    .slice(0, 3)
+    .map((x) => ({ p: x, base, result: fmt(base + (x / 100) * base) }))
+
+  const relatedBases = INCREASE_BASES.filter((x) => x !== base)
+    .slice(0, 3)
+    .map((x) => ({ p, base: x, result: fmt(x + (p / 100) * x) }))
+
+  return (
+    <article className="mx-auto max-w-2xl px-4 pb-12">
+      <div className="pt-8">
+        <Breadcrumb
+          crumbs={[
+            { name: "Home", href: "/" },
+            { name: "Percentage Calculators", href: "/percentage/" },
+            { name: `${p}% increase from ${base}`, href: `/percentage/what-is-${p}-percent-increase-from-${base}/` },
+          ]}
+        />
+      </div>
+
+      <h1 className="text-3xl font-bold text-gray-900 mb-6">What is {p}% Increase from {base}?</h1>
+
+      <div className="bg-blue-50 border border-blue-100 rounded-xl px-6 py-6 mb-8 text-center">
+        <p className="text-gray-600 text-sm mb-1">{p}% increase from {base} =</p>
+        <p className="text-5xl font-bold text-blue-700">{newFmt}</p>
+        <p className="text-sm text-gray-500 mt-2">Increase amount: +{incFmt}</p>
+      </div>
+
+      <section className="mb-8">
+        <h2 className="text-lg font-bold text-gray-900 mb-3">How to calculate {p}% increase from {base}</h2>
+        <ol className="space-y-2 text-gray-700 list-decimal list-inside">
+          <li>Find {p}% of {base}: {base} × {p / 100} = {incFmt}</li>
+          <li>Add to the original: {base} + {incFmt} = <strong>{newFmt}</strong></li>
+        </ol>
+        <div className="mt-3 bg-gray-100 rounded-lg px-4 py-3 font-mono text-sm text-gray-800">
+          {base} × (1 + {p}/100) = {base} × {1 + p / 100} = {newFmt}
+        </div>
+      </section>
+
+      <section className="mb-8 border border-gray-200 rounded-xl px-5 py-4 bg-gray-50">
+        <p className="text-gray-700 text-sm">
+          Need a different percentage increase?{" "}
+          <Link href="/percentage/percentage-increase-calculator/" className="text-blue-600 hover:underline font-medium">
+            Use the percentage increase calculator
+          </Link>{" "}
+          for any two values.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Other % increases from {base}</h2>
+        <div className="grid grid-cols-3 gap-2">
+          {relatedPercents.map(({ p: rp, base: rb, result: rr }) => (
+            <Link
+              key={`${rp}-${rb}`}
+              href={`/percentage/what-is-${rp}-percent-increase-from-${rb}/`}
+              className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
+            >
+              <span className="text-xs text-gray-500">{rp}% of {rb}</span>
+              <span className="font-bold text-gray-900 mt-0.5">{rr}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">{p}% increase from other values</h2>
+        <div className="grid grid-cols-3 gap-2">
+          {relatedBases.map(({ p: rp, base: rb, result: rr }) => (
+            <Link
+              key={`${rp}-${rb}`}
+              href={`/percentage/what-is-${rp}-percent-increase-from-${rb}/`}
+              className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
+            >
+              <span className="text-xs text-gray-500">{rp}% of {rb}</span>
+              <span className="font-bold text-gray-900 mt-0.5">{rr}</span>
             </Link>
           ))}
         </div>

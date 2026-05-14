@@ -19,6 +19,7 @@ type CalculatorShellProps = {
   examples: { input: string; output: string }[]
   useCases: string[]
   faqs: FAQ[]
+  lookupTable?: React.ReactNode
 }
 
 export default function CalculatorShell({
@@ -33,6 +34,7 @@ export default function CalculatorShell({
   examples,
   useCases,
   faqs,
+  lookupTable,
 }: CalculatorShellProps) {
   const relatedSlugs = getRelatedSlugs(slug)
   const relatedCalculators = relatedSlugs
@@ -120,6 +122,12 @@ export default function CalculatorShell({
           ))}
         </div>
       </section>
+
+      {lookupTable && (
+        <section className="mt-8">
+          {lookupTable}
+        </section>
+      )}
     </article>
   )
 }

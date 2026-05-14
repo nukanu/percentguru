@@ -6,6 +6,48 @@ import CalculatorShell from "@/components/calculator/CalculatorShell"
 import Breadcrumb from "@/components/layout/Breadcrumb"
 import WhatIsXPercentOfYWidget from "./CalculatorWidget"
 
+const TABLE_PERCENTS = [10, 15, 20, 25, 30, 50]
+const TABLE_NUMBERS = [25, 50, 100, 200, 500, 1000]
+
+function fmt(n: number) {
+  return n % 1 === 0 ? String(n) : n.toFixed(2).replace(/\.?0+$/, "")
+}
+
+function LookupTable() {
+  return (
+    <>
+      <h2 className="text-lg font-bold text-gray-900 mb-3">Common Percentage Lookup Table</h2>
+      <p className="text-sm text-gray-600 mb-4">Quick reference — tap any cell to see the full calculation.</p>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm border-collapse">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="border border-gray-200 px-3 py-2 text-left text-gray-600 font-semibold">%</th>
+              {TABLE_NUMBERS.map((n) => (
+                <th key={n} className="border border-gray-200 px-3 py-2 text-center text-gray-600 font-semibold">of {n}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {TABLE_PERCENTS.map((p) => (
+              <tr key={p} className="hover:bg-blue-50">
+                <td className="border border-gray-200 px-3 py-2 font-semibold text-gray-700">{p}%</td>
+                {TABLE_NUMBERS.map((n) => (
+                  <td key={n} className="border border-gray-200 px-3 py-2 text-center">
+                    <Link href={`/percentage/what-is-${p}-percent-of-${n}/`} className="text-blue-600 hover:underline font-medium">
+                      {fmt((p / 100) * n)}
+                    </Link>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  )
+}
+
 const faqs = [
   {
     question: "What is 20% of 80?",
@@ -99,6 +141,7 @@ export default function WhatIsXPercentOfYPage() {
           "Calculating a percentage share of a profit or budget",
         ]}
         faqs={faqs}
+        lookupTable={<LookupTable />}
       />
     </>
   )

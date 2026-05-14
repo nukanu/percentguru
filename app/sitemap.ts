@@ -7,6 +7,8 @@ const ANSWER_PERCENTS = [5, 10, 15, 20, 25, 30, 33, 40, 50, 60, 66, 75, 80, 90]
 const ANSWER_NUMBERS = [20, 25, 30, 40, 50, 60, 75, 80, 100, 120, 150, 200, 250, 300, 400, 500, 750, 1000]
 const ANSWER_PARTS = [5, 10, 12, 15, 18, 20, 25, 30, 40, 50, 60, 75, 80, 100]
 const ANSWER_WHOLES = [20, 25, 40, 50, 75, 100, 120, 150, 200, 250, 300, 400, 500, 1000]
+const INCREASE_PERCENTS = [3, 5, 10, 15, 20, 25, 30, 40, 50]
+const INCREASE_BASES = [10, 20, 25, 50, 100, 150, 200, 250, 300, 400, 500, 1000]
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const calculatorPages = calculators.map((c) => ({
@@ -28,6 +30,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...ANSWER_PARTS.flatMap((part) =>
       ANSWER_WHOLES.map((whole) => ({
         url: `${BASE_URL}/percentage/${part}-is-what-percent-of-${whole}/`,
+        lastModified: new Date(),
+        changeFrequency: "yearly" as const,
+        priority: 0.5,
+      }))
+    ),
+    ...INCREASE_PERCENTS.flatMap((p) =>
+      INCREASE_BASES.map((base) => ({
+        url: `${BASE_URL}/percentage/what-is-${p}-percent-increase-from-${base}/`,
         lastModified: new Date(),
         changeFrequency: "yearly" as const,
         priority: 0.5,

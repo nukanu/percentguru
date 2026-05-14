@@ -35,8 +35,8 @@ const faqs = [
 ]
 
 export const metadata: Metadata = generatePageMetadata({
-  title: "Percentage Error Calculator",
-  description: "Calculate the percentage error between a measured and theoretical value. Find out how accurate your experimental result is in seconds.",
+  title: "Percentage Error Calculator — Experimental vs Theoretical",
+  description: "Calculate the percentage error between a measured value and the theoretical (accepted) value. Instantly shows how accurate an experiment or estimate is.",
   path: "/percentage/percentage-error-calculator/",
   keywords: ["percentage error calculator", "percent error", "calculate percentage error", "experimental vs theoretical"],
 })

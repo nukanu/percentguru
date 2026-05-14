@@ -6,6 +6,49 @@ import CalculatorShell from "@/components/calculator/CalculatorShell"
 import Breadcrumb from "@/components/layout/Breadcrumb"
 import XIsWhatPercentOfYWidget from "./CalculatorWidget"
 
+const TABLE_PARTS = [10, 20, 25, 30, 40, 50]
+const TABLE_WHOLES = [25, 50, 100, 200, 500]
+
+function fmt(n: number) {
+  const v = (n % 1 === 0) ? String(n) : n.toFixed(2).replace(/\.?0+$/, "")
+  return v + "%"
+}
+
+function LookupTable() {
+  return (
+    <>
+      <h2 className="text-lg font-bold text-gray-900 mb-3">Common Percentage Ratio Table</h2>
+      <p className="text-sm text-gray-600 mb-4">What percentage is X of Y? Quick reference for common values — tap any cell for the full breakdown.</p>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm border-collapse">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="border border-gray-200 px-3 py-2 text-left text-gray-600 font-semibold">X out of Y</th>
+              {TABLE_WHOLES.map((w) => (
+                <th key={w} className="border border-gray-200 px-3 py-2 text-center text-gray-600 font-semibold">of {w}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {TABLE_PARTS.map((p) => (
+              <tr key={p} className="hover:bg-blue-50">
+                <td className="border border-gray-200 px-3 py-2 font-semibold text-gray-700">{p} is…</td>
+                {TABLE_WHOLES.map((w) => (
+                  <td key={w} className="border border-gray-200 px-3 py-2 text-center">
+                    <Link href={`/percentage/${p}-is-what-percent-of-${w}/`} className="text-blue-600 hover:underline font-medium">
+                      {fmt((p / w) * 100)}
+                    </Link>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  )
+}
+
 const faqs = [
   {
     question: "30 is what percent of 200?",
@@ -85,6 +128,7 @@ export default function XIsWhatPercentOfYPage() {
           "Determining what percentage of a target has been reached",
         ]}
         faqs={faqs}
+        lookupTable={<LookupTable />}
       />
     </>
   )
