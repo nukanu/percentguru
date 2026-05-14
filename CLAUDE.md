@@ -209,7 +209,7 @@ git push origin main
 - Commit exists in history
 
 ### 4. Verify Deployment
-- https://percentguru.vercel.app/ loads
+- https://percentguru.com/ loads
 - Changes are visible on production
 
 If any step fails → STOP and say task is not complete
@@ -233,7 +233,7 @@ Push result:
 <confirmation>
 
 Production URL:
-https://percentguru.vercel.app/
+https://percentguru.com/
 
 Verification:
 <what exactly is visible on production>
