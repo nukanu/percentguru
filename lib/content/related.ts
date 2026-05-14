@@ -35,18 +35,23 @@ const relatedMap: Record<string, string[]> = {
     "percentage-error-calculator",
   ],
   "reverse-percentage-calculator": [
+    "percent-off-calculator",
     "what-is-x-percent-of-y",
     "percentage-calculator",
-    "percentage-change-calculator",
   ],
   "percentage-error-calculator": [
     "percentage-difference-calculator",
     "percentage-change-calculator",
     "x-is-what-percent-of-y",
   ],
+  "percent-off-calculator": [
+    "discount-calculator",
+    "reverse-percentage-calculator",
+    "sales-tax-calculator",
+  ],
   "discount-calculator": [
+    "percent-off-calculator",
     "markup-calculator",
-    "profit-margin-calculator",
     "sales-tax-calculator",
   ],
   "markup-calculator": [
