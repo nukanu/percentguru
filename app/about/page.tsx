@@ -50,6 +50,21 @@ export default function AboutPage() {
             legal obligations, verify with a qualified professional.
           </p>
         </div>
+
+        <div>
+          <h2 className="text-lg font-bold text-gray-900 mb-2">Who we are</h2>
+          <p>
+            PercentGuru is built and maintained by the PercentGuru Team — a small group focused on
+            making everyday maths and financial calculations accessible to everyone. We built this
+            site because we were frustrated with calculator tools that were slow, ad-heavy, or gave
+            answers without explanation. Every page on PercentGuru is written and reviewed by us to
+            make sure the formulas, examples, and explanations are correct and genuinely useful.
+          </p>
+          <p className="mt-3">
+            Have a question or found an error?{" "}
+            <Link href="/contact/" className="text-blue-600 hover:underline">Get in touch</Link> — we read every message.
+          </p>
+        </div>
       </div>
     </div>
   )
