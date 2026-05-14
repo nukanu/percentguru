@@ -1,15 +1,14 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { getCalculatorsByHub } from "@/lib/content/calculators"
 import { generateHubMetadata } from "@/lib/seo/metadata"
 import { faqSchema } from "@/lib/seo/schema"
 import Breadcrumb from "@/components/layout/Breadcrumb"
 
 export const metadata: Metadata = generateHubMetadata({
   hub: "percentage",
-  title: "Percentage Calculators — Find, Change, Compare, and Reverse Percentages",
+  title: "Percentage Calculators — Find, Change, Compare, and Convert",
   description:
-    "Free percentage calculators for every use case. Find what percent of a number is, calculate percentage increases and decreases, reverse a percentage, measure error, and more.",
+    "Free percentage calculators for every use case — find X% of a number, calculate percentage increases and decreases, convert fractions and decimals, calculate grades and GPA, and more.",
 })
 
 const faqs = [
@@ -35,14 +34,80 @@ const faqs = [
   },
 ]
 
+const decisionGuide = [
+  { question: "Find X% of a number (tip, tax, commission)", tool: "What is X% of Y?", href: "/percentage/what-is-x-percent-of-y/" },
+  { question: "Express one number as a % of another", tool: "X is What % of Y?", href: "/percentage/x-is-what-percent-of-y/" },
+  { question: "Find the original before a % was applied", tool: "Reverse Percentage", href: "/percentage/reverse-percentage-calculator/" },
+  { question: "Measure how much a value rose or fell", tool: "Percentage Change", href: "/percentage/percentage-change-calculator/" },
+  { question: "Calculate a sale price or discount", tool: "Percent Off Calculator", href: "/percentage/percent-off-calculator/" },
+  { question: "Convert a test score to a letter grade", tool: "Grade Calculator", href: "/percentage/grade-calculator/" },
+  { question: "Calculate GPA from letter grades and credits", tool: "GPA Calculator", href: "/percentage/gpa-calculator/" },
+  { question: "Convert a fraction or decimal to %", tool: "Fraction to Percent", href: "/percentage/fraction-to-percent-calculator/" },
+]
+
+type CalcEntry = { slug: string; title: string; description: string }
+
+const CORE: CalcEntry[] = [
+  { slug: "percentage-calculator", title: "Percentage Calculator", description: "Find X% of a number, or find what % one number is of another." },
+  { slug: "what-is-x-percent-of-y", title: "What is X% of Y?", description: "Enter a rate and a number — get the result. Works for tips, tax, commissions." },
+  { slug: "x-is-what-percent-of-y", title: "X is What Percent of Y?", description: "Express one number as a percentage of another." },
+  { slug: "reverse-percentage-calculator", title: "Reverse Percentage Calculator", description: "Work backwards from a result to find the original value before a % was applied." },
+]
+
+const CHANGE: CalcEntry[] = [
+  { slug: "percentage-increase-calculator", title: "Percentage Increase Calculator", description: "How much did a value go up, expressed as a percentage?" },
+  { slug: "percentage-decrease-calculator", title: "Percentage Decrease Calculator", description: "How much did a value drop, expressed as a percentage?" },
+  { slug: "percentage-change-calculator", title: "Percentage Change Calculator", description: "Track any increase or decrease between two values as a percentage." },
+  { slug: "percentage-difference-calculator", title: "Percentage Difference Calculator", description: "Compare two values without a 'before' or 'after' — just how far apart they are." },
+  { slug: "percentage-error-calculator", title: "Percentage Error Calculator", description: "How accurate was a measurement vs expected? Express the gap as a percentage." },
+  { slug: "percentage-points-calculator", title: "Percentage Points Calculator", description: "Percentage point change vs relative % change — when each one applies." },
+]
+
+const GRADES: CalcEntry[] = [
+  { slug: "grade-calculator", title: "Grade Calculator", description: "Score out of total → percentage and letter grade instantly." },
+  { slug: "gpa-calculator", title: "GPA Calculator", description: "Letter grades + credit hours → GPA on the 4.0 scale." },
+]
+
+const CONVERSIONS: CalcEntry[] = [
+  { slug: "fraction-to-percent-calculator", title: "Fraction to Percent Calculator", description: "Enter any fraction (3/8, 2/3) — get the percentage instantly." },
+  { slug: "decimal-to-percent-calculator", title: "Decimal to Percent Calculator", description: "Convert any decimal to a percentage. Enter 0.75 to get 75%." },
+  { slug: "percent-to-decimal-calculator", title: "Percent to Decimal Calculator", description: "Convert any percentage to a decimal. Enter 75 to get 0.75." },
+]
+
+const EVERYDAY: CalcEntry[] = [
+  { slug: "tip-calculator", title: "Tip Calculator", description: "Bill amount + tip % — instant total and per-person split." },
+  { slug: "percent-off-calculator", title: "Percent Off Calculator", description: "Enter a price and % off — see sale price and savings instantly." },
+  { slug: "salary-increase-calculator", title: "Salary Increase Calculator", description: "See how much a raise adds in dollars and new annual total." },
+  { slug: "annual-change-calculator", title: "Annual Percentage Change Calculator", description: "CAGR and total change over any number of years." },
+]
+
+function CalcList({ items }: { items: CalcEntry[] }) {
+  return (
+    <ul className="space-y-2">
+      {items.map((c) => (
+        <li key={c.slug}>
+          <Link
+            href={`/percentage/${c.slug}/`}
+            className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors group"
+          >
+            <div>
+              <p className="font-semibold text-gray-800 group-hover:text-blue-700">{c.title}</p>
+              <p className="text-sm text-gray-500 mt-0.5">{c.description}</p>
+            </div>
+            <span className="text-gray-400 group-hover:text-blue-400 text-xl ml-4">&rarr;</span>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+const quickLookups = [
+  { p: 10, n: 100 }, { p: 20, n: 100 }, { p: 25, n: 200 },
+  { p: 15, n: 50 }, { p: 30, n: 150 }, { p: 50, n: 80 },
+]
+
 export default function PercentagePage() {
-  const calculators = getCalculatorsByHub("percentage")
-
-  const quickLookups = [
-    { p: 10, n: 100 }, { p: 20, n: 100 }, { p: 25, n: 200 },
-    { p: 15, n: 50 }, { p: 30, n: 150 }, { p: 50, n: 80 },
-  ]
-
   return (
     <>
       <script
@@ -63,19 +128,35 @@ export default function PercentagePage() {
           <Link href="/percentage/what-is-x-percent-of-y/" className="text-blue-600 hover:underline">what 15% of a number is</Link>,
           track{" "}
           <Link href="/percentage/percentage-change-calculator/" className="text-blue-600 hover:underline">how much a value changed</Link>,
-          or work backwards with the{" "}
-          <Link href="/percentage/reverse-percentage-calculator/" className="text-blue-600 hover:underline">reverse percentage tool</Link>.
-          Results appear as you type. For financial applications like{" "}
-          <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discounts</Link>{" "}
+          work backwards with the{" "}
+          <Link href="/percentage/reverse-percentage-calculator/" className="text-blue-600 hover:underline">reverse percentage tool</Link>,
+          or convert{" "}
+          <Link href="/percentage/fraction-to-percent-calculator/" className="text-blue-600 hover:underline">fractions</Link>{" "}
           and{" "}
-          <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">profit margins</Link>,
-          see the finance calculators.
+          <Link href="/percentage/decimal-to-percent-calculator/" className="text-blue-600 hover:underline">decimals</Link>{" "}
+          to percentages. For financial applications like discounts and profit margins, see the{" "}
+          <Link href="/finance/" className="text-blue-600 hover:underline">finance calculators</Link>.
         </p>
 
         <section className="mb-8 bg-gray-50 border border-gray-200 rounded-xl px-5 py-5">
+          <h2 className="text-base font-semibold text-gray-800 mb-3">Which calculator do you need?</h2>
+          <p className="text-sm text-gray-500 mb-3">Find the right tool based on your question.</p>
+          <div className="space-y-2">
+            {decisionGuide.map(({ question, tool, href }) => (
+              <div key={href} className="flex items-center justify-between text-sm gap-3">
+                <span className="text-gray-600">{question}</span>
+                <Link href={href} className="text-blue-600 hover:underline shrink-0 font-medium">
+                  {tool} →
+                </Link>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mb-8">
           <h2 className="text-base font-semibold text-gray-800 mb-3">How percentages work</h2>
           <p className="text-sm text-gray-600 mb-3">
-            A percentage expresses one number as a fraction of 100. The word comes from the Latin <em>per centum</em> — "per hundred." There are three fundamental calculations, and every percentage problem reduces to one of them:
+            A percentage expresses one number as a fraction of 100. Every percentage problem reduces to one of three fundamental calculations:
           </p>
           <div className="space-y-2 text-sm">
             <div className="flex gap-3">
@@ -94,40 +175,33 @@ export default function PercentagePage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-lg font-semibold text-gray-800 mb-3">What these tools help you with</h2>
-          <ul className="space-y-1.5 text-sm text-gray-600 list-disc list-inside">
-            <li><strong>Tips and commissions</strong> — find exactly what 18% of $47.50 is without mental math</li>
-            <li><strong>Discounts and tax</strong> — work out a percentage of any price, e.g. 20% off $65 = $13 off, $52 final</li>
-            <li><strong>Year-over-year comparisons</strong> — measure how much revenue, traffic, or costs rose or fell</li>
-            <li><strong>Test scores and grades</strong> — convert raw marks to a percentage, or find the score for 80% on a 45-question test</li>
-            <li><strong>Measurement error</strong> — express the gap between an estimate and an actual value as a percentage</li>
-            <li><strong>Original prices</strong> — reverse a percentage to recover the value before a discount or markup was applied</li>
-            <li><strong>Salary raises</strong> — calculate how much a 5% raise adds to your annual pay with the <Link href="/percentage/salary-increase-calculator/" className="text-blue-600 hover:underline">salary increase calculator</Link></li>
-          </ul>
+          <h2 className="text-lg font-semibold text-gray-800 mb-3">Core Calculations</h2>
+          <p className="text-sm text-gray-500 mb-4">The fundamental operations — finding a part, a rate, or reversing a percentage.</p>
+          <CalcList items={CORE} />
         </section>
 
         <section className="mb-8">
-          <h2 className="text-lg font-semibold text-gray-800 mb-3">All percentage calculators</h2>
-          <p className="text-sm text-gray-500 mb-4">
-            Each tool handles a distinct type of question. Choose based on what you&apos;re starting with — a rate, a result, or two values to compare.
-          </p>
-          <ul className="space-y-3">
-            {calculators.map((c) => (
-              <li key={c.slug}>
-                <Link
-                  href={`/percentage/${c.slug}/`}
-                  className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors group"
-                >
-                  <div>
-                    <p className="font-semibold text-gray-800 group-hover:text-blue-700">{c.title}</p>
-                    <p className="text-sm text-gray-500 mt-0.5">{c.description}</p>
-                  </div>
-                  <span className="text-gray-400 group-hover:text-blue-400 text-xl ml-4">&rarr;</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <p className="text-xs text-gray-500 mt-4">All tools run instantly in your browser — no sign-up, no data stored.</p>
+          <h2 className="text-lg font-semibold text-gray-800 mb-3">Change &amp; Comparison</h2>
+          <p className="text-sm text-gray-500 mb-4">Measuring how much something increased, decreased, or differs between two values.</p>
+          <CalcList items={CHANGE} />
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-lg font-semibold text-gray-800 mb-3">Grades &amp; Education</h2>
+          <p className="text-sm text-gray-500 mb-4">Convert scores to letter grades or calculate GPA from course results.</p>
+          <CalcList items={GRADES} />
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-lg font-semibold text-gray-800 mb-3">Conversions</h2>
+          <p className="text-sm text-gray-500 mb-4">Convert between fractions, decimals, and percentages.</p>
+          <CalcList items={CONVERSIONS} />
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-lg font-semibold text-gray-800 mb-3">Everyday Use</h2>
+          <p className="text-sm text-gray-500 mb-4">Tips, discounts, salary raises, and year-over-year changes.</p>
+          <CalcList items={EVERYDAY} />
         </section>
 
         <section className="mb-8">

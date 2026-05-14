@@ -3,6 +3,13 @@ import { calculators } from "@/lib/content/calculators"
 
 const BASE_URL = "https://percentguru.com"
 
+const SALARY_VALUES = [
+  25000, 30000, 35000, 40000, 45000, 50000, 55000,
+  60000, 65000, 70000, 75000, 80000, 85000, 90000,
+  95000, 100000, 110000, 120000, 130000, 140000,
+  150000, 175000, 200000,
+]
+
 const ANSWER_PERCENTS = [1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25, 30, 33, 35, 40, 50, 60, 66, 75, 80, 90]
 const ANSWER_NUMBERS = [10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 75, 80, 90, 100, 120, 125, 150, 175, 200, 225, 250, 300, 350, 400, 500, 750, 1000]
 const ANSWER_PARTS = [1, 2, 3, 5, 6, 8, 9, 10, 12, 14, 15, 18, 20, 25, 30, 35, 40, 50, 60, 75, 80, 100]
@@ -65,6 +72,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ),
   ]
 
+  const salaryPages = SALARY_VALUES.map((s) => ({
+    url: `${BASE_URL}/finance/salary/${s}-a-year-is-how-much-an-hour/`,
+    lastModified: new Date(),
+    changeFrequency: "yearly" as const,
+    priority: 0.5,
+  }))
+
   return [
     {
       url: BASE_URL,
@@ -86,6 +100,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...calculatorPages,
     ...answerPages,
+    ...salaryPages,
     {
       url: `${BASE_URL}/about/`,
       lastModified: new Date(),

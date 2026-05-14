@@ -42,11 +42,11 @@ export const metadata: Metadata = {
 const FEATURED = [
   { slug: "discount-calculator", hub: "finance" },
   { slug: "what-is-x-percent-of-y", hub: "percentage" },
-  { slug: "profit-margin-calculator", hub: "finance" },
+  { slug: "mortgage-calculator", hub: "finance" },
   { slug: "percentage-increase-calculator", hub: "percentage" },
-  { slug: "vat-calculator", hub: "finance" },
+  { slug: "savings-calculator", hub: "finance" },
   { slug: "gpa-calculator", hub: "percentage" },
-  { slug: "loan-payment-calculator", hub: "finance" },
+  { slug: "salary-to-hourly-calculator", hub: "finance" },
   { slug: "percentage-change-calculator", hub: "percentage" },
 ] as const
 
@@ -81,6 +81,10 @@ const DESCRIPTIONS: Record<string, string> = {
   "percent-off-calculator": "Enter any price and % off — see sale price and savings",
   "grade-calculator": "Score out of total → percentage and letter grade instantly",
   "percentage-points-calculator": "PP change vs relative % change — explained clearly",
+  // Personal finance
+  "mortgage-calculator": "Monthly payment and total interest from home price, rate, and term",
+  "savings-calculator": "Project savings growth from contributions and interest over time",
+  "salary-to-hourly-calculator": "Annual salary → hourly, daily, weekly, and monthly rates",
 }
 
 function CalcLink({ href, title, description }: { href: string; title: string; description?: string }) {
@@ -226,24 +230,26 @@ export default function Home() {
       <section className="mt-12">
         <h2 className="text-xl font-bold text-gray-800 mb-4">Popular calculators</h2>
         <p className="text-sm text-gray-600 leading-relaxed mb-3">
-          If you&apos;re shopping a sale, the{" "}
+          For home buyers, the{" "}
+          <Link href="/finance/mortgage-calculator/" className="text-blue-600 hover:underline">mortgage calculator</Link>{" "}
+          shows the exact monthly payment and total interest before you make an offer. The{" "}
+          <Link href="/finance/savings-calculator/" className="text-blue-600 hover:underline">savings calculator</Link>{" "}
+          projects how any combination of initial deposit and monthly contributions grows over time. For shopping, the{" "}
           <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discount calculator</Link>{" "}
-          shows your exact savings and final price. For UK business pricing, the{" "}
-          <Link href="/finance/vat-calculator/" className="text-blue-600 hover:underline">VAT calculator</Link>{" "}
-          handles adding or removing VAT in one step. For business margins, the{" "}
+          shows exact savings and final price.
+        </p>
+        <p className="text-sm text-gray-600 leading-relaxed">
+          For business pricing, the{" "}
           <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">profit margin calculator</Link>{" "}
           and{" "}
           <Link href="/finance/markup-calculator/" className="text-blue-600 hover:underline">markup calculator</Link>{" "}
-          cover both sides of pricing.
-        </p>
-        <p className="text-sm text-gray-600 leading-relaxed">
-          For students, the{" "}
+          cover both sides. For students, the{" "}
           <Link href="/percentage/gpa-calculator/" className="text-blue-600 hover:underline">GPA calculator</Link>{" "}
           and{" "}
           <Link href="/percentage/grade-calculator/" className="text-blue-600 hover:underline">grade calculator</Link>{" "}
-          convert marks to percentages and grade point averages. For everyday percentage questions, the{" "}
+          convert marks to percentages and grade point averages. For everyday questions, the{" "}
           <Link href="/percentage/what-is-x-percent-of-y/" className="text-blue-600 hover:underline">what is X% of Y calculator</Link>{" "}
-          handles tips, tax amounts, commissions, and any other percentage-of-a-number question.
+          handles tips, tax amounts, and commissions.
         </p>
       </section>
 
