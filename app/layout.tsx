@@ -22,6 +22,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7433380127486100"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className={`${geist.className} bg-white text-gray-900 antialiased`}>
         <Header />
         <main>{children}</main>
