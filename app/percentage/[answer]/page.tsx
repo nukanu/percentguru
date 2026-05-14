@@ -17,10 +17,20 @@ const WHOLES = [20, 25, 40, 50, 75, 100, 120, 150, 200, 250, 300, 400, 500, 1000
 const INCREASE_PERCENTS = [3, 5, 10, 15, 20, 25, 30, 40, 50]
 const INCREASE_BASES = [10, 20, 25, 50, 100, 150, 200, 250, 300, 400, 500, 1000]
 
+// Pattern 4: what-is-10-percent-decrease-from-50
+const DECREASE_PERCENTS = [5, 10, 15, 20, 25, 30, 40, 50]
+const DECREASE_BASES = [10, 20, 25, 50, 100, 150, 200, 250, 300, 400, 500, 1000]
+
+// Pattern 5: what-is-20-percent-off-80
+const OFF_PERCENTS = [5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 75]
+const OFF_PRICES = [10, 20, 25, 30, 40, 50, 60, 75, 80, 100, 120, 150, 200, 250, 300, 400, 500, 750, 1000]
+
 type ParsedAnswer =
   | { type: "whatIsXPctOfY"; p: number; n: number }
   | { type: "xIsWhatPctOfY"; part: number; whole: number }
   | { type: "pctIncreaseFrom"; p: number; base: number }
+  | { type: "pctDecreaseFrom"; p: number; base: number }
+  | { type: "pctOff"; p: number; price: number }
 
 function parseSlug(answer: string): ParsedAnswer | null {
   const m1 = answer.match(/^what-is-(\d+)-percent-of-(\d+)$/)
@@ -41,6 +51,18 @@ function parseSlug(answer: string): ParsedAnswer | null {
     const base = parseInt(m3[2])
     if (INCREASE_PERCENTS.includes(p) && INCREASE_BASES.includes(base)) return { type: "pctIncreaseFrom", p, base }
   }
+  const m4 = answer.match(/^what-is-(\d+)-percent-decrease-from-(\d+)$/)
+  if (m4) {
+    const p = parseInt(m4[1])
+    const base = parseInt(m4[2])
+    if (DECREASE_PERCENTS.includes(p) && DECREASE_BASES.includes(base)) return { type: "pctDecreaseFrom", p, base }
+  }
+  const m5 = answer.match(/^what-is-(\d+)-percent-off-(\d+)$/)
+  if (m5) {
+    const p = parseInt(m5[1])
+    const price = parseInt(m5[2])
+    if (OFF_PERCENTS.includes(p) && OFF_PRICES.includes(price)) return { type: "pctOff", p, price }
+  }
   return null
 }
 
@@ -54,7 +76,13 @@ export function generateStaticParams() {
   const type3 = INCREASE_PERCENTS.flatMap((p) =>
     INCREASE_BASES.map((base) => ({ answer: `what-is-${p}-percent-increase-from-${base}` }))
   )
-  return [...type1, ...type2, ...type3]
+  const type4 = DECREASE_PERCENTS.flatMap((p) =>
+    DECREASE_BASES.map((base) => ({ answer: `what-is-${p}-percent-decrease-from-${base}` }))
+  )
+  const type5 = OFF_PERCENTS.flatMap((p) =>
+    OFF_PRICES.map((price) => ({ answer: `what-is-${p}-percent-off-${price}` }))
+  )
+  return [...type1, ...type2, ...type3, ...type4, ...type5]
 }
 
 export async function generateMetadata({
@@ -88,7 +116,7 @@ export async function generateMetadata({
         `${part} out of ${whole} as a percentage`,
       ],
     })
-  } else {
+  } else if (parsed.type === "pctIncreaseFrom") {
     const { p, base } = parsed
     const increase = (p / 100) * base
     const result = fmt(base + increase)
@@ -100,6 +128,34 @@ export async function generateMetadata({
         `what is ${p} percent increase from ${base}`,
         `${p}% increase from ${base}`,
         `${p} percent increase of ${base}`,
+      ],
+    })
+  } else if (parsed.type === "pctDecreaseFrom") {
+    const { p, base } = parsed
+    const decrease = (p / 100) * base
+    const result = fmt(base - decrease)
+    return generatePageMetadata({
+      title: `What is ${p}% Decrease from ${base}? — Answer: ${result}`,
+      description: `A ${p}% decrease from ${base} equals ${result}. The decrease amount is ${fmt(decrease)}. See the step-by-step calculation.`,
+      path: `/percentage/${answer}/`,
+      keywords: [
+        `what is ${p} percent decrease from ${base}`,
+        `${p}% decrease from ${base}`,
+        `${p} percent decrease of ${base}`,
+      ],
+    })
+  } else {
+    const { p, price } = parsed
+    const savings = (p / 100) * price
+    const salePrice = fmt(price - savings)
+    return generatePageMetadata({
+      title: `What is ${p}% Off ${price}? — Sale Price: ${salePrice}`,
+      description: `${p}% off ${price} saves you ${fmt(savings)} — you pay ${salePrice}. See the full calculation and use the free percent off calculator for any price.`,
+      path: `/percentage/${answer}/`,
+      keywords: [
+        `what is ${p} percent off ${price}`,
+        `${p}% off ${price}`,
+        `${p} off ${price}`,
       ],
     })
   }
@@ -120,7 +176,13 @@ export default async function AnswerPage({
   if (parsed.type === "xIsWhatPctOfY") {
     return <XIsWhatPctOfY part={parsed.part} whole={parsed.whole} />
   }
-  return <PctIncreaseFrom p={parsed.p} base={parsed.base} />
+  if (parsed.type === "pctIncreaseFrom") {
+    return <PctIncreaseFrom p={parsed.p} base={parsed.base} />
+  }
+  if (parsed.type === "pctDecreaseFrom") {
+    return <PctDecreaseFrom p={parsed.p} base={parsed.base} />
+  }
+  return <PctOff p={parsed.p} price={parsed.price} />
 }
 
 function WhatIsXPctOfY({ p, n }: { p: number; n: number }) {
@@ -391,6 +453,186 @@ function PctIncreaseFrom({ p, base }: { p: number; base: number }) {
             >
               <span className="text-xs text-gray-500">{rp}% of {rb}</span>
               <span className="font-bold text-gray-900 mt-0.5">{rr}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </article>
+  )
+}
+
+function PctDecreaseFrom({ p, base }: { p: number; base: number }) {
+  const decreaseAmt = (p / 100) * base
+  const newValue = base - decreaseAmt
+  const newFmt = fmt(newValue)
+  const decFmt = fmt(decreaseAmt)
+
+  const relatedPercents = DECREASE_PERCENTS.filter((x) => x !== p)
+    .slice(0, 3)
+    .map((x) => ({ p: x, base, result: fmt(base - (x / 100) * base) }))
+
+  const relatedBases = DECREASE_BASES.filter((x) => x !== base)
+    .slice(0, 3)
+    .map((x) => ({ p, base: x, result: fmt(x - (p / 100) * x) }))
+
+  return (
+    <article className="mx-auto max-w-2xl px-4 pb-12">
+      <div className="pt-8">
+        <Breadcrumb
+          crumbs={[
+            { name: "Home", href: "/" },
+            { name: "Percentage Calculators", href: "/percentage/" },
+            { name: `${p}% decrease from ${base}`, href: `/percentage/what-is-${p}-percent-decrease-from-${base}/` },
+          ]}
+        />
+      </div>
+
+      <h1 className="text-3xl font-bold text-gray-900 mb-6">What is {p}% Decrease from {base}?</h1>
+
+      <div className="bg-blue-50 border border-blue-100 rounded-xl px-6 py-6 mb-8 text-center">
+        <p className="text-gray-600 text-sm mb-1">{p}% decrease from {base} =</p>
+        <p className="text-5xl font-bold text-blue-700">{newFmt}</p>
+        <p className="text-sm text-gray-500 mt-2">Decrease amount: −{decFmt}</p>
+      </div>
+
+      <section className="mb-8">
+        <h2 className="text-lg font-bold text-gray-900 mb-3">How to calculate {p}% decrease from {base}</h2>
+        <ol className="space-y-2 text-gray-700 list-decimal list-inside">
+          <li>Find {p}% of {base}: {base} × {p / 100} = {decFmt}</li>
+          <li>Subtract from the original: {base} − {decFmt} = <strong>{newFmt}</strong></li>
+        </ol>
+        <div className="mt-3 bg-gray-100 rounded-lg px-4 py-3 font-mono text-sm text-gray-800">
+          {base} × (1 − {p}/100) = {base} × {1 - p / 100} = {newFmt}
+        </div>
+      </section>
+
+      <section className="mb-8 border border-gray-200 rounded-xl px-5 py-4 bg-gray-50">
+        <p className="text-gray-700 text-sm">
+          Need a different percentage decrease?{" "}
+          <Link href="/percentage/percentage-decrease-calculator/" className="text-blue-600 hover:underline font-medium">
+            Use the percentage decrease calculator
+          </Link>{" "}
+          for any two values.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Other % decreases from {base}</h2>
+        <div className="grid grid-cols-3 gap-2">
+          {relatedPercents.map(({ p: rp, base: rb, result: rr }) => (
+            <Link
+              key={`${rp}-${rb}`}
+              href={`/percentage/what-is-${rp}-percent-decrease-from-${rb}/`}
+              className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
+            >
+              <span className="text-xs text-gray-500">{rp}% from {rb}</span>
+              <span className="font-bold text-gray-900 mt-0.5">{rr}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">{p}% decrease from other values</h2>
+        <div className="grid grid-cols-3 gap-2">
+          {relatedBases.map(({ p: rp, base: rb, result: rr }) => (
+            <Link
+              key={`${rp}-${rb}`}
+              href={`/percentage/what-is-${rp}-percent-decrease-from-${rb}/`}
+              className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
+            >
+              <span className="text-xs text-gray-500">{rp}% of {rb}</span>
+              <span className="font-bold text-gray-900 mt-0.5">{rr}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </article>
+  )
+}
+
+function PctOff({ p, price }: { p: number; price: number }) {
+  const savings = (p / 100) * price
+  const salePrice = price - savings
+  const saleFmt = fmt(salePrice)
+  const saveFmt = fmt(savings)
+
+  const relatedPercents = OFF_PERCENTS.filter((x) => x !== p)
+    .slice(0, 3)
+    .map((x) => ({ p: x, price, salePrice: fmt(price - (x / 100) * price) }))
+
+  const relatedPrices = OFF_PRICES.filter((x) => x !== price)
+    .slice(0, 3)
+    .map((x) => ({ p, price: x, salePrice: fmt(x - (p / 100) * x) }))
+
+  return (
+    <article className="mx-auto max-w-2xl px-4 pb-12">
+      <div className="pt-8">
+        <Breadcrumb
+          crumbs={[
+            { name: "Home", href: "/" },
+            { name: "Percentage Calculators", href: "/percentage/" },
+            { name: `${p}% off ${price}`, href: `/percentage/what-is-${p}-percent-off-${price}/` },
+          ]}
+        />
+      </div>
+
+      <h1 className="text-3xl font-bold text-gray-900 mb-6">What is {p}% Off {price}?</h1>
+
+      <div className="bg-green-50 border border-green-100 rounded-xl px-6 py-6 mb-8 text-center">
+        <p className="text-gray-600 text-sm mb-1">Sale price ({p}% off {price})</p>
+        <p className="text-5xl font-bold text-green-700">{saleFmt}</p>
+        <p className="text-sm text-gray-500 mt-2">You save: {saveFmt}</p>
+      </div>
+
+      <section className="mb-8">
+        <h2 className="text-lg font-bold text-gray-900 mb-3">How to calculate {p}% off {price}</h2>
+        <ol className="space-y-2 text-gray-700 list-decimal list-inside">
+          <li>Find {p}% of {price}: {price} × {p / 100} = {saveFmt}</li>
+          <li>Subtract the discount: {price} − {saveFmt} = <strong>{saleFmt}</strong></li>
+        </ol>
+        <div className="mt-3 bg-gray-100 rounded-lg px-4 py-3 font-mono text-sm text-gray-800">
+          {price} × (1 − {p}/100) = {price} × {1 - p / 100} = {saleFmt}
+        </div>
+      </section>
+
+      <section className="mb-8 border border-gray-200 rounded-xl px-5 py-4 bg-gray-50">
+        <p className="text-gray-700 text-sm">
+          Need a different discount?{" "}
+          <Link href="/percentage/percent-off-calculator/" className="text-blue-600 hover:underline font-medium">
+            Use the percent off calculator
+          </Link>{" "}
+          for any price and percentage.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Other discounts on {price}</h2>
+        <div className="grid grid-cols-3 gap-2">
+          {relatedPercents.map(({ p: rp, price: rpr, salePrice: rs }) => (
+            <Link
+              key={`${rp}-${rpr}`}
+              href={`/percentage/what-is-${rp}-percent-off-${rpr}/`}
+              className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
+            >
+              <span className="text-xs text-gray-500">{rp}% off {rpr}</span>
+              <span className="font-bold text-gray-900 mt-0.5">{rs}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">{p}% off other prices</h2>
+        <div className="grid grid-cols-3 gap-2">
+          {relatedPrices.map(({ p: rp, price: rpr, salePrice: rs }) => (
+            <Link
+              key={`${rp}-${rpr}`}
+              href={`/percentage/what-is-${rp}-percent-off-${rpr}/`}
+              className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
+            >
+              <span className="text-xs text-gray-500">{rp}% off {rpr}</span>
+              <span className="font-bold text-gray-900 mt-0.5">{rs}</span>
             </Link>
           ))}
         </div>
