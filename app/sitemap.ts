@@ -31,5 +31,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     ...calculatorPages,
+    {
+      url: `${BASE_URL}/about/`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
+    },
+    {
+      url: `${BASE_URL}/contact/`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.4,
+    },
+    {
+      url: `${BASE_URL}/privacy-policy/`,
+      lastModified: new Date(),
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
+    },
+    {
+      url: `${BASE_URL}/terms/`,
+      lastModified: new Date(),
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
+    },
   ]
 }
