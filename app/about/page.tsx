@@ -89,6 +89,17 @@ export default function AboutPage() {
         </div>
 
         <div>
+          <h2 className="text-lg font-bold text-gray-900 mb-3">Who runs this site</h2>
+          <p>
+            PercentGuru is built and maintained by the PercentGuru Team — a small group focused on
+            making everyday maths and financial calculations accessible to everyone. We built this
+            site because we were frustrated with calculator tools that were slow, ad-heavy, or gave
+            answers without explanation. Every page on PercentGuru is written and reviewed by us to
+            make sure the formulas, examples, and explanations are correct and genuinely useful.
+          </p>
+        </div>
+
+        <div>
           <h2 className="text-lg font-bold text-gray-900 mb-3">Why this site exists</h2>
           <p>
             Most calculator sites are built for quantity, not quality — thin pages with minimal
