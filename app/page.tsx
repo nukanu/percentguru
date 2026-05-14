@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { getCalculatorsByHub, getCalculator } from "@/lib/content/calculators"
+import { calculators, getCalculator } from "@/lib/content/calculators"
 
 const websiteSchema = {
   "@context": "https://schema.org",
@@ -101,8 +101,8 @@ function CalcLink({ href, title, description }: { href: string; title: string; d
 }
 
 export default function Home() {
-  const percentageCalcs = getCalculatorsByHub("percentage")
-  const financeCalcs = getCalculatorsByHub("finance")
+  const percentageCount = calculators.filter((c) => c.hub === "percentage").length
+  const financeCount = calculators.filter((c) => c.hub === "finance").length
   const featured = FEATURED.map(({ slug, hub }) => {
     const calc = getCalculator(slug)
     return calc ? { slug, title: calc.title, href: `/${hub}/${slug}/` } : null
@@ -120,7 +120,7 @@ export default function Home() {
           Free Percentage &amp; Finance Calculators
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-3">
-          31 free calculators for{" "}
+          {calculators.length} free calculators for{" "}
           <Link href="/percentage/percentage-increase-calculator/" className="text-blue-600 hover:underline">percentage increase</Link>,{" "}
           <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discounts</Link>,{" "}
           <Link href="/finance/vat-calculator/" className="text-blue-600 hover:underline">VAT</Link>,{" "}
@@ -144,53 +144,45 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Categories */}
-      <div className="grid sm:grid-cols-2 gap-10">
-        <section>
-          <div className="flex items-center justify-between mb-2">
-            <h2 className="text-xl font-bold text-gray-800">Percentage Calculators</h2>
-            <Link href="/percentage/" className="text-sm text-blue-600 hover:underline">
-              View all
-            </Link>
+      {/* Hub cards */}
+      <div className="grid sm:grid-cols-2 gap-6 mb-2">
+        <Link
+          href="/percentage/"
+          className="group border border-gray-200 rounded-xl p-6 hover:border-blue-300 hover:bg-blue-50 transition-colors"
+        >
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-lg font-bold text-gray-800 group-hover:text-blue-700">Percentage Calculators</h2>
+            <span className="text-xs font-medium bg-gray-100 group-hover:bg-blue-100 text-gray-500 group-hover:text-blue-600 px-2 py-1 rounded-full">{percentageCount} tools</span>
           </div>
-          <p className="text-sm text-gray-500 mb-4">
-            Percentage increase and decrease, reverse percentage, percentage error, and more.
-          </p>
-          <ul className="space-y-2">
-            {percentageCalcs.map((c) => (
-              <li key={c.slug}>
-                <CalcLink
-                  href={`/percentage/${c.slug}/`}
-                  title={c.title}
-                  description={DESCRIPTIONS[c.slug]}
-                />
-              </li>
-            ))}
+          <ul className="space-y-1 text-sm text-gray-600 mb-5">
+            <li>Percentage increase, decrease &amp; change</li>
+            <li>Grade, GPA &amp; fraction converters</li>
+            <li>Decimal ↔ percent, tip &amp; percent off</li>
+            <li>Reverse percentage, error &amp; more</li>
           </ul>
-        </section>
+          <span className="text-sm font-medium text-blue-600 group-hover:text-blue-700">
+            Browse all percentage calculators &rarr;
+          </span>
+        </Link>
 
-        <section>
-          <div className="flex items-center justify-between mb-2">
-            <h2 className="text-xl font-bold text-gray-800">Finance Calculators</h2>
-            <Link href="/finance/" className="text-sm text-blue-600 hover:underline">
-              View all
-            </Link>
+        <Link
+          href="/finance/"
+          className="group border border-gray-200 rounded-xl p-6 hover:border-blue-300 hover:bg-blue-50 transition-colors"
+        >
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-lg font-bold text-gray-800 group-hover:text-blue-700">Finance Calculators</h2>
+            <span className="text-xs font-medium bg-gray-100 group-hover:bg-blue-100 text-gray-500 group-hover:text-blue-600 px-2 py-1 rounded-full">{financeCount} tools</span>
           </div>
-          <p className="text-sm text-gray-500 mb-4">
-            Profit margins, discounts, markup, loan repayments, ROI, interest, and break-even analysis.
-          </p>
-          <ul className="space-y-2">
-            {financeCalcs.map((c) => (
-              <li key={c.slug}>
-                <CalcLink
-                  href={`/finance/${c.slug}/`}
-                  title={c.title}
-                  description={DESCRIPTIONS[c.slug]}
-                />
-              </li>
-            ))}
+          <ul className="space-y-1 text-sm text-gray-600 mb-5">
+            <li>Discount, markup &amp; profit margin</li>
+            <li>VAT, sales tax &amp; cost reduction</li>
+            <li>ROI, break-even &amp; loan payment</li>
+            <li>Compound interest, weighted average &amp; more</li>
           </ul>
-        </section>
+          <span className="text-sm font-medium text-blue-600 group-hover:text-blue-700">
+            Browse all finance calculators &rarr;
+          </span>
+        </Link>
       </div>
 
       {/* Quick answers */}
