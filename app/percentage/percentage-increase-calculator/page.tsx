@@ -36,8 +36,8 @@ const faqs = [
 ]
 
 export const metadata: Metadata = generatePageMetadata({
-  title: "Percentage Increase Calculator",
-  description: "Calculate the percentage increase between two values. Enter before and after — works for salaries, prices, scores, and revenue growth.",
+  title: "Percentage Increase Calculator — Free & Instant",
+  description: "Enter any two numbers and get the percentage increase instantly. See the result, formula, and step-by-step explanation — no sign-up needed.",
   path: "/percentage/percentage-increase-calculator/",
   keywords: ["percentage increase calculator", "percent increase", "how to calculate percentage increase"],
 })

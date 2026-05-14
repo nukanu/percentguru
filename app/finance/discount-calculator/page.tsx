@@ -35,8 +35,8 @@ const faqs = [
 ]
 
 export const metadata: Metadata = generatePageMetadata({
-  title: "Discount Calculator — Calculate Percent Off",
-  description: "Enter a price and a discount percentage to instantly see your savings and the final price. Works for any sale, coupon, or bulk discount.",
+  title: "Discount Calculator — Find Sale Price & Savings",
+  description: "Enter any price and discount percentage to see your savings and final cost instantly. Works for sales, coupons, trade discounts, and bulk deals.",
   path: "/finance/discount-calculator/",
   keywords: ["discount calculator", "percent off calculator", "sale price calculator", "how much do I save"],
 })
