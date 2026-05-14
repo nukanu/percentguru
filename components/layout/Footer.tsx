@@ -14,6 +14,8 @@ export default function Footer() {
               <li><Link href="/percentage/percentage-increase-calculator/" className="hover:text-blue-600">Percentage Increase</Link></li>
               <li><Link href="/percentage/percentage-points-calculator/" className="hover:text-blue-600">Percentage Points</Link></li>
               <li><Link href="/percentage/reverse-percentage-calculator/" className="hover:text-blue-600">Reverse Percentage</Link></li>
+              <li><Link href="/percentage/gpa-calculator/" className="hover:text-blue-600">GPA Calculator</Link></li>
+              <li><Link href="/percentage/fraction-to-percent-calculator/" className="hover:text-blue-600">Fraction to Percent</Link></li>
             </ul>
           </div>
           <div>
@@ -34,6 +36,7 @@ export default function Footer() {
               <li><Link href="/finance/sales-tax-calculator/" className="hover:text-blue-600">Sales Tax</Link></li>
               <li><Link href="/finance/interest-calculator/" className="hover:text-blue-600">Simple Interest</Link></li>
               <li><Link href="/finance/weighted-average-calculator/" className="hover:text-blue-600">Weighted Average</Link></li>
+              <li><Link href="/finance/vat-calculator/" className="hover:text-blue-600">VAT Calculator</Link></li>
             </ul>
           </div>
           <div>

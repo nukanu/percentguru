@@ -189,6 +189,27 @@ export const calculators: CalculatorConfig[] = [
     description: "Calculate savings amount and percentage cost reduction between two costs.",
     keywords: ["cost reduction calculator", "cost savings calculator", "cost savings percentage calculator"],
   },
+  {
+    slug: "gpa-calculator",
+    hub: "percentage",
+    title: "GPA Calculator",
+    description: "Calculate your GPA on the 4.0 scale from letter grades and credit hours.",
+    keywords: ["GPA calculator", "grade point average calculator", "college GPA calculator", "how to calculate GPA"],
+  },
+  {
+    slug: "fraction-to-percent-calculator",
+    hub: "percentage",
+    title: "Fraction to Percent Calculator",
+    description: "Convert any fraction to a percentage instantly. Enter numerator and denominator.",
+    keywords: ["fraction to percent calculator", "fraction to percentage", "convert fraction to percent"],
+  },
+  {
+    slug: "vat-calculator",
+    hub: "finance",
+    title: "VAT Calculator",
+    description: "Add or remove VAT from any amount. Works for any VAT rate including UK 20%, EU rates, and custom rates.",
+    keywords: ["VAT calculator", "add VAT calculator", "remove VAT calculator", "VAT inclusive exclusive"],
+  },
 ]
 
 export function getCalculatorsByHub(hub: "percentage" | "finance"): CalculatorConfig[] {

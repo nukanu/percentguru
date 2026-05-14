@@ -72,3 +72,13 @@ export function compoundInterestEarned(
 ): number {
   return compoundInterestTotal(principal, annualRate, compoundsPerYear, years) - principal
 }
+
+export function addVat(net: number, vatRate: number): { gross: number; vatAmount: number } {
+  const vatAmount = (vatRate / 100) * net
+  return { gross: net + vatAmount, vatAmount }
+}
+
+export function removeVat(gross: number, vatRate: number): { net: number; vatAmount: number } {
+  const net = gross / (1 + vatRate / 100)
+  return { net, vatAmount: gross - net }
+}

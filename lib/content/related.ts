@@ -71,7 +71,7 @@ const relatedMap: Record<string, string[]> = {
   ],
   "sales-tax-calculator": [
     "discount-calculator",
-    "profit-margin-calculator",
+    "vat-calculator",
     "markup-calculator",
   ],
   "roi-calculator": [
@@ -112,7 +112,7 @@ const relatedMap: Record<string, string[]> = {
   "grade-calculator": [
     "what-is-x-percent-of-y",
     "weighted-average-calculator",
-    "x-is-what-percent-of-y",
+    "gpa-calculator",
   ],
   "salary-increase-calculator": [
     "percentage-increase-calculator",
@@ -128,6 +128,21 @@ const relatedMap: Record<string, string[]> = {
     "percentage-decrease-calculator",
     "profit-margin-calculator",
     "discount-calculator",
+  ],
+  "gpa-calculator": [
+    "grade-calculator",
+    "weighted-average-calculator",
+    "x-is-what-percent-of-y",
+  ],
+  "fraction-to-percent-calculator": [
+    "what-is-x-percent-of-y",
+    "x-is-what-percent-of-y",
+    "percentage-calculator",
+  ],
+  "vat-calculator": [
+    "sales-tax-calculator",
+    "discount-calculator",
+    "profit-margin-calculator",
   ],
 }
 

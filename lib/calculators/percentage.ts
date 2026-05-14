@@ -86,3 +86,29 @@ export function letterGrade(percentage: number): string {
   if (percentage >= 60) return "D"
   return "F"
 }
+
+export const GPA_GRADES = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "F"] as const
+
+export function gradeToGpaPoints(grade: string): number {
+  const map: Record<string, number> = {
+    "A+": 4.0, "A": 4.0, "A-": 3.7,
+    "B+": 3.3, "B": 3.0, "B-": 2.7,
+    "C+": 2.3, "C": 2.0, "C-": 1.7,
+    "D+": 1.3, "D": 1.0, "D-": 0.7,
+    "F": 0.0,
+  }
+  return map[grade] ?? 0
+}
+
+export function calculateGpa(courses: { grade: string; credits: number }[]): number {
+  const valid = courses.filter((c) => c.credits > 0)
+  if (valid.length === 0) return 0
+  const totalPoints = valid.reduce((s, c) => s + gradeToGpaPoints(c.grade) * c.credits, 0)
+  const totalCredits = valid.reduce((s, c) => s + c.credits, 0)
+  return totalCredits > 0 ? totalPoints / totalCredits : 0
+}
+
+export function fractionToPercent(numerator: number, denominator: number): number {
+  if (denominator === 0) return 0
+  return (numerator / denominator) * 100
+}
