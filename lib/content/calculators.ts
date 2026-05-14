@@ -99,6 +99,20 @@ export const calculators: CalculatorConfig[] = [
     keywords: ["annual percentage change calculator", "CAGR calculator", "annual growth rate calculator"],
   },
   {
+    slug: "percentage-points-calculator",
+    hub: "percentage",
+    title: "Percentage Points Calculator",
+    description: "Calculate the percentage point change and relative percentage change between two rates.",
+    keywords: ["percentage points calculator", "percentage points vs percentage", "percentage point change"],
+  },
+  {
+    slug: "grade-calculator",
+    hub: "percentage",
+    title: "Grade Calculator",
+    description: "Convert any test score to a percentage and letter grade instantly.",
+    keywords: ["grade calculator", "test score percentage calculator", "what grade is x out of y"],
+  },
+  {
     slug: "discount-calculator",
     hub: "finance",
     title: "Discount Calculator",
@@ -153,6 +167,13 @@ export const calculators: CalculatorConfig[] = [
     title: "Weighted Average Calculator",
     description: "Calculate the weighted average from values and their corresponding weights.",
     keywords: ["weighted average calculator", "weighted mean calculator", "calculate weighted average"],
+  },
+  {
+    slug: "compound-interest-calculator",
+    hub: "finance",
+    title: "Compound Interest Calculator",
+    description: "Calculate total amount and interest earned with daily, monthly, quarterly, or annual compounding.",
+    keywords: ["compound interest calculator", "compound interest formula", "daily monthly annual compounding"],
   },
   {
     slug: "break-even-calculator",

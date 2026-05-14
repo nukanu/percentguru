@@ -54,3 +54,21 @@ export function breakEvenUnits(fixedCosts: number, sellingPrice: number, variabl
   if (contribution <= 0) return Infinity
   return fixedCosts / contribution
 }
+
+export function compoundInterestTotal(
+  principal: number,
+  annualRate: number,
+  compoundsPerYear: number,
+  years: number
+): number {
+  return principal * Math.pow(1 + annualRate / 100 / compoundsPerYear, compoundsPerYear * years)
+}
+
+export function compoundInterestEarned(
+  principal: number,
+  annualRate: number,
+  compoundsPerYear: number,
+  years: number
+): number {
+  return compoundInterestTotal(principal, annualRate, compoundsPerYear, years) - principal
+}

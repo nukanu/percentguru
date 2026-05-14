@@ -5,9 +5,9 @@ const relatedMap: Record<string, string[]> = {
     "percentage-calculator",
   ],
   "x-is-what-percent-of-y": [
+    "grade-calculator",
     "what-is-x-percent-of-y",
     "percentage-difference-calculator",
-    "percentage-change-calculator",
   ],
   "percentage-calculator": [
     "what-is-x-percent-of-y",
@@ -80,9 +80,9 @@ const relatedMap: Record<string, string[]> = {
     "interest-calculator",
   ],
   "interest-calculator": [
+    "compound-interest-calculator",
     "loan-payment-calculator",
     "roi-calculator",
-    "discount-calculator",
   ],
   "loan-payment-calculator": [
     "interest-calculator",
@@ -98,6 +98,21 @@ const relatedMap: Record<string, string[]> = {
     "profit-margin-calculator",
     "roi-calculator",
     "markup-calculator",
+  ],
+  "compound-interest-calculator": [
+    "interest-calculator",
+    "roi-calculator",
+    "loan-payment-calculator",
+  ],
+  "percentage-points-calculator": [
+    "percentage-change-calculator",
+    "percentage-increase-calculator",
+    "percentage-difference-calculator",
+  ],
+  "grade-calculator": [
+    "what-is-x-percent-of-y",
+    "weighted-average-calculator",
+    "x-is-what-percent-of-y",
   ],
   "salary-increase-calculator": [
     "percentage-increase-calculator",

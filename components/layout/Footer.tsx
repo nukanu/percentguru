@@ -9,10 +9,10 @@ export default function Footer() {
             <p className="font-semibold text-gray-700 mb-2">Percentage</p>
             <ul className="space-y-1">
               <li><Link href="/percentage/tip-calculator/" className="hover:text-blue-600">Tip Calculator</Link></li>
+              <li><Link href="/percentage/grade-calculator/" className="hover:text-blue-600">Grade Calculator</Link></li>
               <li><Link href="/percentage/what-is-x-percent-of-y/" className="hover:text-blue-600">What is X% of Y?</Link></li>
-              <li><Link href="/percentage/x-is-what-percent-of-y/" className="hover:text-blue-600">X is What % of Y?</Link></li>
               <li><Link href="/percentage/percentage-increase-calculator/" className="hover:text-blue-600">Percentage Increase</Link></li>
-              <li><Link href="/percentage/percentage-change-calculator/" className="hover:text-blue-600">Percentage Change</Link></li>
+              <li><Link href="/percentage/percentage-points-calculator/" className="hover:text-blue-600">Percentage Points</Link></li>
               <li><Link href="/percentage/reverse-percentage-calculator/" className="hover:text-blue-600">Reverse Percentage</Link></li>
             </ul>
           </div>
@@ -30,6 +30,7 @@ export default function Footer() {
           <div>
             <p className="font-semibold text-gray-700 mb-2">More Finance</p>
             <ul className="space-y-1">
+              <li><Link href="/finance/compound-interest-calculator/" className="hover:text-blue-600">Compound Interest</Link></li>
               <li><Link href="/finance/sales-tax-calculator/" className="hover:text-blue-600">Sales Tax</Link></li>
               <li><Link href="/finance/interest-calculator/" className="hover:text-blue-600">Simple Interest</Link></li>
               <li><Link href="/finance/weighted-average-calculator/" className="hover:text-blue-600">Weighted Average</Link></li>
