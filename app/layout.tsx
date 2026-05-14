@@ -4,6 +4,7 @@ import Script from "next/script"
 import "./globals.css"
 import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
+import CookieBanner from "@/components/layout/CookieBanner"
 
 const geist = Geist({ subsets: ["latin"] })
 
@@ -29,6 +30,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <CookieBanner />
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-7FZ05NRKFG" strategy="afterInteractive" />
         <Script id="gtag-init" strategy="afterInteractive">{`
           window.dataLayer = window.dataLayer || [];

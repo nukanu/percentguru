@@ -28,7 +28,7 @@ export default function AboutPage() {
         <div>
           <h2 className="text-lg font-bold text-gray-900 mb-3">What we cover</h2>
           <p className="mb-3">
-            Two calculator hubs with 28 tools across everyday and financial maths:
+            Two calculator hubs with 34 tools across everyday and financial maths:
           </p>
           <div className="grid sm:grid-cols-2 gap-4">
             <div className="border border-gray-200 rounded-xl p-4 bg-gray-50">
@@ -45,11 +45,11 @@ export default function AboutPage() {
             <div className="border border-gray-200 rounded-xl p-4 bg-gray-50">
               <p className="font-semibold text-gray-800 mb-2"><Link href="/finance/" className="text-blue-600 hover:underline">Finance Calculators</Link></p>
               <ul className="text-sm space-y-1 text-gray-600">
+                <li>Mortgage, savings, and loan payment</li>
+                <li>Salary to hourly, simple and compound interest</li>
                 <li>Discount, markup, and profit margin</li>
                 <li>ROI, break-even, and cost reduction</li>
-                <li>Sales tax and VAT (add or remove)</li>
-                <li>Simple and compound interest</li>
-                <li>Loan payment and weighted average</li>
+                <li>Sales tax, VAT, and weighted average</li>
               </ul>
             </div>
           </div>
