@@ -78,6 +78,20 @@ export const calculators: CalculatorConfig[] = [
     keywords: ["percent off calculator", "percentage off calculator", "how much is x% off"],
   },
   {
+    slug: "salary-increase-calculator",
+    hub: "percentage",
+    title: "Salary Increase Calculator",
+    description: "Calculate your raise amount and new salary from a percentage increase.",
+    keywords: ["salary increase calculator", "raise calculator", "percentage raise calculator", "calculate salary increase"],
+  },
+  {
+    slug: "annual-change-calculator",
+    hub: "percentage",
+    title: "Annual Percentage Change Calculator",
+    description: "Calculate CAGR and total percentage change between two values over any number of years.",
+    keywords: ["annual percentage change calculator", "CAGR calculator", "annual growth rate calculator"],
+  },
+  {
     slug: "discount-calculator",
     hub: "finance",
     title: "Discount Calculator",
@@ -139,6 +153,13 @@ export const calculators: CalculatorConfig[] = [
     title: "Break-Even Calculator",
     description: "Calculate break-even point in units and revenue from fixed costs and pricing.",
     keywords: ["break-even calculator", "breakeven point calculator", "break even analysis"],
+  },
+  {
+    slug: "cost-reduction-calculator",
+    hub: "finance",
+    title: "Cost Reduction Calculator",
+    description: "Calculate savings amount and percentage cost reduction between two costs.",
+    keywords: ["cost reduction calculator", "cost savings calculator", "cost savings percentage calculator"],
   },
 ]
 

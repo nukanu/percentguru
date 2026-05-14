@@ -17,7 +17,7 @@ const relatedMap: Record<string, string[]> = {
   "percentage-increase-calculator": [
     "percentage-decrease-calculator",
     "percentage-change-calculator",
-    "percentage-difference-calculator",
+    "salary-increase-calculator",
   ],
   "percentage-decrease-calculator": [
     "percentage-increase-calculator",
@@ -27,7 +27,7 @@ const relatedMap: Record<string, string[]> = {
   "percentage-change-calculator": [
     "percentage-increase-calculator",
     "percentage-decrease-calculator",
-    "percentage-difference-calculator",
+    "annual-change-calculator",
   ],
   "percentage-difference-calculator": [
     "percentage-change-calculator",
@@ -52,7 +52,7 @@ const relatedMap: Record<string, string[]> = {
   "discount-calculator": [
     "percent-off-calculator",
     "markup-calculator",
-    "sales-tax-calculator",
+    "cost-reduction-calculator",
   ],
   "markup-calculator": [
     "discount-calculator",
@@ -61,8 +61,8 @@ const relatedMap: Record<string, string[]> = {
   ],
   "profit-margin-calculator": [
     "markup-calculator",
-    "discount-calculator",
-    "sales-tax-calculator",
+    "cost-reduction-calculator",
+    "roi-calculator",
   ],
   "sales-tax-calculator": [
     "discount-calculator",
@@ -93,6 +93,21 @@ const relatedMap: Record<string, string[]> = {
     "profit-margin-calculator",
     "roi-calculator",
     "markup-calculator",
+  ],
+  "salary-increase-calculator": [
+    "percentage-increase-calculator",
+    "percentage-change-calculator",
+    "annual-change-calculator",
+  ],
+  "annual-change-calculator": [
+    "percentage-change-calculator",
+    "salary-increase-calculator",
+    "percentage-increase-calculator",
+  ],
+  "cost-reduction-calculator": [
+    "percentage-decrease-calculator",
+    "profit-margin-calculator",
+    "discount-calculator",
   ],
 }
 
