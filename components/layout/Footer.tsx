@@ -46,7 +46,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <p className="mt-8 text-xs text-gray-400 text-center">
+        <p className="mt-8 text-xs text-gray-600 text-center">
           © {new Date().getFullYear()} PercentGuru. Free calculators for percentages, discounts, taxes, and financial calculations.
         </p>
       </div>

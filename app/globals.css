@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+article a, .prose a {
+  text-decoration: underline;
+}
+
 @keyframes resultFadeIn {
   from {
     opacity: 0;
