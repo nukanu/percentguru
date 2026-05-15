@@ -36,7 +36,7 @@ const faqs = [
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Percentage Change Calculator — % Change Formula",
-  description: "Calculate the percentage change between any two values. Shows direction (increase or decrease) and exact magnitude. Formula: ((New − Old) ÷ Old) × 100.",
+  description: "Calculate the percentage change between two values. Instantly shows if it went up or down, with formula and worked examples. Free.",
   path: "/percentage/percentage-change-calculator/",
   keywords: ["percentage change calculator", "percent change", "calculate percentage change"],
 })

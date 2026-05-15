@@ -37,7 +37,7 @@ const faqs = [
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Percentage Decrease Calculator — % Drop Formula",
-  description: "Calculate how much a value fell as a percentage. Enter before and after values — works for price drops, budget cuts, revenue declines, and any falling metric.",
+  description: "Calculate how much a value fell as a percentage. Works for price drops, budget cuts, revenue declines, and any falling metric. Free.",
   path: "/percentage/percentage-decrease-calculator/",
   keywords: ["percentage decrease calculator", "percent decrease", "how to calculate percentage decrease"],
 })

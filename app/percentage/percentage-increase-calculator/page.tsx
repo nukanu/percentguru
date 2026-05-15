@@ -50,7 +50,7 @@ const faqs = [
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Percentage Increase Calculator — Instant % Increase Formula",
-  description: "Calculate the percentage increase between any two numbers instantly. Enter an original and new value to get the exact % increase, formula, and step-by-step working. Free, no sign-up.",
+  description: "Find the percentage increase between two numbers instantly — formula, step-by-step working, and examples included. Free, no sign-up.",
   path: "/percentage/percentage-increase-calculator/",
   keywords: ["percentage increase calculator", "percent increase calculator", "calculate percentage increase", "how to calculate percentage increase", "figure out percentage increase"],
 })
@@ -101,6 +101,45 @@ export default function PercentageIncreasePage() {
           "Calculating how much a product or property value has risen",
         ]}
         faqs={faqs}
+        lookupTable={
+          <div>
+            <h2 className="text-lg font-bold text-gray-900 mb-3">Common Percentage Increases — Quick Reference</h2>
+            <p className="text-sm text-gray-600 mb-4">Common value pairs and their exact percentage increase, calculated with the formula above.</p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left py-2 pr-4 text-gray-600 font-semibold">Original</th>
+                    <th className="text-left py-2 pr-4 text-gray-600 font-semibold">New Value</th>
+                    <th className="text-left py-2 text-gray-600 font-semibold">% Increase</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {[
+                    [80, 100, "25%"],
+                    [50, 75, "50%"],
+                    [100, 110, "10%"],
+                    [100, 125, "25%"],
+                    [100, 150, "50%"],
+                    [100, 200, "100%"],
+                    [200, 250, "25%"],
+                    [40, 52, "30%"],
+                    [60, 80, "33.33%"],
+                    [1000, 1200, "20%"],
+                    [500, 600, "20%"],
+                    [25, 30, "20%"],
+                  ].map(([orig, nv, pct], i) => (
+                    <tr key={i} className="hover:bg-gray-50">
+                      <td className="py-2 pr-4 text-gray-700">{orig}</td>
+                      <td className="py-2 pr-4 text-gray-700">{nv}</td>
+                      <td className="py-2 font-semibold text-blue-700">{pct}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        }
       />
     </>
   )

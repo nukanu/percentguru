@@ -64,7 +64,7 @@ const faqs = [
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Fraction to Percent Calculator — Convert Any Fraction",
-  description: "Convert any fraction to a percentage instantly. Enter numerator and denominator — includes a reference table of common fractions like 1/2, 3/4, 2/3, and more.",
+  description: "Convert any fraction to a percentage instantly. 1/2 = 50%, 3/4 = 75%, 2/3 = 66.67%. Reference table included. Free.",
   path: "/percentage/fraction-to-percent-calculator/",
   keywords: ["fraction to percent calculator", "fraction to percentage", "convert fraction to percent", "what is 3/8 as a percent"],
 })

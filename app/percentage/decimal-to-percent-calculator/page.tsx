@@ -59,7 +59,7 @@ const faqs = [
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Decimal to Percent Calculator — Convert Any Decimal",
-  description: "Convert any decimal to a percentage instantly. Enter 0.75 to get 75%, 0.33 to get 33%, or any decimal — includes a reference table of common conversions.",
+  description: "Convert any decimal to a percentage instantly — 0.75 is 75%, 0.5 is 50%, 0.33 is 33%. Includes a reference table. Free.",
   path: "/percentage/decimal-to-percent-calculator/",
   keywords: ["decimal to percent calculator", "convert decimal to percentage", "decimal to percent", "0.75 as a percent"],
 })
