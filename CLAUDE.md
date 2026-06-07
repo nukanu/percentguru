@@ -108,6 +108,15 @@ If any section is missing → NOT complete
 
 ---
 
+## GUIDES / ARTICLES
+
+Before writing ANY guide or article (the `/guides/` section), you MUST read and
+follow `docs/guide-writing-standards.md`. Guides must never be thin or
+near-duplicate — that is what got the site rejected by AdSense. The criteria in
+that file apply automatically; the user does not need to restate them.
+
+---
+
 ## SEARCH INTENT
 
 Every page must solve a real user problem.
