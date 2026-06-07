@@ -14,6 +14,15 @@ export type GuideMeta = {
 
 export const guides: GuideMeta[] = [
   {
+    slug: "salary-to-hourly",
+    title: "Salary to Hourly: How to Work Out Your Real Hourly Rate",
+    description:
+      "Convert an annual salary to an hourly rate, then adjust for unpaid overtime, holiday, and commuting to find what you actually earn per hour — with worked examples.",
+    category: "Money",
+    published: "2026-06-07",
+    updated: "2026-06-07",
+  },
+  {
     slug: "percentage-increase-and-decrease",
     title: "Percentage Increase and Decrease, Explained with Examples",
     description:
