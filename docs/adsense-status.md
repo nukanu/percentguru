@@ -59,7 +59,7 @@ single canonical host with URLs that resolve 200 (no redirect chains).
 
 **Goal in ~2–4 weeks:**
 
-- **Indexed: ~66 pages** (grows as guides are added). That is the whole sitemap —
+- **Indexed: ~71 pages** (grows as guides are added). That is the whole sitemap —
   homepage + 2 hubs + 36 calculators + 23 curated answer pages + 4 trust pages
   (About, Contact, Privacy, Terms) + the /guides/ index and each guide article.
   This is the number that proves the cleanup worked.
@@ -69,14 +69,13 @@ single canonical host with URLs that resolve 200 (no redirect chains).
 
 **Snapshot 2026-06-07 (start point):** Indexed **1.55K**, Not indexed **3.01K**.
 The 1.55K is still mostly filler that Google hasn't re-crawled yet — it should
-fall steadily toward ~64. Re-apply to AdSense once Indexed is roughly **50–80**
+fall steadily toward ~71. Re-apply to AdSense once Indexed is roughly **50–80**
 (not before).
 
 **Don't be alarmed if total "Not indexed" stays high (3K+).** It is inflated by
 non-content URLs that are expected and harmless: old `www` URLs now redirecting
 to the apex, old non-trailing-slash URLs now redirecting, and duplicate/alternate
-variants. Those are normal. The only two numbers that matter are: **Indexed
-falling to ~64**, and **"Excluded by 'noindex'" rising to ~1,640**.
+variants. Those are normal. The only two numbers that matter are: **Indexed falling to ~71**, and **"Excluded by 'noindex'" rising to ~1,640**.
 
 ## Notes
 
