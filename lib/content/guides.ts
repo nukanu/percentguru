@@ -14,6 +14,15 @@ export type GuideMeta = {
 
 export const guides: GuideMeta[] = [
   {
+    slug: "percentage-increase-and-decrease",
+    title: "Percentage Increase and Decrease, Explained with Examples",
+    description:
+      "How to calculate a percentage increase or decrease, why successive changes don't add up, and how to reverse one to find the original — with shopping, salary, and stat examples.",
+    category: "Maths",
+    published: "2026-06-07",
+    updated: "2026-06-07",
+  },
+  {
     slug: "how-to-calculate-a-pay-raise",
     title: "How to Calculate a Pay Raise (and What Counts as a Good One)",
     description:
