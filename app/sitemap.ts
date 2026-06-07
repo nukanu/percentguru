@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
 import { calculators } from "@/lib/content/calculators"
-import { CURATED_ANSWER_SLUGS } from "@/app/percentage/[answer]/page"
+import { CURATED_ANSWER_SLUGS } from "@/lib/content/curated-answers"
 
 const BASE_URL = "https://percentguru.com"
 

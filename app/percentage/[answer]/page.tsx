@@ -2,8 +2,10 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { generatePageMetadata } from "@/lib/seo/metadata"
+import { faqSchema } from "@/lib/seo/schema"
 import Breadcrumb from "@/components/layout/Breadcrumb"
 import { fmt } from "@/lib/calculators/utils"
+import { CURATED_ANSWERS, CURATED_ANSWER_SLUGS } from "@/lib/content/curated-answers"
 
 // Pattern 1: what-is-20-percent-of-100
 const PERCENTS = [1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25, 30, 33, 35, 40, 50, 60, 66, 75, 80, 90]
@@ -24,36 +26,6 @@ const DECREASE_BASES = [10, 20, 25, 50, 100, 150, 200, 250, 300, 400, 500, 1000]
 // Pattern 5: what-is-20-percent-off-80
 const OFF_PERCENTS = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 65, 70, 75]
 const OFF_PRICES = [10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 65, 70, 75, 80, 90, 100, 120, 150, 175, 200, 250, 300, 400, 500, 750, 1000, 2000]
-
-// Curated set kept in Google's index — the only answer pages with proven search
-// demand (per Search Console impressions). Every other generated answer page is
-// noindexed to keep the site's content-quality ratio high. These curated slugs
-// are slated for full content expansion; the rest stay live for direct visitors.
-export const CURATED_ANSWER_SLUGS = new Set<string>([
-  "what-is-3-percent-of-400",
-  "what-is-25-percent-of-25",
-  "what-is-33-percent-of-50",
-  "what-is-3-percent-of-250",
-  "what-is-15-percent-of-350",
-  "what-is-1-percent-of-50",
-  "what-is-1-percent-of-20",
-  "what-is-33-percent-of-70",
-  "what-is-4-percent-of-15",
-  "what-is-75-percent-of-45",
-  "what-is-80-percent-of-70",
-  "what-is-60-percent-of-350",
-  "what-is-3-percent-of-150",
-  "what-is-80-percent-of-35",
-  "what-is-75-percent-of-35",
-  "what-is-4-percent-of-45",
-  "what-is-75-percent-of-15",
-  "what-is-3-percent-of-750",
-  "what-is-15-percent-off-150",
-  "what-is-3-percent-of-350",
-  "what-is-30-percent-of-175",
-  "what-is-33-percent-of-35",
-  "what-is-25-percent-of-40",
-])
 
 type ParsedAnswer =
   | { type: "whatIsXPctOfY"; p: number; n: number }
@@ -207,7 +179,7 @@ export default async function AnswerPage({
   if (!parsed) notFound()
 
   if (parsed.type === "whatIsXPctOfY") {
-    return <WhatIsXPctOfY p={parsed.p} n={parsed.n} />
+    return <WhatIsXPctOfY p={parsed.p} n={parsed.n} slug={answer} />
   }
   if (parsed.type === "xIsWhatPctOfY") {
     return <XIsWhatPctOfY part={parsed.part} whole={parsed.whole} />
@@ -218,10 +190,61 @@ export default async function AnswerPage({
   if (parsed.type === "pctDecreaseFrom") {
     return <PctDecreaseFrom p={parsed.p} base={parsed.base} />
   }
-  return <PctOff p={parsed.p} price={parsed.price} />
+  return <PctOff p={parsed.p} price={parsed.price} slug={answer} />
 }
 
-function WhatIsXPctOfY({ p, n }: { p: number; n: number }) {
+// Rich, hand-written sections rendered only on curated (indexed) answer pages.
+// Returns null for the noindexed long-tail pages, which keep the lean template.
+function CuratedSections({ slug }: { slug: string }) {
+  const content = CURATED_ANSWERS[slug]
+  if (!content) return null
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(content.faqs)) }}
+      />
+
+      <section className="mb-8">
+        <h2 className="text-lg font-bold text-gray-900 mb-3">Real-world examples</h2>
+        <div className="space-y-4">
+          {content.examples.map((ex) => (
+            <div key={ex.title} className="border border-gray-200 rounded-xl px-5 py-4">
+              <h3 className="font-semibold text-gray-900 mb-1">{ex.title}</h3>
+              <p className="text-gray-700 text-sm leading-relaxed">{ex.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-lg font-bold text-gray-900 mb-3">When you need this</h2>
+        <p className="text-gray-700 leading-relaxed">{content.useCase}</p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-lg font-bold text-gray-900 mb-3">Frequently asked questions</h2>
+        <div className="space-y-4">
+          {content.faqs.map((f) => (
+            <div key={f.question}>
+              <h3 className="font-semibold text-gray-900 mb-1">{f.question}</h3>
+              <p className="text-gray-700 text-sm leading-relaxed">{f.answer}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
+  )
+}
+
+function CuratedIntro({ slug }: { slug: string }) {
+  const content = CURATED_ANSWERS[slug]
+  if (!content) return null
+  return <p className="text-gray-700 leading-relaxed mb-8">{content.intro}</p>
+}
+
+function WhatIsXPctOfY({ p, n, slug }: { p: number; n: number; slug: string }) {
   const result = (p / 100) * n
   const resultFmt = fmt(result)
   const decimal = p / 100
@@ -253,6 +276,8 @@ function WhatIsXPctOfY({ p, n }: { p: number; n: number }) {
         <p className="text-5xl font-bold text-blue-700">{resultFmt}</p>
       </div>
 
+      <CuratedIntro slug={slug} />
+
       <section className="mb-8">
         <h2 className="text-lg font-bold text-gray-900 mb-3">How to calculate {p}% of {n}</h2>
         <ol className="space-y-2 text-gray-700 list-decimal list-inside">
@@ -263,6 +288,8 @@ function WhatIsXPctOfY({ p, n }: { p: number; n: number }) {
           {n} × {decimal} = {resultFmt}
         </div>
       </section>
+
+      <CuratedSections slug={slug} />
 
       <section className="mb-8 border border-gray-200 rounded-xl px-5 py-4 bg-gray-50">
         <p className="text-gray-700 text-sm">
@@ -587,7 +614,7 @@ function PctDecreaseFrom({ p, base }: { p: number; base: number }) {
   )
 }
 
-function PctOff({ p, price }: { p: number; price: number }) {
+function PctOff({ p, price, slug }: { p: number; price: number; slug: string }) {
   const savings = (p / 100) * price
   const salePrice = price - savings
   const saleFmt = fmt(salePrice)
@@ -621,6 +648,8 @@ function PctOff({ p, price }: { p: number; price: number }) {
         <p className="text-sm text-gray-500 mt-2">You save: {saveFmt}</p>
       </div>
 
+      <CuratedIntro slug={slug} />
+
       <section className="mb-8">
         <h2 className="text-lg font-bold text-gray-900 mb-3">How to calculate {p}% off {price}</h2>
         <ol className="space-y-2 text-gray-700 list-decimal list-inside">
@@ -631,6 +660,8 @@ function PctOff({ p, price }: { p: number; price: number }) {
           {price} × (1 − {p}/100) = {price} × {1 - p / 100} = {saleFmt}
         </div>
       </section>
+
+      <CuratedSections slug={slug} />
 
       <section className="mb-8 border border-gray-200 rounded-xl px-5 py-4 bg-gray-50">
         <p className="text-gray-700 text-sm">
