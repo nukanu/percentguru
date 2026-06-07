@@ -34,6 +34,32 @@ export function faqSchema(
   }
 }
 
+export function articleSchema({
+  headline,
+  description,
+  path,
+  datePublished,
+  dateModified,
+}: {
+  headline: string
+  description: string
+  path: string
+  datePublished: string
+  dateModified: string
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline,
+    description,
+    datePublished,
+    dateModified,
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${BASE_URL}${path}` },
+    author: { "@type": "Organization", name: "PercentGuru", url: BASE_URL },
+    publisher: { "@type": "Organization", name: "PercentGuru", url: BASE_URL },
+  }
+}
+
 export function breadcrumbSchema(
   crumbs: { name: string; href: string }[]
 ) {

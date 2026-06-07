@@ -48,6 +48,7 @@ export default function Footer() {
             <p className="font-semibold text-gray-700 mb-2">PercentGuru</p>
             <ul className="space-y-1">
               <li><Link href="/" className="hover:text-blue-600">Home</Link></li>
+              <li><Link href="/guides/" className="hover:text-blue-600">Guides</Link></li>
               <li><Link href="/about/" className="hover:text-blue-600">About</Link></li>
               <li><Link href="/contact/" className="hover:text-blue-600">Contact</Link></li>
               <li><Link href="/privacy-policy/" className="hover:text-blue-600">Privacy Policy</Link></li>

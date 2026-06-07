@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next"
 import { calculators } from "@/lib/content/calculators"
 import { CURATED_ANSWER_SLUGS } from "@/lib/content/curated-answers"
+import { guides } from "@/lib/content/guides"
 
 const BASE_URL = "https://percentguru.com"
 
@@ -22,6 +23,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
+  const guidePages = guides.map((g) => ({
+    url: `${BASE_URL}/guides/${g.slug}/`,
+    lastModified: new Date(g.updated),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }))
+
   return [
     {
       url: BASE_URL,
@@ -41,8 +49,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.9,
     },
+    {
+      url: `${BASE_URL}/guides/`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
     ...calculatorPages,
     ...answerPages,
+    ...guidePages,
     {
       url: `${BASE_URL}/about/`,
       lastModified: new Date(),

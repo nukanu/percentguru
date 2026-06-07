@@ -27,6 +27,9 @@ export default function Header() {
           <Link href="/finance/" className="hover:text-blue-600 transition-colors">
             Finance
           </Link>
+          <Link href="/guides/" className="hover:text-blue-600 transition-colors">
+            Guides
+          </Link>
         </nav>
       </div>
     </header>

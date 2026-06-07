@@ -59,9 +59,10 @@ single canonical host with URLs that resolve 200 (no redirect chains).
 
 **Goal in ~2–4 weeks:**
 
-- **Indexed: ~64 pages.** That is the whole sitemap — homepage + 2 hubs + 36
-  calculators + 23 curated answer pages + 4 trust pages (About, Contact,
-  Privacy, Terms). This is the number that proves the cleanup worked.
+- **Indexed: ~66 pages** (grows as guides are added). That is the whole sitemap —
+  homepage + 2 hubs + 36 calculators + 23 curated answer pages + 4 trust pages
+  (About, Contact, Privacy, Terms) + the /guides/ index and each guide article.
+  This is the number that proves the cleanup worked.
 - **Not indexed → "Excluded by 'noindex' tag": ~1,640+.** This is the filler
   Google has correctly dropped. Seeing this reason climb into the thousands is
   the positive signal, not a problem.
