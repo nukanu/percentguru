@@ -32,6 +32,14 @@ const faqs = [
     question: "How is the discount calculator different from the percent off calculator?",
     answer: "The percent off calculator is designed for shoppers — enter a price tag and a discount label to find savings. The discount calculator is oriented towards businesses — it also shows the discount amount but is better suited for invoice discounts and trade pricing contexts.",
   },
+  {
+    question: "What's the difference between simple and compound interest?",
+    answer: "Simple interest is charged only on the original amount — $1,000 at 5% earns $50 every year. Compound interest is charged on the balance including past interest, so it grows faster: $1,000 at 5% compounded annually earns $50 the first year, then $52.50 the next, and so on. Use the simple interest calculator for short-term or flat-rate figures, and the compound interest calculator for savings and long-term growth.",
+  },
+  {
+    question: "Is VAT the same as US sales tax?",
+    answer: "They both add a percentage to a price, but they work differently. Sales tax is added once, at the final sale to the customer. VAT is collected at each stage of the supply chain, and businesses reclaim the VAT they pay. For UK and EU prices use the VAT calculator; for US prices use the sales tax calculator. The arithmetic of adding the rate is identical — the difference is who collects it and when.",
+  },
 ]
 
 const decisionGuide = [
@@ -138,6 +146,47 @@ export default function FinancePage() {
         </section>
 
         <section className="mb-8">
+          <h2 className="text-base font-semibold text-gray-800 mb-3">Finance terms worth getting right</h2>
+          <p className="text-sm text-gray-600 mb-3">
+            A few of these calculations look similar but answer different questions. Getting them
+            confused is the most common source of pricing and budgeting mistakes.
+          </p>
+          <div className="space-y-3 text-sm">
+            <div>
+              <p className="font-semibold text-gray-800">Markup vs. profit margin</p>
+              <p className="text-gray-600">
+                Markup is measured against your <em>cost</em>; margin is measured against your{" "}
+                <em>selling price</em>. A 50% markup is only a 33% margin. Use the{" "}
+                <Link href="/finance/markup-calculator/" className="text-blue-600 hover:underline">markup calculator</Link>{" "}
+                to set a price from cost, and the{" "}
+                <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">profit margin calculator</Link>{" "}
+                to see what share of revenue you actually keep.
+              </p>
+            </div>
+            <div>
+              <p className="font-semibold text-gray-800">Simple vs. compound interest</p>
+              <p className="text-gray-600">
+                Simple interest is charged only on the starting amount; compound interest is
+                charged on the growing balance, so it accelerates over time. Short-term loans
+                often use{" "}
+                <Link href="/finance/interest-calculator/" className="text-blue-600 hover:underline">simple interest</Link>;
+                savings and long-term growth use{" "}
+                <Link href="/finance/compound-interest-calculator/" className="text-blue-600 hover:underline">compound interest</Link>.
+              </p>
+            </div>
+            <div>
+              <p className="font-semibold text-gray-800">Return on investment vs. profit margin</p>
+              <p className="text-gray-600">
+                ROI compares what you got back to what you <em>spent</em> (good for ad campaigns and
+                projects); margin compares profit to <em>revenue</em>. The{" "}
+                <Link href="/finance/roi-calculator/" className="text-blue-600 hover:underline">ROI calculator</Link>{" "}
+                answers “was this worth it?”, while margin answers “how profitable is each sale?”.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-8">
           <h2 className="text-lg font-semibold text-gray-800 mb-3">Personal Finance</h2>
           <p className="text-sm text-gray-500 mb-4">Mortgages, savings, salary, and loans — planning your own money.</p>
           <CalcList items={PERSONAL_FINANCE} />
@@ -153,6 +202,15 @@ export default function FinancePage() {
           <h2 className="text-lg font-semibold text-gray-800 mb-3">Investment &amp; Analysis</h2>
           <p className="text-sm text-gray-500 mb-4">ROI and break-even — measuring returns and viability.</p>
           <CalcList items={INVESTMENT} />
+        </section>
+
+        <section className="mb-8 bg-blue-50 border border-blue-100 rounded-xl px-5 py-4">
+          <p className="text-sm text-gray-700 leading-relaxed">
+            Every finance calculator here shows the formula it uses and worked examples, and is
+            checked by hand against known results. All tools are free, run in your browser, need no
+            sign-up, and store none of the figures you enter. Learn how we build them on the{" "}
+            <Link href="/about/" className="text-blue-600 hover:underline">about page</Link>.
+          </p>
         </section>
 
         <section className="mt-10 border-t border-gray-100 pt-8">

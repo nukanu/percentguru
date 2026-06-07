@@ -32,6 +32,14 @@ const faqs = [
     question: "How do I calculate a percentage increase in my head?",
     answer: "For 10%, move the decimal one place left (10% of $80 = $8). For 20%, double that ($16). For 5%, halve the 10% figure ($4). For 25%, divide by 4 ($20). These shortcuts work for any round percentage on any base.",
   },
+  {
+    question: "Why doesn't a 20% increase followed by a 20% decrease return to the original?",
+    answer: "Because the second percentage is taken from a larger number. Start at $100, add 20% → $120, then take 20% off $120 (which is $24, not $20) → $96. The increase and decrease are calculated from different bases, so they never cancel out exactly. The bigger the percentage, the bigger the gap.",
+  },
+  {
+    question: "What's the difference between a percentage and a percentage point?",
+    answer: "A percentage point is the plain difference between two percentages; a percent change is relative. If a rate rises from 10% to 12%, that is a 2 percentage-point increase — but a 20% relative increase (2 ÷ 10). News headlines often confuse the two. The percentage points calculator shows both side by side.",
+  },
 ]
 
 const decisionGuide = [
@@ -224,6 +232,15 @@ export default function PercentagePage() {
               )
             })}
           </div>
+        </section>
+
+        <section className="mb-8 bg-blue-50 border border-blue-100 rounded-xl px-5 py-4">
+          <p className="text-sm text-gray-700 leading-relaxed">
+            Every percentage calculator here shows the formula it uses and a worked example, and
+            is checked by hand against known results. All tools are free, run in your browser, and
+            need no sign-up. Learn how we build them on the{" "}
+            <Link href="/about/" className="text-blue-600 hover:underline">about page</Link>.
+          </p>
         </section>
 
         <section className="mt-10 border-t border-gray-100 pt-8">

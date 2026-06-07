@@ -253,6 +253,27 @@ export default function Home() {
         </p>
       </section>
 
+      {/* Why PercentGuru */}
+      <section className="mt-12 border-t border-gray-100 pt-8">
+        <h2 className="text-xl font-bold text-gray-800 mb-4">Why PercentGuru</h2>
+        <p className="text-sm text-gray-600 leading-relaxed mb-3">
+          Most calculators just hand you a number. PercentGuru shows the working: every tool
+          displays the formula it uses, walks through worked examples, and explains what the
+          result means — so you can check it, learn the method, and do it yourself next time.
+          The answer updates instantly as you type, and there are no pop-ups or pay-walls
+          between you and the result.
+        </p>
+        <p className="text-sm text-gray-600 leading-relaxed">
+          Every calculator is built in-house, uses the standard formula shown on its page, and
+          is verified against worked examples. The tools are completely free, run entirely in
+          your browser, need no account, and store none of the numbers you enter. You can read
+          more about how we build and check each one on the{" "}
+          <Link href="/about/" className="text-blue-600 hover:underline">about page</Link>, or
+          send a correction or request through the{" "}
+          <Link href="/contact/" className="text-blue-600 hover:underline">contact page</Link>.
+        </p>
+      </section>
+
     </div>
     </>
   )
