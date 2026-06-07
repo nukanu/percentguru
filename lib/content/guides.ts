@@ -14,6 +14,15 @@ export type GuideMeta = {
 
 export const guides: GuideMeta[] = [
   {
+    slug: "how-to-calculate-percentages",
+    title: "How to Calculate Percentages: The Complete Guide",
+    description:
+      "The three percentage problems that cover almost everything — finding a percent of a number, working out one number as a percent of another, and percentage change — explained with plain-English methods and worked examples.",
+    category: "Maths",
+    published: "2026-06-07",
+    updated: "2026-06-07",
+  },
+  {
     slug: "how-to-work-out-vat",
     title: "How to Work Out VAT: A Plain-English UK Guide",
     description:
