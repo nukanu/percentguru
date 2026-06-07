@@ -18,7 +18,7 @@ export function fmt(n: number, decimals = 4): string {
   return parseFloat(n.toFixed(decimals)).toString()
 }
 
-// Currency: always 2 decimal places
+// Currency: thousand separators, always 2 decimal places
 export function fmtMoney(n: number): string {
-  return n.toFixed(2)
+  return n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
