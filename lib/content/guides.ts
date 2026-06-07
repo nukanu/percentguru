@@ -14,6 +14,15 @@ export type GuideMeta = {
 
 export const guides: GuideMeta[] = [
   {
+    slug: "markup-vs-margin",
+    title: "Markup vs. Margin: The Difference Every Business Owner Should Know",
+    description:
+      "Markup and margin use the same two numbers but divide by different things — and confusing them quietly erodes profit. Here's the distinction, the formulas, a conversion table, and worked examples.",
+    category: "Business",
+    published: "2026-06-07",
+    updated: "2026-06-07",
+  },
+  {
     slug: "how-to-calculate-percentages",
     title: "How to Calculate Percentages: The Complete Guide",
     description:
