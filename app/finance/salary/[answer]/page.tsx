@@ -37,6 +37,7 @@ export async function generateMetadata({
     title: `$${salary.toLocaleString()} a Year is How Much an Hour? | PercentGuru`,
     description: `$${salary.toLocaleString()} a year is $${fmt2(hourly)} per hour based on a 40-hour week. See daily, weekly, and monthly breakdowns.`,
     alternates: { canonical: `https://percentguru.com/finance/salary/${answer}/` },
+    robots: { index: false, follow: true },
   }
 }
 

@@ -25,6 +25,36 @@ const DECREASE_BASES = [10, 20, 25, 50, 100, 150, 200, 250, 300, 400, 500, 1000]
 const OFF_PERCENTS = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 65, 70, 75]
 const OFF_PRICES = [10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 65, 70, 75, 80, 90, 100, 120, 150, 175, 200, 250, 300, 400, 500, 750, 1000, 2000]
 
+// Curated set kept in Google's index — the only answer pages with proven search
+// demand (per Search Console impressions). Every other generated answer page is
+// noindexed to keep the site's content-quality ratio high. These curated slugs
+// are slated for full content expansion; the rest stay live for direct visitors.
+export const CURATED_ANSWER_SLUGS = new Set<string>([
+  "what-is-3-percent-of-400",
+  "what-is-25-percent-of-25",
+  "what-is-33-percent-of-50",
+  "what-is-3-percent-of-250",
+  "what-is-15-percent-of-350",
+  "what-is-1-percent-of-50",
+  "what-is-1-percent-of-20",
+  "what-is-33-percent-of-70",
+  "what-is-4-percent-of-15",
+  "what-is-75-percent-of-45",
+  "what-is-80-percent-of-70",
+  "what-is-60-percent-of-350",
+  "what-is-3-percent-of-150",
+  "what-is-80-percent-of-35",
+  "what-is-75-percent-of-35",
+  "what-is-4-percent-of-45",
+  "what-is-75-percent-of-15",
+  "what-is-3-percent-of-750",
+  "what-is-15-percent-off-150",
+  "what-is-3-percent-of-350",
+  "what-is-30-percent-of-175",
+  "what-is-33-percent-of-35",
+  "what-is-25-percent-of-40",
+])
+
 type ParsedAnswer =
   | { type: "whatIsXPctOfY"; p: number; n: number }
   | { type: "xIsWhatPctOfY"; part: number; whole: number }
@@ -94,6 +124,12 @@ export async function generateMetadata({
   const parsed = parseSlug(answer)
   if (!parsed) return {}
 
+  const meta = buildAnswerMetadata(parsed, answer)
+  if (CURATED_ANSWER_SLUGS.has(answer)) return meta
+  return { ...meta, robots: { index: false, follow: true } }
+}
+
+function buildAnswerMetadata(parsed: ParsedAnswer, answer: string): Metadata {
   if (parsed.type === "whatIsXPctOfY") {
     const { p, n } = parsed
     const result = fmt((p / 100) * n)
