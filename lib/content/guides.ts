@@ -14,6 +14,15 @@ export type GuideMeta = {
 
 export const guides: GuideMeta[] = [
   {
+    slug: "how-to-calculate-a-pay-raise",
+    title: "How to Calculate a Pay Raise (and What Counts as a Good One)",
+    description:
+      "Work out the percentage of any pay rise, convert it to real take-home money, and judge it against inflation — with worked examples for hourly, monthly, and annual pay.",
+    category: "Money",
+    published: "2026-06-07",
+    updated: "2026-06-07",
+  },
+  {
     slug: "markup-vs-margin",
     title: "Markup vs. Margin: The Difference Every Business Owner Should Know",
     description:
