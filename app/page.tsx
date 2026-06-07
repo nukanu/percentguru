@@ -195,14 +195,14 @@ export default function Home() {
         <p className="text-sm text-gray-500 mb-4">Common percentage questions — tap for the full calculation.</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {[
-            { href: "/percentage/what-is-20-percent-of-50/", label: "20% of 50?" },
-            { href: "/percentage/what-is-10-percent-of-100/", label: "10% of 100?" },
-            { href: "/percentage/what-is-15-percent-of-200/", label: "15% of 200?" },
-            { href: "/percentage/what-is-25-percent-of-80/", label: "25% of 80?" },
-            { href: "/percentage/what-is-10-percent-off-50/", label: "10% off 50?" },
-            { href: "/percentage/what-is-20-percent-off-100/", label: "20% off 100?" },
-            { href: "/percentage/what-is-10-percent-increase-from-100/", label: "10% increase from 100?" },
-            { href: "/percentage/50-is-what-percent-of-200/", label: "50 is what % of 200?" },
+            { href: "/percentage/what-is-3-percent-of-400/", label: "3% of 400?" },
+            { href: "/percentage/what-is-15-percent-of-350/", label: "15% of 350?" },
+            { href: "/percentage/what-is-25-percent-of-40/", label: "25% of 40?" },
+            { href: "/percentage/what-is-80-percent-of-70/", label: "80% of 70?" },
+            { href: "/percentage/what-is-75-percent-of-45/", label: "75% of 45?" },
+            { href: "/percentage/what-is-33-percent-of-50/", label: "33% of 50?" },
+            { href: "/percentage/what-is-30-percent-of-175/", label: "30% of 175?" },
+            { href: "/percentage/what-is-15-percent-off-150/", label: "15% off 150?" },
           ].map(({ href, label }) => (
             <Link key={href} href={href} className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors text-center">
               {label}

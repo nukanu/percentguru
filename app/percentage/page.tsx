@@ -102,9 +102,11 @@ function CalcList({ items }: { items: CalcEntry[] }) {
   )
 }
 
+// Only link to curated (indexed, full-content) answer pages — never to the
+// noindexed long-tail filler pages.
 const quickLookups = [
-  { p: 10, n: 100 }, { p: 20, n: 100 }, { p: 25, n: 200 },
-  { p: 15, n: 50 }, { p: 30, n: 150 }, { p: 50, n: 80 },
+  { p: 3, n: 400 }, { p: 15, n: 350 }, { p: 25, n: 40 },
+  { p: 80, n: 70 }, { p: 75, n: 45 }, { p: 30, n: 175 },
 ]
 
 export default function PercentagePage() {

@@ -244,6 +244,49 @@ function CuratedIntro({ slug }: { slug: string }) {
   return <p className="text-gray-700 leading-relaxed mb-8">{content.intro}</p>
 }
 
+// Related links shown on curated (indexed) pages — point ONLY to other curated
+// pages, never to the noindexed filler. Rotates through the curated set so each
+// page links to a different handful.
+function curatedRelatedItems(currentSlug: string, limit = 6) {
+  const all = [...CURATED_ANSWER_SLUGS]
+  const start = all.indexOf(currentSlug) + 1
+  const items: { href: string; label: string; value: string }[] = []
+  for (let i = 0; i < all.length && items.length < limit; i++) {
+    const slug = all[(start + i) % all.length]
+    if (slug === currentSlug) continue
+    const parsed = parseSlug(slug)
+    if (!parsed) continue
+    if (parsed.type === "whatIsXPctOfY") {
+      items.push({ href: `/percentage/${slug}/`, label: `${parsed.p}% of ${parsed.n}`, value: fmt((parsed.p / 100) * parsed.n) })
+    } else if (parsed.type === "pctOff") {
+      items.push({ href: `/percentage/${slug}/`, label: `${parsed.p}% off ${parsed.price}`, value: fmt(parsed.price - (parsed.p / 100) * parsed.price) })
+    }
+  }
+  return items
+}
+
+function CuratedRelated({ slug }: { slug: string }) {
+  const items = curatedRelatedItems(slug)
+  if (items.length === 0) return null
+  return (
+    <section>
+      <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Related percentage calculations</h2>
+      <div className="grid grid-cols-3 gap-2">
+        {items.map(({ href, label, value }) => (
+          <Link
+            key={href}
+            href={href}
+            className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
+          >
+            <span className="text-xs text-gray-500">{label}</span>
+            <span className="font-bold text-gray-900 mt-0.5">{value}</span>
+          </Link>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 function WhatIsXPctOfY({ p, n, slug }: { p: number; n: number; slug: string }) {
   const result = (p / 100) * n
   const resultFmt = fmt(result)
@@ -301,37 +344,43 @@ function WhatIsXPctOfY({ p, n, slug }: { p: number; n: number; slug: string }) {
         </p>
       </section>
 
-      <section className="mb-8">
-        <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Other {p}% calculations</h2>
-        <div className="grid grid-cols-3 gap-2">
-          {relatedSamePercent.map(({ p: rp, n: rn, result: rr }) => (
-            <Link
-              key={`${rp}-${rn}`}
-              href={`/percentage/what-is-${rp}-percent-of-${rn}/`}
-              className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
-            >
-              <span className="text-xs text-gray-500">{rp}% of {rn}</span>
-              <span className="font-bold text-gray-900 mt-0.5">{rr}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
+      {CURATED_ANSWERS[slug] ? (
+        <CuratedRelated slug={slug} />
+      ) : (
+        <>
+          <section className="mb-8">
+            <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Other {p}% calculations</h2>
+            <div className="grid grid-cols-3 gap-2">
+              {relatedSamePercent.map(({ p: rp, n: rn, result: rr }) => (
+                <Link
+                  key={`${rp}-${rn}`}
+                  href={`/percentage/what-is-${rp}-percent-of-${rn}/`}
+                  className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
+                >
+                  <span className="text-xs text-gray-500">{rp}% of {rn}</span>
+                  <span className="font-bold text-gray-900 mt-0.5">{rr}</span>
+                </Link>
+              ))}
+            </div>
+          </section>
 
-      <section>
-        <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Other percentages of {n}</h2>
-        <div className="grid grid-cols-3 gap-2">
-          {relatedSameNumber.map(({ p: rp, n: rn, result: rr }) => (
-            <Link
-              key={`${rp}-${rn}`}
-              href={`/percentage/what-is-${rp}-percent-of-${rn}/`}
-              className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
-            >
-              <span className="text-xs text-gray-500">{rp}% of {rn}</span>
-              <span className="font-bold text-gray-900 mt-0.5">{rr}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
+          <section>
+            <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Other percentages of {n}</h2>
+            <div className="grid grid-cols-3 gap-2">
+              {relatedSameNumber.map(({ p: rp, n: rn, result: rr }) => (
+                <Link
+                  key={`${rp}-${rn}`}
+                  href={`/percentage/what-is-${rp}-percent-of-${rn}/`}
+                  className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
+                >
+                  <span className="text-xs text-gray-500">{rp}% of {rn}</span>
+                  <span className="font-bold text-gray-900 mt-0.5">{rr}</span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        </>
+      )}
     </article>
   )
 }
@@ -673,37 +722,43 @@ function PctOff({ p, price, slug }: { p: number; price: number; slug: string }) 
         </p>
       </section>
 
-      <section className="mb-8">
-        <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Other discounts on {price}</h2>
-        <div className="grid grid-cols-3 gap-2">
-          {relatedPercents.map(({ p: rp, price: rpr, salePrice: rs }) => (
-            <Link
-              key={`${rp}-${rpr}`}
-              href={`/percentage/what-is-${rp}-percent-off-${rpr}/`}
-              className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
-            >
-              <span className="text-xs text-gray-500">{rp}% off {rpr}</span>
-              <span className="font-bold text-gray-900 mt-0.5">{rs}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
+      {CURATED_ANSWERS[slug] ? (
+        <CuratedRelated slug={slug} />
+      ) : (
+        <>
+          <section className="mb-8">
+            <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Other discounts on {price}</h2>
+            <div className="grid grid-cols-3 gap-2">
+              {relatedPercents.map(({ p: rp, price: rpr, salePrice: rs }) => (
+                <Link
+                  key={`${rp}-${rpr}`}
+                  href={`/percentage/what-is-${rp}-percent-off-${rpr}/`}
+                  className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
+                >
+                  <span className="text-xs text-gray-500">{rp}% off {rpr}</span>
+                  <span className="font-bold text-gray-900 mt-0.5">{rs}</span>
+                </Link>
+              ))}
+            </div>
+          </section>
 
-      <section>
-        <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">{p}% off other prices</h2>
-        <div className="grid grid-cols-3 gap-2">
-          {relatedPrices.map(({ p: rp, price: rpr, salePrice: rs }) => (
-            <Link
-              key={`${rp}-${rpr}`}
-              href={`/percentage/what-is-${rp}-percent-off-${rpr}/`}
-              className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
-            >
-              <span className="text-xs text-gray-500">{rp}% off {rpr}</span>
-              <span className="font-bold text-gray-900 mt-0.5">{rs}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
+          <section>
+            <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">{p}% off other prices</h2>
+            <div className="grid grid-cols-3 gap-2">
+              {relatedPrices.map(({ p: rp, price: rpr, salePrice: rs }) => (
+                <Link
+                  key={`${rp}-${rpr}`}
+                  href={`/percentage/what-is-${rp}-percent-off-${rpr}/`}
+                  className="border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600 transition-colors flex flex-col"
+                >
+                  <span className="text-xs text-gray-500">{rp}% off {rpr}</span>
+                  <span className="font-bold text-gray-900 mt-0.5">{rs}</span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        </>
+      )}
     </article>
   )
 }
