@@ -55,6 +55,28 @@ single canonical host with URLs that resolve 200 (no redirect chains).
    re-read them for completeness before re-applying.
 4. **Re-apply to AdSense** only after 1–3 are done and the index has settled.
 
+## Target index ratio (what to watch in Search Console → Pages)
+
+**Goal in ~2–4 weeks:**
+
+- **Indexed: ~64 pages.** That is the whole sitemap — homepage + 2 hubs + 36
+  calculators + 23 curated answer pages + 4 trust pages (About, Contact,
+  Privacy, Terms). This is the number that proves the cleanup worked.
+- **Not indexed → "Excluded by 'noindex' tag": ~1,640+.** This is the filler
+  Google has correctly dropped. Seeing this reason climb into the thousands is
+  the positive signal, not a problem.
+
+**Snapshot 2026-06-07 (start point):** Indexed **1.55K**, Not indexed **3.01K**.
+The 1.55K is still mostly filler that Google hasn't re-crawled yet — it should
+fall steadily toward ~64. Re-apply to AdSense once Indexed is roughly **50–80**
+(not before).
+
+**Don't be alarmed if total "Not indexed" stays high (3K+).** It is inflated by
+non-content URLs that are expected and harmless: old `www` URLs now redirecting
+to the apex, old non-trailing-slash URLs now redirecting, and duplicate/alternate
+variants. Those are normal. The only two numbers that matter are: **Indexed
+falling to ~64**, and **"Excluded by 'noindex'" rising to ~1,640**.
+
 ## Notes
 
 - Do NOT try to enrich all ~1,600 long-tail pages — keep them noindexed.
