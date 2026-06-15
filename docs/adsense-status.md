@@ -40,6 +40,7 @@ so nobody clicked).
 | 2026-06-07 | Expanded all 23 curated pages with unique content: intro, two real-world worked examples, a "when you need this" section, and 2–3 unique FAQs each, plus FAQ JSON-LD. |
 | 2026-06-07 | Host canonicalization: `www` now 301-redirects to apex `percentguru.com` (was the reverse, 307). Set in Vercel by making the apex the primary domain. |
 | 2026-06-07 | Enabled `trailingSlash: true` so served URLs match the trailing-slash canonicals/sitemap (Next was 308-redirecting `/path/` → `/path`). |
+| 2026-06-15 | **Switched filler from noindex → deleted (404).** Set `dynamicParams = false` + a `PUBLISH_FILLER` flag (default `false`) on both `app/percentage/[answer]/page.tsx` and `app/finance/salary/[answer]/page.tsx`. Now only the 23 curated answer slugs build; every other answer/salary URL returns 404. Reason: noindex was propagating too slowly (GSC 6/12 showed only 2 pages "Excluded by noindex"); 404 is a cleaner delete signal. The generator code stays in the files as the archive — flip `PUBLISH_FILLER` to `true` to republish the full long-tail set. |
 
 Net result Google now sees: ~59 quality pages, **zero thin pages indexed**, on a
 single canonical host with URLs that resolve 200 (no redirect chains).

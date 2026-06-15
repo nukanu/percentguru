@@ -20,7 +20,14 @@ function fmt2(n: number) {
   return n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
 
+// All salary pages are filler. With dynamicParams=false + an empty list, every
+// salary URL 404s ("deleted" from Google). Flip PUBLISH_FILLER to true to
+// republish — SALARIES above is the preserved archive.
+export const dynamicParams = false
+const PUBLISH_FILLER = false
+
 export async function generateStaticParams() {
+  if (!PUBLISH_FILLER) return []
   return SALARIES.map((s) => ({ answer: `${s}-a-year-is-how-much-an-hour` }))
 }
 

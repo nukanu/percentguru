@@ -68,7 +68,16 @@ function parseSlug(answer: string): ParsedAnswer | null {
   return null
 }
 
+// Build ONLY the slugs in generateStaticParams; any other slug 404s (the filler
+// pages are "deleted" from Google's view). Flip PUBLISH_FILLER to true to bring
+// the full long-tail set back — the generator below is the preserved archive.
+export const dynamicParams = false
+const PUBLISH_FILLER = false
+
 export function generateStaticParams() {
+  const curated = [...CURATED_ANSWER_SLUGS].map((answer) => ({ answer }))
+  if (!PUBLISH_FILLER) return curated
+
   const type1 = PERCENTS.flatMap((p) =>
     NUMBERS.map((n) => ({ answer: `what-is-${p}-percent-of-${n}` }))
   )
