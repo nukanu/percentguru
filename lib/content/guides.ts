@@ -14,6 +14,15 @@ export type GuideMeta = {
 
 export const guides: GuideMeta[] = [
   {
+    slug: "how-to-calculate-your-grade",
+    title: "How to Calculate Your Grade: Test Scores, Weighted Grades, and Finals",
+    description:
+      "Turn any test score into a percentage and letter grade, combine weighted coursework and exams, and work out exactly what you need on the final — with worked examples and a grade-band table.",
+    category: "Study",
+    published: "2026-07-26",
+    updated: "2026-07-26",
+  },
+  {
     slug: "how-to-calculate-a-discount",
     title: "How to Calculate a Discount (Percent Off, Reversed, and Stacked)",
     description:
