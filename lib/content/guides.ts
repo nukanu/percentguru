@@ -14,6 +14,15 @@ export type GuideMeta = {
 
 export const guides: GuideMeta[] = [
   {
+    slug: "how-to-calculate-a-discount",
+    title: "How to Calculate a Discount (Percent Off, Reversed, and Stacked)",
+    description:
+      "Work out any sale price in one step, reverse a discount to find the original, and see why 30% off then 20% off is not 50% off — with worked examples and a quick-reference table.",
+    category: "Shopping",
+    published: "2026-07-26",
+    updated: "2026-07-26",
+  },
+  {
     slug: "salary-to-hourly",
     title: "Salary to Hourly: How to Work Out Your Real Hourly Rate",
     description:
