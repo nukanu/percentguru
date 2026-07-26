@@ -5,6 +5,7 @@ import { softwareApplicationSchema, faqSchema } from "@/lib/seo/schema"
 import CalculatorShell from "@/components/calculator/CalculatorShell"
 import Breadcrumb from "@/components/layout/Breadcrumb"
 import SalaryIncreaseWidget from "./CalculatorWidget"
+import RaiseComparisonWidget from "./RaiseComparisonWidget"
 
 const faqs = [
   {
@@ -20,6 +21,14 @@ const faqs = [
     answer: "10% of $50,000 is $5,000. Your new salary would be $55,000 per year, or roughly $416 more per month before tax.",
   },
   {
+    question: "Is a 3% raise good if inflation is 4%?",
+    answer: "In real terms, no — it's a pay cut. A 3% raise against 4% inflation works out to a real change of about −0.96% per year: your salary number goes up, but it buys less than it did. Use the scenario comparison on this page with the inflation field filled in to see the real value of any offer.",
+  },
+  {
+    question: "How much difference does a 2% bigger annual raise make over 5 years?",
+    answer: "Far more than it sounds, because raises compound. On a $60,000 salary, 5% annual raises reach $76,577 after 5 years, while 3% raises reach $69,556 — a gap of about $7,000 per year, and roughly $20,000 in extra total pay accumulated along the way. This is why negotiating even one extra percentage point matters.",
+  },
+  {
     question: "How do I ask for a raise using a specific percentage?",
     answer: "Know the market rate for your role first, then calculate what percentage increase you need to match it. For example, if market rate is $75,000 and you earn $68,000, that's roughly a 10.3% gap — that number makes a concrete, data-driven request.",
   },
@@ -30,10 +39,10 @@ const faqs = [
 ]
 
 export const metadata: Metadata = generatePageMetadata({
-  title: "Salary Increase Calculator — Calculate Your Raise Instantly",
-  description: "Enter your current salary and raise percentage to see exactly how much more you'll earn. Works for annual, monthly, or hourly pay.",
+  title: "Salary Increase Calculator — Raise Amount & Scenario Comparison",
+  description: "See what a raise adds to your pay, then compare two raise scenarios over multiple years — with inflation adjustment — to know what an offer is really worth.",
   path: "/percentage/salary-increase-calculator/",
-  keywords: ["salary increase calculator", "raise calculator", "percentage raise calculator", "calculate salary increase", "salary raise percentage"],
+  keywords: ["salary increase calculator", "raise calculator", "percentage raise calculator", "compare raise offers", "real raise after inflation", "salary raise percentage"],
 })
 
 export default function SalaryIncreasePage() {
@@ -41,7 +50,7 @@ export default function SalaryIncreasePage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSchema("Salary Increase Calculator", "Calculate how much a percentage raise adds to your annual salary.")) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSchema("Salary Increase Calculator", "Calculate how much a percentage raise adds to your annual salary, and compare two raise scenarios over time with inflation adjustment.")) }}
       />
       <script
         type="application/ld+json"
@@ -60,6 +69,15 @@ export default function SalaryIncreasePage() {
         intro={<>Enter your current salary and raise percentage to instantly see the dollar amount of your raise and your new annual salary. Useful before a performance review, when comparing job offers, or when checking whether a raise keeps pace with inflation. For context on how your raise compares to the starting point, see the <Link href="/percentage/percentage-increase-calculator/" className="text-blue-600 hover:underline">percentage increase calculator</Link>.</>}
         whenToUse="Use this before a salary negotiation to set a concrete target, or after receiving a raise offer to see what it means in actual dollars. Also handy for HR professionals calculating team compensation changes."
         calculator={<SalaryIncreaseWidget />}
+        secondaryTool={
+          <section className="mt-10">
+            <h2 className="text-xl font-bold text-gray-900 mb-2">Compare Two Raise Scenarios Over Time</h2>
+            <p className="text-gray-700 mb-4 leading-relaxed text-sm">
+              A single-year raise number hides what actually matters: raises compound. The difference between 3% and 5% looks like pocket change in year one, but repeated annually it becomes a five-figure gap. Enter two scenarios — a raise you were offered vs the one you&apos;re asking for, or two competing job offers — and see the salaries side by side after any number of years. Add expected inflation to see each raise in real purchasing-power terms, which is the honest way to judge whether an offer is a raise at all. The copy-link button gives you a URL that reopens this exact comparison — useful mid-negotiation.
+            </p>
+            <RaiseComparisonWidget />
+          </section>
+        }
         howTo={[
           "Enter your current salary (annual, monthly, or hourly — any unit works).",
           "Enter the raise percentage — for example, 5 for a 5% raise.",

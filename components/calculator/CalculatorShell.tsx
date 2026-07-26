@@ -20,6 +20,7 @@ type CalculatorShellProps = {
   useCases: string[]
   faqs: FAQ[]
   lookupTable?: React.ReactNode
+  secondaryTool?: React.ReactNode
 }
 
 export default function CalculatorShell({
@@ -35,6 +36,7 @@ export default function CalculatorShell({
   useCases,
   faqs,
   lookupTable,
+  secondaryTool,
 }: CalculatorShellProps) {
   const relatedSlugs = getRelatedSlugs(slug)
   const relatedCalculators = relatedSlugs
@@ -55,6 +57,8 @@ export default function CalculatorShell({
         {calculator}
         <p className="text-xs text-gray-500 mt-3">Results are instant — nothing is stored and no account is needed.</p>
       </section>
+
+      {secondaryTool}
 
       {relatedCalculators.length > 0 && (
         <section className="mt-8">

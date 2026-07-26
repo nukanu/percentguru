@@ -6,6 +6,18 @@ export function discountedPrice(original: number, discountPct: number): number {
   return original - discountAmount(original, discountPct)
 }
 
+// Stacked discounts apply sequentially (30% + extra 10% = 37% total, not 40%);
+// a dollar coupon is applied last, after all percentage discounts.
+export function stackedDealPrice(
+  price: number,
+  discountPct: number,
+  extraDiscountPct: number,
+  couponOff: number
+): number {
+  const afterDiscounts = price * (1 - discountPct / 100) * (1 - extraDiscountPct / 100)
+  return Math.max(0, afterDiscounts - couponOff)
+}
+
 export function markupAmount(cost: number, markupPct: number): number {
   return (markupPct / 100) * cost
 }

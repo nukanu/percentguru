@@ -48,6 +48,34 @@ export function newSalary(current: number, raisePct: number): number {
   return current + salaryRaiseAmount(current, raisePct)
 }
 
+export function compoundedSalary(current: number, annualRaisePct: number, years: number): number {
+  return current * Math.pow(1 + annualRaisePct / 100, years)
+}
+
+// Total pay earned over the projection, with the raise applied at the start of each year
+export function cumulativeEarnings(current: number, annualRaisePct: number, years: number): number {
+  let total = 0
+  let salary = current
+  for (let y = 0; y < years; y++) {
+    salary = salary * (1 + annualRaisePct / 100)
+    total += salary
+  }
+  return total
+}
+
+// Inflation-adjusted raise: (1 + raise) / (1 + inflation) − 1
+export function realRaisePct(raisePct: number, inflationPct: number): number {
+  return ((1 + raisePct / 100) / (1 + inflationPct / 100) - 1) * 100
+}
+
+// Score needed on the final exam to reach a desired overall grade.
+// Can return values above 100 (target unreachable) or below 0 (already secured).
+export function neededFinalScore(currentPct: number, desiredPct: number, finalWeightPct: number): number {
+  const w = finalWeightPct / 100
+  if (w <= 0) return Infinity
+  return (desiredPct - currentPct * (1 - w)) / w
+}
+
 export function cagr(startValue: number, endValue: number, years: number): number {
   if (startValue <= 0 || years <= 0) return 0
   return (Math.pow(endValue / startValue, 1 / years) - 1) * 100
