@@ -64,6 +64,7 @@ const DESCRIPTIONS: Record<string, string> = {
   // Finance
   "discount-calculator": "See how much you save and what you'll pay",
   "markup-calculator": "Price from cost with a target markup",
+  "wholesale-price-calculator": "Wholesale and retail prices from your cost",
   "profit-margin-calculator": "Revenue and cost — into a margin percentage",
   "sales-tax-calculator": "Add any tax rate to a price — works for VAT too",
   "roi-calculator": "Return % and net gain on any investment",

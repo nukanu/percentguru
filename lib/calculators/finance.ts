@@ -35,6 +35,11 @@ export function costFromMarkup(price: number, markupPct: number): number {
   return price / (1 + markupPct / 100)
 }
 
+// What a retailer pays when they keep marginPct of the retail price.
+export function wholesaleFromRetail(retail: number, marginPct: number): number {
+  return retail * (1 - marginPct / 100)
+}
+
 export function profitMargin(revenue: number, cost: number): number {
   if (revenue === 0) return 0
   return ((revenue - cost) / revenue) * 100

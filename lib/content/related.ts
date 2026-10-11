@@ -60,9 +60,15 @@ const relatedMap: Record<string, string[]> = {
     "cost-reduction-calculator",
   ],
   "markup-calculator": [
-    "discount-calculator",
+    "wholesale-price-calculator",
     "profit-margin-calculator",
+    "discount-calculator",
     "sales-tax-calculator",
+  ],
+  "wholesale-price-calculator": [
+    "markup-calculator",
+    "profit-margin-calculator",
+    "break-even-calculator",
   ],
   "profit-margin-calculator": [
     "markup-calculator",

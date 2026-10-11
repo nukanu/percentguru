@@ -183,6 +183,13 @@ export const calculators: CalculatorConfig[] = [
     keywords: ["break-even calculator", "breakeven point calculator", "break even analysis"],
   },
   {
+    slug: "wholesale-price-calculator",
+    hub: "finance",
+    title: "Wholesale Price Calculator",
+    description: "Set wholesale and retail prices from your cost, or work back from a retail price.",
+    keywords: ["wholesale price calculator", "wholesale to retail price calculator", "how to calculate wholesale price"],
+  },
+  {
     slug: "cost-reduction-calculator",
     hub: "finance",
     title: "Cost Reduction Calculator",
