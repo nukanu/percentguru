@@ -26,6 +26,15 @@ export function markupPrice(cost: number, markupPct: number): number {
   return cost + markupAmount(cost, markupPct)
 }
 
+export function markupPercent(cost: number, price: number): number {
+  if (cost === 0) return 0
+  return ((price - cost) / cost) * 100
+}
+
+export function costFromMarkup(price: number, markupPct: number): number {
+  return price / (1 + markupPct / 100)
+}
+
 export function profitMargin(revenue: number, cost: number): number {
   if (revenue === 0) return 0
   return ((revenue - cost) / revenue) * 100
