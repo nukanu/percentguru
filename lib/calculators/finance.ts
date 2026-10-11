@@ -40,6 +40,11 @@ export function wholesaleFromRetail(retail: number, marginPct: number): number {
   return retail * (1 - marginPct / 100)
 }
 
+// Listing price that still leaves `net` after a fee taken as a share of the price.
+export function priceBeforeFee(net: number, feePct: number): number {
+  return net / (1 - feePct / 100)
+}
+
 export function profitMargin(revenue: number, cost: number): number {
   if (revenue === 0) return 0
   return ((revenue - cost) / revenue) * 100

@@ -67,7 +67,13 @@ const relatedMap: Record<string, string[]> = {
   ],
   "wholesale-price-calculator": [
     "markup-calculator",
+    "handmade-pricing-calculator",
     "profit-margin-calculator",
+    "break-even-calculator",
+  ],
+  "handmade-pricing-calculator": [
+    "wholesale-price-calculator",
+    "markup-calculator",
     "break-even-calculator",
   ],
   "profit-margin-calculator": [

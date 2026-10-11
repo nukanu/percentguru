@@ -190,6 +190,13 @@ export const calculators: CalculatorConfig[] = [
     keywords: ["wholesale price calculator", "wholesale to retail price calculator", "how to calculate wholesale price"],
   },
   {
+    slug: "handmade-pricing-calculator",
+    hub: "finance",
+    title: "Handmade Pricing Calculator",
+    description: "Price handmade items from materials, your time, overheads and selling fees.",
+    keywords: ["handmade pricing calculator", "craft pricing calculator", "how to price handmade items"],
+  },
+  {
     slug: "cost-reduction-calculator",
     hub: "finance",
     title: "Cost Reduction Calculator",
