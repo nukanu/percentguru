@@ -73,6 +73,7 @@ const BUSINESS_PRICING: CalcEntry[] = [
   { slug: "profit-margin-calculator", title: "Profit Margin Calculator", description: "Gross margin as a percentage from revenue and cost." },
   { slug: "wholesale-price-calculator", title: "Wholesale Price Calculator", description: "Wholesale and retail prices from your cost, or back from a retail price." },
   { slug: "handmade-pricing-calculator", title: "Handmade Pricing Calculator", description: "A price for handmade items from materials, time, overheads and fees." },
+  { slug: "ebay-fee-calculator", title: "eBay Fee Calculator", description: "eBay fees, payout and profit on a US sale, by category." },
   { slug: "sales-tax-calculator", title: "Sales Tax Calculator", description: "Add any tax rate to a price — works for US sales tax." },
   { slug: "vat-calculator", title: "VAT Calculator", description: "Add or remove VAT at any rate, including UK 20%, 5%, and custom rates." },
   { slug: "cost-reduction-calculator", title: "Cost Reduction Calculator", description: "Savings amount and percentage cost reduction between two costs." },

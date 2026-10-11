@@ -81,6 +81,7 @@ const DESCRIPTIONS: Record<string, string> = {
   "markup-calculator": "Cost, markup or price — enter two, get the third",
   "wholesale-price-calculator": "Wholesale and retail prices from your cost",
   "handmade-pricing-calculator": "Price handmade items from materials and your time",
+  "ebay-fee-calculator": "eBay fees, payout and profit on a US sale",
   "profit-margin-calculator": "Profit, margin and percent profit on cost",
   "sales-tax-calculator": "Add any tax rate to a price — works for VAT too",
   "roi-calculator": "Return % and net gain on any investment",

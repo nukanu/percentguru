@@ -26,6 +26,7 @@ const steps = [
 ]
 
 const more = [
+  { title: "eBay Fee Calculator", href: "/finance/ebay-fee-calculator/", description: "What eBay keeps from a US sale, what you receive, and the price that hits a profit target." },
   { title: "VAT Calculator", href: "/finance/vat-calculator/", description: "Add or remove VAT so you price on the figure before tax." },
   { title: "Sales Tax Calculator", href: "/finance/sales-tax-calculator/", description: "Add US sales tax to a price, or see the tax in a total." },
   { title: "ROI Calculator", href: "/finance/roi-calculator/", description: "Return on the money tied up in stock, tools or advertising." },
@@ -107,7 +108,7 @@ export default function PricingHubPage() {
           ))}
         </ul>
 
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Tax, returns and costs</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-4">Fees, tax, returns and costs</h2>
         <ul className="space-y-2 mb-10">
           {more.map((m) => (
             <li key={m.href} className="text-sm text-gray-700">

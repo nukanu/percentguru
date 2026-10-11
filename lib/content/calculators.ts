@@ -197,6 +197,13 @@ export const calculators: CalculatorConfig[] = [
     keywords: ["handmade pricing calculator", "craft pricing calculator", "how to price handmade items"],
   },
   {
+    slug: "ebay-fee-calculator",
+    hub: "finance",
+    title: "eBay Fee Calculator",
+    description: "eBay final value fees, what you receive and your profit on a US sale.",
+    keywords: ["ebay fee calculator", "ebay profit calculator", "ebay final value fee calculator"],
+  },
+  {
     slug: "cost-reduction-calculator",
     hub: "finance",
     title: "Cost Reduction Calculator",
