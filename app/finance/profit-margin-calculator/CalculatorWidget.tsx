@@ -17,11 +17,14 @@ export default function ProfitMarginWidget() {
 
   const margin = hasInput ? profitMargin(parseFloat(revenue), parseFloat(cost)) : null
   const profit = hasInput ? parseFloat(revenue) - parseFloat(cost) : null
+  // Profit as a percentage of cost — what many people mean by "percent profit".
+  const markup = hasInput && parseFloat(cost) > 0 && profit !== null ? (profit / parseFloat(cost)) * 100 : null
   const marginFormatted = margin !== null ? fmt(margin) : null
+  const markupFormatted = markup !== null ? fmt(markup) : null
   const profitFormatted = profit !== null ? fmtMoney(profit) : null
 
   const quickAnswer = hasInput && margin !== null && profit !== null
-    ? `Gross profit is $${profitFormatted} — a ${marginFormatted}% profit margin`
+    ? `Gross profit is $${profitFormatted} — a ${marginFormatted}% profit margin${markupFormatted !== null ? ` (${markupFormatted}% of cost)` : ""}`
     : null
 
   return (
@@ -46,7 +49,8 @@ export default function ProfitMarginWidget() {
         />
       </div>
       <div className="grid sm:grid-cols-2 gap-3 mt-5">
-        <ResultBlock label="Profit Margin" value={marginFormatted !== null ? `${marginFormatted}%` : null} />
+        <ResultBlock label="Profit Margin (% of price)" value={marginFormatted !== null ? `${marginFormatted}%` : null} />
+        <ResultBlock label="Profit on Cost (markup)" value={markupFormatted !== null ? `${markupFormatted}%` : null} />
         <ResultBlock label="Gross Profit" value={profitFormatted !== null ? `$${profitFormatted}` : null} />
       </div>
       <QuickAnswer text={quickAnswer} />
