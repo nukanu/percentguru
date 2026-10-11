@@ -45,6 +45,8 @@ const faqs = [
 const decisionGuide = [
   { question: "Setting a product price from cost", tool: "Markup Calculator", href: "/finance/markup-calculator/" },
   { question: "Measuring profit as % of revenue", tool: "Profit Margin Calculator", href: "/finance/profit-margin-calculator/" },
+  { question: "Setting a wholesale and a retail price", tool: "Wholesale Price Calculator", href: "/finance/wholesale-price-calculator/" },
+  { question: "Pricing something you make by hand", tool: "Handmade Pricing Calculator", href: "/finance/handmade-pricing-calculator/" },
   { question: "Calculating monthly mortgage payment", tool: "Mortgage Calculator", href: "/finance/mortgage-calculator/" },
   { question: "Projecting savings growth over time", tool: "Savings Calculator", href: "/finance/savings-calculator/" },
   { question: "Converting annual salary to hourly rate", tool: "Salary to Hourly", href: "/finance/salary-to-hourly-calculator/" },

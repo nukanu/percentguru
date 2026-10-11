@@ -7,7 +7,7 @@ const websiteSchema = {
   "@type": "WebSite",
   name: "PercentGuru",
   url: "https://percentguru.com",
-  description: "Free percentage and finance calculators — instant results, no sign-up required.",
+  description: "Free pricing, profit and percentage calculators — instant results, no sign-up required.",
 }
 
 const organizationSchema = {
@@ -15,32 +15,32 @@ const organizationSchema = {
   "@type": "Organization",
   name: "PercentGuru",
   url: "https://percentguru.com",
-  description: "Free online percentage and finance calculators.",
+  description: "Free online pricing, profit and percentage calculators.",
 }
 
 export const metadata: Metadata = {
-  title: "PercentGuru — Free Percentage & Finance Calculators",
+  title: "PercentGuru — Free Pricing, Profit & Percentage Calculators",
   description:
-    "Free percentage and finance calculators — percentage increase, discount, profit margin, VAT, GPA, loan payments, ROI, and more. Instant results, no account needed.",
+    "Free calculators for pricing and profit — markup, margin, wholesale, break-even — plus percentage, discount, VAT and loan tools. Instant results, no account needed.",
   alternates: { canonical: "https://percentguru.com/" },
   openGraph: {
-    title: "PercentGuru — Percentage & Finance Calculators",
+    title: "PercentGuru — Pricing, Profit & Percentage Calculators",
     description:
-      "Calculate percentages, discounts, profit margins, loan payments, ROI, and more. Instant results, no account needed.",
+      "Price a product, check your margin and work out any percentage. Instant results, no account needed.",
     url: "https://percentguru.com/",
     siteName: "PercentGuru",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "PercentGuru — Free Percentage & Finance Calculators",
+    title: "PercentGuru — Free Pricing, Profit & Percentage Calculators",
     description:
-      "Free percentage and finance calculators — percentage increase, discount, profit margin, VAT, GPA, loan payments, ROI, and more. Instant results, no account needed.",
+      "Free calculators for pricing and profit — markup, margin, wholesale, break-even — plus percentage, discount, VAT and loan tools. Instant results, no account needed.",
   },
 }
 
 const FEATURED = [
-  { slug: "discount-calculator", hub: "finance" },
+  { slug: "percentage-calculator", hub: "percentage" },
   { slug: "what-is-x-percent-of-y", hub: "percentage" },
   { slug: "mortgage-calculator", hub: "finance" },
   { slug: "percentage-increase-calculator", hub: "percentage" },
@@ -49,6 +49,21 @@ const FEATURED = [
   { slug: "salary-to-hourly-calculator", hub: "finance" },
   { slug: "percentage-change-calculator", hub: "percentage" },
 ] as const
+
+const PRICING = [
+  "markup-calculator",
+  "profit-margin-calculator",
+  "wholesale-price-calculator",
+  "handmade-pricing-calculator",
+  "break-even-calculator",
+  "discount-calculator",
+] as const
+
+const PRICING_GUIDES = [
+  { href: "/guides/how-to-calculate-markup/", label: "How to calculate markup" },
+  { href: "/guides/how-to-calculate-profit-margin/", label: "How to calculate profit margin" },
+  { href: "/guides/markup-vs-margin/", label: "Markup vs. margin" },
+]
 
 const DESCRIPTIONS: Record<string, string> = {
   // Percentage
@@ -63,16 +78,16 @@ const DESCRIPTIONS: Record<string, string> = {
   "reverse-percentage-calculator": "Find the original before a % was applied",
   // Finance
   "discount-calculator": "See how much you save and what you'll pay",
-  "markup-calculator": "Price from cost with a target markup",
+  "markup-calculator": "Cost, markup or price — enter two, get the third",
   "wholesale-price-calculator": "Wholesale and retail prices from your cost",
   "handmade-pricing-calculator": "Price handmade items from materials and your time",
-  "profit-margin-calculator": "Revenue and cost — into a margin percentage",
+  "profit-margin-calculator": "Profit, margin and percent profit on cost",
   "sales-tax-calculator": "Add any tax rate to a price — works for VAT too",
   "roi-calculator": "Return % and net gain on any investment",
   "interest-calculator": "Simple interest earned or owed over time",
   "loan-payment-calculator": "Monthly repayment and total interest on any loan",
   "weighted-average-calculator": "Average values that don't carry equal weight",
-  "break-even-calculator": "How many units to sell before you cover costs?",
+  "break-even-calculator": "Units to cover your costs or hit a profit target",
   "tip-calculator": "Bill amount + tip % — instant total and per-person split",
   "salary-increase-calculator": "See how much a raise adds in dollars and new total",
   "annual-change-calculator": "CAGR and total change over any number of years",
@@ -93,7 +108,7 @@ function CalcLink({ href, title, description }: { href: string; title: string; d
   return (
     <Link
       href={href}
-      className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors group"
+      className="flex items-center justify-between min-w-0 p-3 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors group"
     >
       <span className="min-w-0">
         <span className="block text-gray-700 group-hover:text-blue-700 font-medium">{title}</span>
@@ -114,6 +129,11 @@ export default function Home() {
     return calc ? { slug, title: calc.title, href: `/${hub}/${slug}/` } : null
   }).filter(Boolean) as { slug: string; title: string; href: string }[]
 
+  const pricing = PRICING.map((slug) => {
+    const calc = getCalculator(slug)
+    return calc ? { slug, title: calc.title, href: `/${calc.hub}/${slug}/` } : null
+  }).filter(Boolean) as { slug: string; title: string; href: string }[]
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
@@ -123,20 +143,45 @@ export default function Home() {
       {/* Hero */}
       <section className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Free Percentage &amp; Finance Calculators
+          Free Pricing, Profit &amp; Percentage Calculators
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-3">
-          {calculators.length} free calculators for{" "}
+          {calculators.length} free calculators. Price a product with{" "}
+          <Link href="/finance/markup-calculator/" className="text-blue-600 hover:underline">markup</Link>, check your{" "}
+          <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">profit margin</Link>, set a{" "}
+          <Link href="/finance/wholesale-price-calculator/" className="text-blue-600 hover:underline">wholesale price</Link>, or work out any{" "}
           <Link href="/percentage/percentage-increase-calculator/" className="text-blue-600 hover:underline">percentage increase</Link>,{" "}
-          <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discounts</Link>,{" "}
-          <Link href="/finance/vat-calculator/" className="text-blue-600 hover:underline">VAT</Link>,{" "}
-          <Link href="/percentage/gpa-calculator/" className="text-blue-600 hover:underline">GPA</Link>,{" "}
-          <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">profit margins</Link>,{" "}
-          <Link href="/finance/loan-payment-calculator/" className="text-blue-600 hover:underline">loan payments</Link>, and more.
+          <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discount</Link>,{" "}
+          <Link href="/finance/vat-calculator/" className="text-blue-600 hover:underline">VAT</Link> or{" "}
+          <Link href="/finance/loan-payment-calculator/" className="text-blue-600 hover:underline">loan payment</Link>.
           Results appear instantly as you type — no account, no ads blocking the answer.
         </p>
         <p className="text-sm text-gray-500 max-w-xl mx-auto">
           Each calculator shows the formula, worked examples, and explains the result — not just the number.
+        </p>
+      </section>
+
+      {/* Pricing and profit */}
+      <section className="mb-12">
+        <h2 className="text-xl font-bold text-gray-800 mb-1">Pricing and Profit for Sellers</h2>
+        <p className="text-sm text-gray-500 mb-4">
+          From what a product costs you to a price that pays — for shops, makers and online sellers.
+        </p>
+        <div className="grid sm:grid-cols-2 gap-2">
+          {pricing.map((c) => (
+            <CalcLink key={c.href} href={c.href} title={c.title} description={DESCRIPTIONS[c.slug]} />
+          ))}
+        </div>
+        <p className="text-sm text-gray-600 mt-4">
+          Guides:{" "}
+          {PRICING_GUIDES.map((g, i) => (
+            <span key={g.href}>
+              {i > 0 && " · "}
+              <Link href={g.href} className="text-blue-600 hover:underline">{g.label}</Link>
+            </span>
+          ))}
+          {" · "}
+          <Link href="/pricing/" className="font-medium text-blue-600 hover:underline">All pricing tools &rarr;</Link>
         </p>
       </section>
 
@@ -217,6 +262,7 @@ export default function Home() {
       <section className="mt-12">
         <h2 className="text-xl font-bold text-gray-800 mb-4">What you can calculate</h2>
         <ul className="space-y-2 text-gray-600 text-sm list-disc list-inside">
+          <li><strong>Selling prices</strong> — from cost and markup, for wholesale and retail, or for something you make by hand</li>
           <li><strong>Discounts and sale prices</strong> — see exactly how much you save and what you pay (e.g. 25% off £80 = £20 off, £60 final)</li>
           <li><strong>VAT and sales tax</strong> — add or remove VAT at any rate, or calculate US sales tax on a purchase</li>
           <li><strong>Percentage increase and decrease</strong> — measure how much a value rose or fell as a percentage</li>
@@ -245,7 +291,11 @@ export default function Home() {
           <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">profit margin calculator</Link>{" "}
           and{" "}
           <Link href="/finance/markup-calculator/" className="text-blue-600 hover:underline">markup calculator</Link>{" "}
-          cover both sides. For students, the{" "}
+          cover both sides, the{" "}
+          <Link href="/finance/wholesale-price-calculator/" className="text-blue-600 hover:underline">wholesale price calculator</Link>{" "}
+          sets what a shop pays, and the{" "}
+          <Link href="/finance/break-even-calculator/" className="text-blue-600 hover:underline">break-even calculator</Link>{" "}
+          shows how many sales cover your costs. For students, the{" "}
           <Link href="/percentage/gpa-calculator/" className="text-blue-600 hover:underline">GPA calculator</Link>{" "}
           and{" "}
           <Link href="/percentage/grade-calculator/" className="text-blue-600 hover:underline">grade calculator</Link>{" "}

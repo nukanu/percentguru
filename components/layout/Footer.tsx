@@ -29,6 +29,8 @@ export default function Footer() {
               <li><Link href="/finance/loan-payment-calculator/" className="hover:text-blue-600">Loan Payment</Link></li>
               <li><Link href="/finance/markup-calculator/" className="hover:text-blue-600">Markup Calculator</Link></li>
               <li><Link href="/finance/break-even-calculator/" className="hover:text-blue-600">Break-Even</Link></li>
+              <li><Link href="/finance/wholesale-price-calculator/" className="hover:text-blue-600">Wholesale Price</Link></li>
+              <li><Link href="/finance/handmade-pricing-calculator/" className="hover:text-blue-600">Handmade Pricing</Link></li>
             </ul>
           </div>
           <div>
@@ -48,6 +50,7 @@ export default function Footer() {
             <p className="font-semibold text-gray-700 mb-2">PercentGuru</p>
             <ul className="space-y-1">
               <li><Link href="/" className="hover:text-blue-600">Home</Link></li>
+              <li><Link href="/pricing/" className="hover:text-blue-600">Pricing &amp; Profit</Link></li>
               <li><Link href="/guides/" className="hover:text-blue-600">Guides</Link></li>
               <li><Link href="/about/" className="hover:text-blue-600">About</Link></li>
               <li><Link href="/contact/" className="hover:text-blue-600">Contact</Link></li>
@@ -57,7 +60,7 @@ export default function Footer() {
           </div>
         </div>
         <p className="mt-8 text-xs text-gray-600 text-center">
-          © {new Date().getFullYear()} PercentGuru. Free calculators for percentages, discounts, taxes, and financial calculations.
+          © {new Date().getFullYear()} PercentGuru. Free calculators for pricing, profit, percentages, discounts and taxes.
         </p>
       </div>
     </footer>
