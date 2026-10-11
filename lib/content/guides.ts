@@ -14,6 +14,15 @@ export type GuideMeta = {
 
 export const guides: GuideMeta[] = [
   {
+    slug: "how-to-get-your-products-into-shops",
+    title: "How to Get Your Products into Shops: A Wholesale Starter Guide",
+    description:
+      "What has to be true before you approach a shop, how to choose which ones, what goes on a line sheet, an email you can copy, the terms buyers ask about, and how to turn a first order into reorders.",
+    category: "Selling",
+    published: "2026-10-12",
+    updated: "2026-10-12",
+  },
+  {
     slug: "how-to-price-handmade-items",
     title: "How to Price Handmade Items: From Materials and Time to a Price",
     description:
