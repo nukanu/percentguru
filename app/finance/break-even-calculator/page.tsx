@@ -10,7 +10,8 @@ import PriceChangeWidget from "./PriceChangeWidget"
 const faqs = [
   {
     question: "What is the break-even formula?",
-    answer: "Break-even units = Fixed costs / (Selling price − Variable cost per unit). The bottom of that fraction is the contribution margin: what each sale puts toward your fixed costs. With $1,200 of fixed costs, a $25 price and a $10 variable cost, it is $1,200 / $15 = 80 units.",
+    answer: <>Break-even units = Fixed costs / (Selling price − Variable cost per unit). The bottom of that fraction is the contribution margin: what each sale puts toward your fixed costs. With $1,200 of fixed costs, a $25 price and a $10 variable cost, it is $1,200 / $15 = 80 units. The <Link href="/guides/how-to-calculate-break-even-point/" className="text-blue-600 hover:underline">break-even guide</Link> works through a full example, including a daily sales target.</>,
+    schemaAnswer: "Break-even units = Fixed costs / (Selling price − Variable cost per unit). The bottom of that fraction is the contribution margin: what each sale puts toward your fixed costs. With $1,200 of fixed costs, a $25 price and a $10 variable cost, it is $1,200 / $15 = 80 units.",
   },
   {
     question: "Should I count my own pay as a fixed cost?",

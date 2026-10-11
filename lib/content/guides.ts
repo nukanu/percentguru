@@ -14,6 +14,15 @@ export type GuideMeta = {
 
 export const guides: GuideMeta[] = [
   {
+    slug: "how-to-calculate-break-even-point",
+    title: "How to Calculate Your Break-Even Point (with a Worked Example)",
+    description:
+      "A coffee cart's numbers from first cup to profit: sorting fixed and variable costs, break-even in units and dollars, a daily sales target, what shifts it most, and three ways the figure flatters you.",
+    category: "Business",
+    published: "2026-10-12",
+    updated: "2026-10-12",
+  },
+  {
     slug: "how-to-raise-your-prices",
     title: "How to Raise Your Prices (and What to Tell Customers)",
     description:
