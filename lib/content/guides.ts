@@ -14,6 +14,15 @@ export type GuideMeta = {
 
 export const guides: GuideMeta[] = [
   {
+    slug: "how-to-raise-your-prices",
+    title: "How to Raise Your Prices (and What to Tell Customers)",
+    description:
+      "When a price rise is overdue, how to choose the new number, how many customers you can afford to lose, who needs notice, and wording you can copy for shops, regulars and complaints.",
+    category: "Business",
+    published: "2026-10-12",
+    updated: "2026-10-12",
+  },
+  {
     slug: "how-to-calculate-profit-margin",
     title: "How to Calculate Profit Margin: Gross, Operating and Net",
     description:
