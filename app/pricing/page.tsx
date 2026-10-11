@@ -38,6 +38,7 @@ const guideLinks = [
   { title: "How to Calculate Profit Margin", href: "/guides/how-to-calculate-profit-margin/", description: "A shop's month worked through gross, operating and net margin." },
   { title: "Markup vs. Margin", href: "/guides/markup-vs-margin/", description: "Why a 50% markup is a 33% margin, with a conversion table." },
   { title: "How to Calculate Your Break-Even Point", href: "/guides/how-to-calculate-break-even-point/", description: "A coffee cart's month, from sorting costs to a daily sales target." },
+  { title: "How to Price Handmade Items", href: "/guides/how-to-price-handmade-items/", description: "A tote bag priced from materials and timed labour, and three formulas compared." },
   { title: "How to Raise Your Prices", href: "/guides/how-to-raise-your-prices/", description: "Choosing the new price, who to tell, and wording you can copy." },
   { title: "eBay, Etsy or Your Own Website?", href: "/guides/ebay-vs-etsy-vs-own-website/", description: "What each keeps from the same order, and how to choose where to sell." },
 ]

@@ -14,7 +14,7 @@ const faqs = [
   },
   {
     question: "Does the \"materials times three\" rule work?",
-    answer: "Only for things that are quick to make. It ignores time completely. A keyring with $4 of materials that takes ten minutes is fine at $12. A knitted hat with $4 of yarn that takes three hours is not: at $12 you would earn under $3 an hour. Price from materials plus time and use the rule only as a sanity check.",
+    answer: "Only for things that are quick to make. It ignores time completely. A keyring with $4 of materials that takes ten minutes is fine at $12. A knitted hat with $4 of yarn that takes three hours is not: at $12 you would earn under $3 an hour. Price from materials plus time and use the rule only as a sanity check. The guide to pricing handmade items compares it with two other common formulas on the same product.",
   },
   {
     question: "My calculated price is higher than similar items sell for. What now?",
@@ -71,7 +71,7 @@ export default function HandmadePricingCalculatorPage() {
       <CalculatorShell
         slug="handmade-pricing-calculator"
         title="Handmade Pricing Calculator"
-        intro={<>Most handmade goods are underpriced for one reason: the maker counts the materials and forgets the hours. Enter what goes into one item — materials, the minutes it takes, what your time is worth, a share of your overheads — and the profit you want on top. The calculator gives a price that covers all of it, raised to absorb marketplace fees if you sell online. The second tool runs the check the other way and shows what your current price pays you per hour. For goods you buy in and resell, the plain <Link href="/finance/markup-calculator/" className="text-blue-600 hover:underline">markup calculator</Link> is all you need.</>}
+        intro={<>Most handmade goods are underpriced for one reason: the maker counts the materials and forgets the hours. Enter what goes into one item — materials, the minutes it takes, what your time is worth, a share of your overheads — and the profit you want on top. The calculator gives a price that covers all of it, raised to absorb marketplace fees if you sell online. The second tool runs the check the other way and shows what your current price pays you per hour. For goods you buy in and resell, the plain <Link href="/finance/markup-calculator/" className="text-blue-600 hover:underline">markup calculator</Link> is all you need. For the reasoning behind each field, read <Link href="/guides/how-to-price-handmade-items/" className="text-blue-600 hover:underline">how to price handmade items</Link>.</>}
         whenToUse="Use this when you are pricing a new piece, before you open an online shop or book a craft fair, or when you suspect a best-seller is not actually paying you. It suits anything made by hand in small numbers: jewellery, candles, soap, ceramics, knitwear, prints, woodwork, baked goods."
         calculator={<HandmadePricingWidget />}
         secondaryTool={

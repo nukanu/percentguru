@@ -14,6 +14,15 @@ export type GuideMeta = {
 
 export const guides: GuideMeta[] = [
   {
+    slug: "how-to-price-handmade-items",
+    title: "How to Price Handmade Items: From Materials and Time to a Price",
+    description:
+      "One tote bag priced step by step: materials, timed labour, overheads, profit and selling fees. Plus why three popular formulas give $31, $45 and $112 for the same bag, and what to do when the price looks too high.",
+    category: "Selling",
+    published: "2026-10-12",
+    updated: "2026-10-12",
+  },
+  {
     slug: "ebay-vs-etsy-vs-own-website",
     title: "eBay, Etsy or Your Own Website: Where Should You Sell?",
     description:
