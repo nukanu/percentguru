@@ -14,6 +14,15 @@ export type GuideMeta = {
 
 export const guides: GuideMeta[] = [
   {
+    slug: "how-to-calculate-profit-margin",
+    title: "How to Calculate Profit Margin: Gross, Operating and Net",
+    description:
+      "Follow one small shop's month from sales to what is left: gross, operating and net margin worked step by step, the two mistakes that inflate the figure, and which lever improves it most.",
+    category: "Business",
+    published: "2026-10-12",
+    updated: "2026-10-12",
+  },
+  {
     slug: "how-to-calculate-markup",
     title: "How to Calculate Markup: From Real Cost to a Price You Can Charge",
     description:

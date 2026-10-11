@@ -25,7 +25,8 @@ const faqs = [
   },
   {
     question: "What is the difference between gross and net profit margin?",
-    answer: "Gross profit margin subtracts only the cost of goods sold (COGS) from revenue. Net profit margin also subtracts operating expenses, taxes, and interest. This calculator computes gross margin — the starting point for profitability analysis.",
+    answer: <>Gross profit margin subtracts only the cost of goods sold (COGS) from revenue. Net profit margin also subtracts operating expenses, taxes, and interest. This calculator computes gross margin — the starting point for profitability analysis. The <Link href="/guides/how-to-calculate-profit-margin/" className="text-blue-600 hover:underline">profit margin guide</Link> works through all three levels with a month of example figures.</>,
+    schemaAnswer: "Gross profit margin subtracts only the cost of goods sold (COGS) from revenue. Net profit margin also subtracts operating expenses, taxes, and interest. This calculator computes gross margin — the starting point for profitability analysis.",
   },
   {
     question: "Should I include selling fees and shipping in the cost?",
