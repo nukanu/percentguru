@@ -14,6 +14,15 @@ export type GuideMeta = {
 
 export const guides: GuideMeta[] = [
   {
+    slug: "ebay-vs-etsy-vs-own-website",
+    title: "eBay, Etsy or Your Own Website: Where Should You Sell?",
+    description:
+      "The same $46 order on eBay, Etsy and your own site: what each one keeps, the Etsy ad fee that changes the answer, what a website really costs once you pay for traffic, and how to choose.",
+    category: "Selling",
+    published: "2026-10-12",
+    updated: "2026-10-12",
+  },
+  {
     slug: "how-to-calculate-break-even-point",
     title: "How to Calculate Your Break-Even Point (with a Worked Example)",
     description:

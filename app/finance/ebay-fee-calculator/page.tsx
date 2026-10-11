@@ -149,7 +149,7 @@ export default function EbayFeeCalculatorPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-800 mb-1">From payout to a real price</h3>
-                <p>Fees are one cost among several. Once you know what you receive, the <Link href="/finance/markup-calculator/" className="text-blue-600 hover:underline">markup calculator</Link> shows what that is against the item&apos;s cost, the <Link href="/finance/break-even-calculator/" className="text-blue-600 hover:underline">break-even calculator</Link> tells you how many sales cover your monthly overheads, and the seller section of the <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discount calculator</Link> shows what accepting a lower offer costs you.</p>
+                <p>Fees are one cost among several. Once you know what you receive, the <Link href="/finance/markup-calculator/" className="text-blue-600 hover:underline">markup calculator</Link> shows what that is against the item&apos;s cost, the <Link href="/finance/break-even-calculator/" className="text-blue-600 hover:underline">break-even calculator</Link> tells you how many sales cover your monthly overheads, and the seller section of the <Link href="/finance/discount-calculator/" className="text-blue-600 hover:underline">discount calculator</Link> shows what accepting a lower offer costs you. If you are still deciding where to sell at all, the <Link href="/guides/ebay-vs-etsy-vs-own-website/" className="text-blue-600 hover:underline">eBay, Etsy or own website guide</Link> compares all three on the same order.</p>
               </div>
             </div>
           </>
