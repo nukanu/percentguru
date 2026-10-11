@@ -31,7 +31,8 @@ const faqs = [
   },
   {
     question: "Which costs should I mark up — just the product, or shipping and packaging too?",
-    answer: "Mark up the full cost of getting one unit ready to sell: the product, inbound shipping, packaging and any per-unit duties. A $8 product with $2 of freight and packaging costs you $10. Mark up only the $8 by 50% and you charge $12, which is a 20% markup on what you really spent.",
+    answer: <>Mark up the full cost of getting one unit ready to sell: the product, inbound shipping, packaging and any per-unit duties. A $8 product with $2 of freight and packaging costs you $10. Mark up only the $8 by 50% and you charge $12, which is a 20% markup on what you really spent. The <Link href="/guides/how-to-calculate-markup/" className="text-blue-600 hover:underline">guide to calculating markup</Link> walks through costing a whole batch.</>,
+    schemaAnswer: "Mark up the full cost of getting one unit ready to sell: the product, inbound shipping, packaging and any per-unit duties. A $8 product with $2 of freight and packaging costs you $10. Mark up only the $8 by 50% and you charge $12, which is a 20% markup on what you really spent.",
   },
   {
     question: "What is a 50% markup on $40?",

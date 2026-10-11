@@ -14,6 +14,15 @@ export type GuideMeta = {
 
 export const guides: GuideMeta[] = [
   {
+    slug: "how-to-calculate-markup",
+    title: "How to Calculate Markup: From Real Cost to a Price You Can Charge",
+    description:
+      "Work out your true cost per unit, turn a markup percentage into a selling price, and find the markup in a price you already charge — with a worked batch example and the mistakes that quietly shrink it.",
+    category: "Business",
+    published: "2026-10-12",
+    updated: "2026-10-12",
+  },
+  {
     slug: "how-to-calculate-your-grade",
     title: "How to Calculate Your Grade: Test Scores, Weighted Grades, and Finals",
     description:
