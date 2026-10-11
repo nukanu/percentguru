@@ -6,6 +6,7 @@ import CalculatorShell from "@/components/calculator/CalculatorShell"
 import Breadcrumb from "@/components/layout/Breadcrumb"
 import DiscountCalculatorWidget from "./CalculatorWidget"
 import DealComparisonWidget from "./DealComparisonWidget"
+import SellerDiscountWidget from "./SellerDiscountWidget"
 
 const faqs = [
   {
@@ -37,6 +38,14 @@ const faqs = [
     answer: "It depends on the price. 20% off beats a $15 coupon whenever the price is above $75, because 20% of $75 is exactly $15. Below $75, take the flat $15. The deal comparison tool on this page works this out for any pair of offers.",
   },
   {
+    question: "As a seller, how much discount can I offer and still make a profit?",
+    answer: "Anything below your profit margin. If an item sells for $50 and costs you $30, your margin is 40%, so a 40% discount brings the price down to your cost and anything smaller still leaves a profit. That is the ceiling, not a target: at 20% off, half your profit on each sale is already gone.",
+  },
+  {
+    question: "How many extra sales does a discount need to pay for itself?",
+    answer: "Divide the discount by your margin minus the discount. With a 40% margin and a 20% discount: 20 / (40 − 20) = 1, so you need 100% more sales just to earn what you did before. With a 10% discount it is 10 / 30, about 33% more. The thinner your margin, the faster that number climbs.",
+  },
+  {
     question: "How do I find the original price from a discounted price?",
     answer: <>Use the <Link href="/percentage/reverse-percentage-calculator/" className="text-blue-600 hover:underline">reverse percentage calculator</Link>. Enter the remaining percentage (100 minus the discount) and the sale price to get the original. For example, $80 after 20% off means 80% remains — enter 80% and $80 to get $100.</>,
     schemaAnswer: "Use the reverse percentage calculator. Enter the remaining percentage (100 minus the discount) and the sale price. For example, $80 after a 20% discount means 80% remains — enter 80% and $80 to get $100.",
@@ -45,9 +54,9 @@ const faqs = [
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Discount Calculator — Sale Price, Stacked Discounts & Deal Comparison",
-  description: "Work out any sale price, stack multiple discounts and coupons, and compare two deals side by side to see which one actually costs less.",
+  description: "Work out any sale price, stack discounts and coupons, compare two deals side by side, and see what a discount does to your profit if you are the seller.",
   path: "/finance/discount-calculator/",
-  keywords: ["discount calculator", "percent off calculator", "sale price calculator", "stacked discount calculator", "compare discounts", "double discount calculator"],
+  keywords: ["discount calculator", "percent off calculator", "sale price calculator", "stacked discount calculator", "compare discounts", "double discount calculator", "discount profit calculator"],
 })
 
 export default function DiscountCalculatorPage() {
@@ -75,6 +84,7 @@ export default function DiscountCalculatorPage() {
         whenToUse="Use this at the point of purchase to verify savings, when comparing two promotions (e.g. 20% off vs $30 off), or when calculating a trade or bulk discount before placing an order."
         calculator={<DiscountCalculatorWidget />}
         secondaryTool={
+          <>
           <section className="mt-10">
             <h2 className="text-xl font-bold text-gray-900 mb-2">Compare Two Deals — Which Discount Is Actually Better?</h2>
             <p className="text-gray-700 mb-4 leading-relaxed text-sm">
@@ -82,6 +92,14 @@ export default function DiscountCalculatorPage() {
             </p>
             <DealComparisonWidget />
           </section>
+          <section className="mt-10">
+            <h2 className="text-xl font-bold text-gray-900 mb-2">Selling, Not Buying? See What a Discount Costs You</h2>
+            <p className="text-gray-700 mb-4 leading-relaxed text-sm">
+              A discount comes out of your profit, not your cost, so it bites harder than the percentage suggests. On a $50 item that costs you $30, taking 20% off cuts the profit from $20 to $10 — you would have to sell twice as many to stand still. Enter your price, cost and the discount you are considering to see the profit left on each sale, how many extra sales it needs to pay for itself, and the largest discount you can give before you lose money. If you do not know your margin yet, start with the <Link href="/finance/profit-margin-calculator/" className="text-blue-600 hover:underline">profit margin calculator</Link>.
+            </p>
+            <SellerDiscountWidget />
+          </section>
+          </>
         }
         howTo={[
           "Enter the original (full) price in the first field.",
